@@ -1,0 +1,109 @@
+import { defaultDisclaimer } from "@/lib/generation/disclaimers";
+import { sourceRegistry } from "@/lib/sources/registry";
+import {
+  getAnalyticsFromDb,
+  getApprovedSegmentsFromDb,
+  getPendingSegmentsFromDb,
+  getSourcesFromDb,
+  getStreamStateFromDb
+} from "@/lib/db";
+import type { AnalyticsSnapshot, Segment, StreamState } from "@/lib/types";
+
+const now = new Date().toISOString();
+
+export const mockSegments: Segment[] = [
+  {
+    id: "seg-echo-agenda",
+    title: "The ASCO Hype desk opens the 2026 watchlist",
+    summary:
+      "Echo Sage frames the countdown, the first wave of agenda attention, and how social posts tagged to ASCO Hype will move through review.",
+    script: `${defaultDisclaimer}\n\nWelcome to ASCO Hype. We are watching the 2026 annual meeting buildup like a live conference desk: agenda previews, media roundups, exhibitor signals, and the social posts people tag with #ASCOHype or @ASCOHypeAI. The key thing to remember: social posts are buzz, not confirmation, until they are checked against stronger sources.\n\nReminder: ${defaultDisclaimer}`,
+    contentType: "agenda_preview",
+    personaId: "echo-sage",
+    personaName: "Echo Sage",
+    hypeLevel: "standard",
+    language: "English",
+    status: "approved",
+    citations: [
+      {
+        label: "ASCO meeting site",
+        url: "https://meetings.asco.org/",
+        sourceType: "official"
+      }
+    ],
+    socialBuzzItems: [],
+    riskFlags: [],
+    confidenceScore: 94,
+    createdAt: now
+  },
+  {
+    id: "seg-social-loop",
+    title: "How the ASCO Hype hashtag gets on the desk",
+    summary:
+      "A short operator-ready explainer for audience posts, bot mentions, and the social buzz review path.",
+    script: `${defaultDisclaimer}\n\nIf you want the desk to see a post, tag #ASCOHype, #AskASCOHype, or @ASCOHypeAI. The post enters the social signal intake, gets labeled as audience buzz, and waits for operator approval before any commentary airs.\n\nReminder: ${defaultDisclaimer}`,
+    contentType: "social_signal",
+    personaId: "vesper-quill",
+    personaName: "Vesper Quill",
+    hypeLevel: "high_energy",
+    language: "English",
+    status: "pending_review",
+    citations: [
+      {
+        label: "ASCO Hype source policy",
+        url: "https://asco-hype.example.com/admin",
+        sourceType: "manual"
+      }
+    ],
+    socialBuzzItems: [
+      {
+        label: "#ASCOHype monitored tag",
+        url: "https://x.com/hashtag/ASCOHype",
+        sourceType: "general_social"
+      }
+    ],
+    riskFlags: ["social_buzz_requires_review"],
+    confidenceScore: 88,
+    createdAt: now
+  }
+];
+
+export async function getPublicSegments() {
+  const dbSegments = await getApprovedSegmentsFromDb();
+  return dbSegments ?? mockSegments.filter((segment) => segment.status === "approved");
+}
+
+export async function getStreamState(): Promise<StreamState> {
+  const dbStreamState = await getStreamStateFromDb();
+  if (dbStreamState) {
+    return dbStreamState;
+  }
+  return {
+    mode: process.env.NEXT_PUBLIC_YOUTUBE_VIDEO_ID
+      ? "youtube_primary"
+      : process.env.NEXT_PUBLIC_HLS_URL
+        ? "hls_fallback"
+        : "preview",
+    emergencyActive: false,
+    emergencyMessage:
+      "ASCO Hype automation is paused while the operator desk reviews the queue.",
+    currentSegmentId: mockSegments[0]?.id
+  };
+}
+
+export async function getAdminSnapshot() {
+  const pendingSegments = (await getPendingSegmentsFromDb()) ?? mockSegments.filter(
+    (segment) => segment.status === "pending_review"
+  );
+  const analytics: AnalyticsSnapshot = (await getAnalyticsFromDb()) ?? {
+    views: 128,
+    clipsCreated: 4,
+    pendingReview: pendingSegments.length
+  };
+  return {
+    pendingSegments,
+    streamState: await getStreamState(),
+    sources: (await getSourcesFromDb()) ?? sourceRegistry,
+    analytics
+  };
+}

@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  background: #f6f1e8;
+  color: #12151f;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    linear-gradient(120deg, rgba(244, 72, 58, 0.08), transparent 32%),
+    linear-gradient(240deg, rgba(21, 166, 184, 0.1), transparent 34%),
+    #f6f1e8;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.hype-grid {
+  background-image:
+    linear-gradient(rgba(18, 21, 31, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(18, 21, 31, 0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
