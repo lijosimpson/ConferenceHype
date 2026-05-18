@@ -11,3 +11,4 @@ public/clips/*
 !public/clips/.gitkeep
 
 .vercel
+.admin-secret.local.txt
