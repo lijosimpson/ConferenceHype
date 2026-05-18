@@ -6,7 +6,7 @@ const envSchema = z.object({
   SUPABASE_SERVICE_ROLE_KEY: z.string().optional(),
   LLM_API_KEY: z.string().optional(),
   LLM_BASE_URL: z.string().url().optional(),
-  LLM_MODEL: z.string().default("gpt-4o-mini"),
+  LLM_MODEL: z.string().default("grok-4.20-0309-non-reasoning"),
   ELEVENLABS_API_KEY: z.string().optional(),
   X_BEARER_TOKEN: z.string().optional(),
   YOUTUBE_RTMP_URL: z.string().optional(),
