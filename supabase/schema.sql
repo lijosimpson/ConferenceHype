@@ -100,6 +100,21 @@ create table public.analytics_events (
   created_at timestamptz not null default now()
 );
 
+create index if not exists ingested_items_source_id_idx
+  on public.ingested_items (source_id);
+
+create index if not exists segments_approved_by_idx
+  on public.segments (approved_by);
+
+create index if not exists media_assets_segment_id_idx
+  on public.media_assets (segment_id);
+
+create index if not exists stream_state_current_segment_id_idx
+  on public.stream_state (current_segment_id);
+
+create index if not exists analytics_events_segment_id_idx
+  on public.analytics_events (segment_id);
+
 insert into public.stream_state (id) values (1) on conflict (id) do nothing;
 
 alter table public.sources enable row level security;
@@ -111,33 +126,57 @@ alter table public.analytics_events enable row level security;
 
 create policy "public can read approved segments"
   on public.segments for select
+  to anon
   using (status in ('approved', 'rendered'));
 
 create policy "authenticated admins can manage segments"
   on public.segments for all
-  using (auth.role() = 'authenticated')
-  with check (auth.role() = 'authenticated');
+  to authenticated
+  using ((select auth.role()) = 'authenticated')
+  with check ((select auth.role()) = 'authenticated');
 
 create policy "authenticated admins can manage sources"
   on public.sources for all
-  using (auth.role() = 'authenticated')
-  with check (auth.role() = 'authenticated');
+  to authenticated
+  using ((select auth.role()) = 'authenticated')
+  with check ((select auth.role()) = 'authenticated');
 
 create policy "authenticated admins can manage stream state"
   on public.stream_state for all
-  using (auth.role() = 'authenticated')
-  with check (auth.role() = 'authenticated');
+  to authenticated
+  using ((select auth.role()) = 'authenticated')
+  with check ((select auth.role()) = 'authenticated');
 
 create policy "authenticated admins can manage ingested items"
   on public.ingested_items for all
-  using (auth.role() = 'authenticated')
-  with check (auth.role() = 'authenticated');
+  to authenticated
+  using ((select auth.role()) = 'authenticated')
+  with check ((select auth.role()) = 'authenticated');
 
 create policy "authenticated admins can manage media assets"
   on public.media_assets for all
-  using (auth.role() = 'authenticated')
-  with check (auth.role() = 'authenticated');
+  to authenticated
+  using ((select auth.role()) = 'authenticated')
+  with check ((select auth.role()) = 'authenticated');
 
 create policy "public can insert analytics"
   on public.analytics_events for insert
-  with check (true);
+  to anon, authenticated
+  with check (
+    char_length(event_name) between 1 and 80
+    and jsonb_typeof(metadata) = 'object'
+    and pg_column_size(metadata) <= 4096
+  );
+
+do $$
+begin
+  if exists (
+    select 1
+    from pg_proc p
+    join pg_namespace n on n.oid = p.pronamespace
+    where n.nspname = 'public'
+      and p.proname = 'rls_auto_enable'
+  ) then
+    revoke execute on function public.rls_auto_enable() from public, anon, authenticated;
+  end if;
+end $$;
