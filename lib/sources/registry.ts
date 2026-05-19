@@ -46,5 +46,13 @@ export const sourceRegistry: SourceConfig[] = [
     type: "general_social",
     rank: 5,
     enabled: true
+  },
+  {
+    id: "manual-instagram-social-watch",
+    name: "Operator Instagram and social watchlist",
+    url: "manual://instagram-social-watchlist",
+    type: "manual",
+    rank: 5,
+    enabled: false
   }
 ];

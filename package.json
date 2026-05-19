@@ -11,6 +11,7 @@
     "job:ingest": "tsx scripts/worker.ts ingest",
     "job:generate": "tsx scripts/worker.ts generate",
     "job:briefing": "tsx scripts/worker.ts briefing",
+    "job:upcoming": "tsx scripts/worker.ts upcoming",
     "job:render": "tsx scripts/ffmpeg-render.ts",
     "job:stream": "tsx scripts/youtube-rtmp-loop.ts"
   },

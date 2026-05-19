@@ -54,31 +54,46 @@ Add repository secrets:
 GitHub Actions:
 
 - `Ingest sources`: runs every 30 minutes.
-- `Generate ASCO 75-minute briefing`: runs every 75 minutes and creates the short "what happened / what is next" agenda segment from the preprocessed ASCO schedule and abstract index.
+- `Generate ASCO upcoming-events spine`: runs every 20 minutes and creates the main no-token schedule segment from the preprocessed ASCO schedule and abstract index.
+- `Generate ASCO 75-minute recap briefing`: runs every 75 minutes and creates the short "what happened / what is next" agenda segment from the preprocessed ASCO schedule and abstract index.
 - `Generate review segments`: runs hourly for media, social, exhibitor, and background programming.
 - `Render media`: manual until media storage and worker deployment are finalized.
 
 ## ASCO 2026 Batch Backbone
 
-The recurring schedule desk is intentionally low-token. The local ASCO schedule workbook and abstracts CSV are preprocessed into `data/asco2026/core-index.json`. The briefing job sends only a small window to the LLM:
+The recurring schedule desk is intentionally no-token for the main broadcast spine. The local ASCO schedule workbook and abstracts CSV are preprocessed into `data/asco2026/core-index.json`. The upcoming-events job creates a prepared segment every 20 minutes without an LLM call:
+
+- next 20 minutes: sessions attendees may want to catch next
+- a small number of matching abstract records for context
+- deterministic copy that is safe to run as the main daily broadcast spine
+
+The 75-minute recap job is a separate, broader desk segment:
 
 - last 75 minutes: sessions that just wrapped
-- next 60 minutes: sessions attendees may want to catch next
-- a small number of matching abstract records for context
+- next 60 minutes: larger forward look
+- can use the configured LLM for a more natural recap script
 
 Run locally:
 
 ```powershell
+npm run job:upcoming
 npm run job:briefing
 ```
 
 For a local smoke test outside the live ASCO dates:
 
 ```powershell
+$env:ASCO_UPCOMING_NOW="2026-05-29T12:55:00-05:00"; npm run job:upcoming
 $env:ASCO_BRIEFING_NOW="2026-05-29T14:30:00-05:00"; npm run job:briefing
 ```
 
 The raw source files should stay local/operator-controlled. Do not paste whole workbooks, full abstract exports, or full article bodies into prompts.
+
+Programming rule:
+
+- The 20-minute upcoming-events spine is the core broadcast every day.
+- Social posts, `#ASCOHype`, X, Instagram-style posts, OncLive, STAT News, The ASCO Post, and exhibitor/company updates interrupt that spine only as reviewed media/social segments.
+- Instagram is treated as an operator/manual social watchlist by default unless a compliant provider/API is added later.
 
 ### 2. Supabase
 
@@ -143,6 +158,7 @@ npm run typecheck
 npm run job:ingest
 npm run job:generate
 npm run job:briefing
+npm run job:upcoming
 npm run job:render
 ```
 

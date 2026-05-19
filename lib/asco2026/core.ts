@@ -34,6 +34,8 @@ type CoreAbstract = {
 
 type CoreIndex = {
   costPolicy: {
+    scheduleSpineCadenceMinutes?: number;
+    scheduleSpineLookaheadMinutes?: number;
     lookbackMinutes: number;
     lookaheadMinutes: number;
     maxBriefingSources: number;
@@ -162,6 +164,36 @@ export function getAscoBriefingSources(now = new Date()): IngestedItem[] {
   return [...sessionItems, ...abstractItems].slice(0, index.costPolicy.maxBriefingSources);
 }
 
+export function getAscoUpcomingEventSources(now = new Date()): IngestedItem[] {
+  const index = loadCoreIndex();
+  const nowMs = now.getTime();
+  const lookaheadMinutes = index.costPolicy.scheduleSpineLookaheadMinutes ?? 20;
+  const lookaheadEnd = nowMs + minutes(lookaheadMinutes);
+
+  const upcomingSessions = index.sessions
+    .filter((session) => {
+      const startMs = toMillis(session.startAt);
+      return startMs !== null && startMs >= nowMs && startMs < lookaheadEnd;
+    })
+    .sort((a, b) => (toMillis(a.startAt) ?? 0) - (toMillis(b.startAt) ?? 0));
+
+  const activeTracks = new Set(upcomingSessions.map((session) => session.track).filter(Boolean));
+  const matchingAbstracts = index.abstracts
+    .filter((abstract) => {
+      const startMs = toMillis(abstract.presentationStartAt);
+      const timedInWindow = startMs !== null && startMs >= nowMs && startMs < lookaheadEnd;
+      const trackMatch = [...activeTracks].some((track) => includesText(abstract.track, track));
+      return timedInWindow || (upcomingSessions.length > 0 && trackMatch);
+    })
+    .slice(0, index.costPolicy.maxAbstractSourcesPerBriefing)
+    .map((abstract) => abstractToItem(abstract, 2));
+
+  return [
+    ...upcomingSessions.map((session) => sessionToItem(session, "upcoming")),
+    ...matchingAbstracts
+  ].slice(0, index.costPolicy.maxBriefingSources);
+}
+
 export function getAscoBackgroundSources(limit = 8): IngestedItem[] {
   const index = loadCoreIndex();
   const max = Math.min(limit, index.costPolicy.maxBackgroundSources);
@@ -176,6 +208,8 @@ export function getAscoCoreStats() {
   return {
     sessions: index.sessions.length,
     abstracts: index.abstracts.length,
+    scheduleSpineCadenceMinutes: index.costPolicy.scheduleSpineCadenceMinutes ?? 20,
+    scheduleSpineLookaheadMinutes: index.costPolicy.scheduleSpineLookaheadMinutes ?? 20,
     lookbackMinutes: index.costPolicy.lookbackMinutes,
     lookaheadMinutes: index.costPolicy.lookaheadMinutes
   };

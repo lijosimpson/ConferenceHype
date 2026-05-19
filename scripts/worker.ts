@@ -1,6 +1,7 @@
 import { runGenerateJob } from "@/lib/jobs/generateSegments";
 import { runBriefingJob } from "@/lib/jobs/briefing";
 import { runIngestionJob } from "@/lib/jobs/ingest";
+import { runUpcomingEventsJob } from "@/lib/jobs/upcomingEvents";
 import { logInfo } from "@/lib/logging";
 
 async function main() {
@@ -26,7 +27,16 @@ async function main() {
     console.log(JSON.stringify(segments, null, 2));
     return;
   }
-  throw new Error("Usage: tsx scripts/worker.ts ingest|generate|briefing");
+  if (command === "upcoming") {
+    const upcomingNow = process.env.ASCO_UPCOMING_NOW
+      ? new Date(process.env.ASCO_UPCOMING_NOW)
+      : new Date();
+    const segments = await runUpcomingEventsJob(upcomingNow);
+    logInfo("worker upcoming events finished", { count: segments.length });
+    console.log(JSON.stringify(segments, null, 2));
+    return;
+  }
+  throw new Error("Usage: tsx scripts/worker.ts ingest|generate|briefing|upcoming");
 }
 
 main().catch((error) => {
