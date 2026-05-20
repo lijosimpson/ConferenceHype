@@ -16,4 +16,20 @@ jobs:
       - run: npm ci
       - run: npm run job:render
         env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          VOICE_ECHO_SAGE: ${{ secrets.VOICE_ECHO_SAGE }}
+          VOICE_NOVA_QUINN: ${{ secrets.VOICE_NOVA_QUINN }}
+          VOICE_KAI_LENNOX: ${{ secrets.VOICE_KAI_LENNOX }}
+          VOICE_SAGE_HARLAN: ${{ secrets.VOICE_SAGE_HARLAN }}
+          VOICE_LUNA_VALE: ${{ secrets.VOICE_LUNA_VALE }}
+          VOICE_ORION_REED: ${{ secrets.VOICE_ORION_REED }}
+          VOICE_RILEY_KNOX: ${{ secrets.VOICE_RILEY_KNOX }}
+          VOICE_AETHER_VALE: ${{ secrets.VOICE_AETHER_VALE }}
+          VOICE_VESPER_QUILL: ${{ secrets.VOICE_VESPER_QUILL }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rendered-media
+          path: public/rendered/*

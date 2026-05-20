@@ -1,10 +1,82 @@
+import { existsSync } from "node:fs";
+import { mkdir, writeFile } from "node:fs/promises";
+import path from "node:path";
+import {
+  getApprovedSegmentsFromDb,
+  getPendingSegmentsFromDb,
+  getSegmentByIdFromDb
+} from "@/lib/db";
+import { getPersona } from "@/lib/generation/personas";
 import { buildSegmentRenderCommand, runCommand } from "@/lib/media/ffmpeg";
+import { synthesizeSpeech } from "@/lib/media/tts";
+
+async function pickSegment() {
+  if (process.env.SEGMENT_ID) {
+    return getSegmentByIdFromDb(process.env.SEGMENT_ID);
+  }
+
+  const approved = await getApprovedSegmentsFromDb();
+  if (approved?.length) {
+    return approved[0];
+  }
+
+  const pending = await getPendingSegmentsFromDb();
+  if (pending?.length) {
+    return pending[0];
+  }
+
+  return null;
+}
 
 async function main() {
-  const voicePath = process.env.VOICE_AUDIO_PATH ?? "public/placeholders/sample-voice.wav";
+  const segment = await pickSegment();
+  if (!segment) {
+    throw new Error("No segment available to render. Approve or generate a segment first.");
+  }
+
+  const persona = getPersona(segment.personaId);
+  const speech = await synthesizeSpeech({
+    script: segment.script,
+    persona
+  });
+
+  if (!speech.audioBuffer) {
+    throw new Error(speech.note);
+  }
+
+  const renderDir = process.env.RENDER_DIR ?? "public/rendered";
+  await mkdir(renderDir, { recursive: true });
+
+  const safeSegmentId = segment.id.replace(/[^a-zA-Z0-9_-]/g, "-");
+  const voicePath =
+    process.env.VOICE_AUDIO_PATH ?? path.join(renderDir, `${safeSegmentId}-voice.mp3`);
   const musicPath = process.env.MUSIC_AUDIO_PATH ?? "public/music/light-jazz-techno.mp3";
-  const outputPath = process.env.RENDER_OUTPUT_PATH ?? "public/rendered/sample-segment.m4a";
-  const command = buildSegmentRenderCommand({ voicePath, musicPath, outputPath });
+  const outputPath =
+    process.env.RENDER_OUTPUT_PATH ?? path.join(renderDir, `${safeSegmentId}.m4a`);
+
+  await mkdir(path.dirname(voicePath), { recursive: true });
+  await writeFile(voicePath, speech.audioBuffer);
+
+  const withMusic = existsSync(musicPath);
+  const command = buildSegmentRenderCommand({ voicePath, musicPath, outputPath, withMusic });
+  console.log(
+    JSON.stringify(
+      {
+        segmentId: segment.id,
+        title: segment.title,
+        persona: persona.name,
+        provider: speech.provider,
+        voicePath,
+        outputPath,
+        withMusic,
+        note: withMusic
+          ? "Rendering voice with music bed."
+          : "Music bed not found; rendering voice-only audio."
+      },
+      null,
+      2
+    )
+  );
   console.log(command.join(" "));
   await runCommand(command);
 }

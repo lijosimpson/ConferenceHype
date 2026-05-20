@@ -3,12 +3,28 @@ import { spawn } from "node:child_process";
 export function buildSegmentRenderCommand({
   voicePath,
   musicPath,
-  outputPath
+  outputPath,
+  withMusic = true
 }: {
   voicePath: string;
   musicPath: string;
   outputPath: string;
+  withMusic?: boolean;
 }) {
+  if (!withMusic) {
+    return [
+      "ffmpeg",
+      "-y",
+      "-i",
+      voicePath,
+      "-c:a",
+      "aac",
+      "-b:a",
+      "128k",
+      outputPath
+    ];
+  }
+
   return [
     "ffmpeg",
     "-y",
