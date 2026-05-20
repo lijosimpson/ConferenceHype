@@ -3,6 +3,7 @@ import type { SourceConfig } from "@/lib/types";
 export const monitoredSocialTags = {
   primaryHashtag: "#ASCOHype",
   secondaryHashtag: "#AskASCOHype",
+  conferenceHashtag: "#ASCO26",
   botHandle: "@ASCOHypeAI"
 };
 
@@ -42,7 +43,7 @@ export const sourceRegistry: SourceConfig[] = [
   {
     id: "asco-hype-tags",
     name: "Audience hashtag and bot mentions",
-    url: `${monitoredSocialTags.primaryHashtag} ${monitoredSocialTags.secondaryHashtag} ${monitoredSocialTags.botHandle}`,
+    url: `${monitoredSocialTags.primaryHashtag} ${monitoredSocialTags.secondaryHashtag} ${monitoredSocialTags.conferenceHashtag} ${monitoredSocialTags.botHandle}`,
     type: "general_social",
     rank: 5,
     enabled: true

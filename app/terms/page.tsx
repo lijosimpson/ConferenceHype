@@ -53,7 +53,8 @@ export default function TermsPage() {
 
           <TermBlock title="Topic suggestions and social posts">
             Posts using {monitoredSocialTags.primaryHashtag},{" "}
-            {monitoredSocialTags.secondaryHashtag}, or{" "}
+            {monitoredSocialTags.secondaryHashtag},{" "}
+            {monitoredSocialTags.conferenceHashtag}, or{" "}
             {monitoredSocialTags.botHandle} may be considered as topic
             suggestions. Tagging ASCO Hype does not guarantee coverage,
             accuracy, approval, publication, compensation, or response.

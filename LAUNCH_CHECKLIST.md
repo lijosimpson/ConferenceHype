@@ -73,6 +73,7 @@ Use these in the public site and X profile:
 
 - `#ASCOHype`
 - `#AskASCOHype`
+- `#ASCO26`
 - `@ASCOHypeAI`
 
 Create or rename the X account to match the bot handle before launch.

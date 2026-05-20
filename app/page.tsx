@@ -29,7 +29,8 @@ export default async function Home() {
             <p className="mt-4 max-w-2xl text-base font-semibold leading-7 text-ink/78 lg:text-lg lg:leading-8">
               Interactive Conference Commentary if you cannot attend. Better if
               you do attend and follow along. Suggest topics to go live with{" "}
-              <strong>{monitoredSocialTags.primaryHashtag}</strong> or tag{" "}
+              <strong>{monitoredSocialTags.primaryHashtag}</strong>, follow{" "}
+              <strong>{monitoredSocialTags.conferenceHashtag}</strong>, or tag{" "}
               <strong>{monitoredSocialTags.botHandle}</strong>.
             </p>
             <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:max-w-2xl">
@@ -86,7 +87,8 @@ export default async function Home() {
             </p>
             <p>
               Posts using {monitoredSocialTags.primaryHashtag},{" "}
-              {monitoredSocialTags.secondaryHashtag}, or{" "}
+              {monitoredSocialTags.secondaryHashtag},{" "}
+              {monitoredSocialTags.conferenceHashtag}, or{" "}
               {monitoredSocialTags.botHandle} may be considered as topic
               suggestions for the commentary stream.
             </p>

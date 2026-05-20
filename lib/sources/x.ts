@@ -3,7 +3,7 @@ import { monitoredSocialTags } from "@/lib/sources/registry";
 import type { IngestedItem } from "@/lib/types";
 
 export function buildXSearchQuery() {
-  return `(${monitoredSocialTags.primaryHashtag} OR ${monitoredSocialTags.secondaryHashtag} OR ${monitoredSocialTags.botHandle}) -is:retweet lang:en`;
+  return `(${monitoredSocialTags.primaryHashtag} OR ${monitoredSocialTags.secondaryHashtag} OR ${monitoredSocialTags.conferenceHashtag} OR ${monitoredSocialTags.botHandle}) -is:retweet lang:en`;
 }
 
 export async function fetchTaggedSocialPosts(): Promise<IngestedItem[]> {
@@ -14,7 +14,7 @@ export async function fetchTaggedSocialPosts(): Promise<IngestedItem[]> {
         title: "Mock tagged post: ASCO Hype audience signal",
         url: "https://x.com/hashtag/ASCOHype",
         excerpt:
-          "A sample audience post tagged with #ASCOHype. Configure X_BEARER_TOKEN to ingest real tagged posts, bot mentions, and audience snack or coffee recommendations from the Exhibitor Hall.",
+          "A sample audience post tagged with #ASCOHype or #ASCO26. Configure X_BEARER_TOKEN to ingest real tagged posts, bot mentions, commentary ideas, and audience snack or coffee recommendations from the Exhibitor Hall.",
         sourceName: "X hashtag monitor",
         sourceType: "general_social",
         rank: 5,

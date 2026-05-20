@@ -16,7 +16,8 @@ export function SourceManager({ sources }: { sources: SourceConfig[] }) {
         </div>
         <p className="mt-2 text-sm leading-6 text-ink/70">
           Monitor {monitoredSocialTags.primaryHashtag},{" "}
-          {monitoredSocialTags.secondaryHashtag}, and{" "}
+          {monitoredSocialTags.secondaryHashtag},{" "}
+          {monitoredSocialTags.conferenceHashtag}, and{" "}
           {monitoredSocialTags.botHandle}. Tagged posts enter the queue as
           social buzz and require human review before airing.
         </p>
