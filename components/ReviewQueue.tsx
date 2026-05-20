@@ -30,7 +30,13 @@ export function ReviewQueue({ segments }: { segments: Segment[] }) {
     startTransition(async () => {
       try {
         await submitAction(segment.id, action, drafts[segment.id] ?? "");
-        setMessage(`${segment.title}: ${action} queued`);
+        const actionLabel =
+          action === "approve"
+            ? "approved for broadcast"
+            : action === "reject"
+              ? "rejected"
+              : "clip queued";
+        setMessage(`${segment.title}: ${actionLabel}`);
       } catch (error) {
         setMessage(error instanceof Error ? error.message : "Action failed");
       }
@@ -52,6 +58,18 @@ export function ReviewQueue({ segments }: { segments: Segment[] }) {
         ) : null}
       </div>
       <div className="grid gap-5 p-5">
+        {segments.length === 0 ? (
+          <div className="border border-dashed border-ink/20 bg-paper/60 p-5">
+            <h3 className="text-lg font-black text-ink">
+              No items are waiting for approval right now
+            </h3>
+            <p className="mt-2 text-sm font-semibold leading-6 text-ink/65">
+              Use Focus a URL or X post to send a source into this queue. Once
+              an item appears here, edit the script if needed and click Approve
+              for broadcast.
+            </p>
+          </div>
+        ) : null}
         {segments.map((segment) => (
           <article key={segment.id} className="border border-ink/10 p-4">
             <div className="flex flex-wrap items-center gap-2">
@@ -85,7 +103,7 @@ export function ReviewQueue({ segments }: { segments: Segment[] }) {
                 onClick={() => run(segment, "approve")}
               >
                 <Check className="h-4 w-4" />
-                Approve
+                Approve for broadcast
               </button>
               <button
                 className="inline-flex items-center justify-center gap-2 bg-gold px-4 py-3 text-sm font-black uppercase text-ink disabled:opacity-50"
