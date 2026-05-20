@@ -7,10 +7,10 @@ export async function POST(request: NextRequest) {
   const expected = process.env.ADMIN_SHARED_SECRET;
 
   if (expected && supplied !== expected) {
-    return NextResponse.redirect(new URL("/admin/login?error=1", request.url));
+    return NextResponse.redirect(new URL("/admin/login?error=1", request.url), 303);
   }
 
-  const response = NextResponse.redirect(new URL(next, request.url));
+  const response = NextResponse.redirect(new URL(next, request.url), 303);
   response.cookies.set("asco_admin_secret", supplied, {
     httpOnly: true,
     sameSite: "lax",
