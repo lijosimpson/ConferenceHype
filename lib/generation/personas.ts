@@ -7,7 +7,7 @@ export const personas: Persona[] = [
     specialty: "Main conference anchor and daily agenda",
     voiceGender: "female",
     voiceEnvKey: "VOICE_ECHO_SAGE",
-    style: "crisp, energetic, source-forward news desk anchor"
+    style: "radio DJ-style conference hype anchor: upbeat, rhythmic, punchy, source-forward, and careful with uncertainty"
   },
   {
     id: "nova-quinn",
@@ -71,7 +71,7 @@ export const personas: Persona[] = [
     specialty: "Exhibitors, booths, industry floor, and product showcases",
     voiceGender: "female",
     voiceEnvKey: "VOICE_VESPER_QUILL",
-    style: "floor reporter tracking exhibitor activity and product buzz"
+    style: "high-energy floor reporter tracking exhibitor activity, poster-wall buzz, booth chatter, snacks, coffee, and product showcases"
   }
 ];
 

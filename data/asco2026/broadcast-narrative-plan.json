@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-20T15:11:47.145Z",
+  "generatedAt": "2026-05-20T17:23:11.068Z",
   "source": "data/asco2026/core-index.json",
   "limitation": "All abstracts in the current export are embargoed_or_pending, so this narrative uses title-level abstract signals and agenda metadata.",
   "disclaimer": "ASCO Hype is AI-generated conference commentary for informational and entertainment purposes only. It is not medical, clinical, scientific, legal, or financial advice. Always consult qualified professionals and primary sources.",
@@ -12,9 +12,10 @@
       "broadcastArc": [
         "Open with the room map: 24 sessions are scheduled, and the leading tracks are Pediatric Oncology, Medical Education and Professional Development, Care Delivery/Models of Care, Hematologic Malignancies—Lymphoma and Chronic Lymphocytic Leukemia.",
         "Use the oral abstract sessions as the evidence spine for the day, with education and special sessions providing context between data-heavy blocks.",
+        "Keep the poster wall callout ready for the next Hall A Posters and Exhibits block.",
         "thoracic oncology sets up the high-attention evidence stream, with metastatic non-small cell disease and local-regional or small-cell sessions giving the channel a recurring clinical-science storyline",
         "developmental therapeutics keeps the discovery lane active, especially targeted therapy, immunotherapy, tumor biology, and early-phase strategy",
-        "Close the day by teasing the next set of agenda turns and reminding viewers that this is commentary, not medical advice or ASCO-affiliated reporting."
+        "Close the day with a media-monitor reset: reviewed media and broadcast signals can interrupt the schedule spine, but they must be attributed and clearly labeled."
       ],
       "watchTracks": [
         {
@@ -251,6 +252,7 @@
           "sourceUrl": "https://meetings.asco.org/"
         }
       ],
+      "posterSessions": [],
       "oralAbstracts": [
         {
           "id": "asco2026-abstract-7009",
@@ -1522,10 +1524,12 @@
       "audiencePrompts": [
         "Run this prompt during the morning ramp: Audience fuel check: if you find the best snacks or coffee in the Exhibitor Hall, tag #ASCOHype on X and tell the desk where you found it. ASCO Hype will treat these as audience recommendations, not endorsements.",
         "Run this prompt around midday, when foot traffic and coffee lines are useful signals: Audience fuel check: if you find the best snacks or coffee in the Exhibitor Hall, tag #ASCOHype on X and tell the desk where you found it. ASCO Hype will treat these as audience recommendations, not endorsements.",
-        "Run this prompt during the afternoon reset between session blocks: Audience fuel check: if you find the best snacks or coffee in the Exhibitor Hall, tag #ASCOHype on X and tell the desk where you found it. ASCO Hype will treat these as audience recommendations, not endorsements."
+        "Run this prompt during the afternoon reset between session blocks: Audience fuel check: if you find the best snacks or coffee in the Exhibitor Hall, tag #ASCOHype on X and tell the desk where you found it. ASCO Hype will treat these as audience recommendations, not endorsements.",
+        "Run this poster-floor prompt when Hall A traffic picks up: Poster wall callout, W-poster watch: Hall A - Posters and Exhibits is the floor to watch. If a poster wall stop is buzzing, say the hall twice, ask listeners to verify the location in the ASCO app and on-site signage, and invite #ASCOHype posts from attendees on the ground.",
+        "Run this media reset between agenda blocks: Media monitor callout: keep an ear on reviewed signals from OncLive, STAT News, The ASCO Post, X posts, and other operator-approved broadcast sources. Label media chatter as reported or discussed, not confirmed science unless primary sources support it."
       ],
-      "hostOpen": "Welcome to ASCO Hype for Friday, May 29. Today the agenda leans into Pediatric Oncology, with Medical Education and Professional Development also carrying major attention. We will use the official agenda as the spine, title-level abstract signals as watch points, and reviewed audience or media inputs as interruptions. Audience fuel check: if you find the best snacks or coffee in the Exhibitor Hall, tag #ASCOHype on X and tell the desk where you found it. ASCO Hype will treat these as audience recommendations, not endorsements.",
-      "hostClose": "That is the Friday, May 29 arc: follow the official schedule, watch the high-density tracks, and treat every abstract-title signal as provisional until primary sources and full text are available. Keep tagging #ASCOHype on X with the best snacks and coffee you find in the Exhibitor Hall so the desk can review audience tips. ASCO Hype is AI-generated conference commentary for informational and entertainment purposes only. It is not medical, clinical, scientific, legal, or financial advice. Always consult qualified professionals and primary sources."
+      "hostOpen": "Welcome to ASCO Hype for Friday, May 29. Turn it up: this is the live conference desk, radio-DJ style, source-forward and moving fast. Today the agenda leans into Pediatric Oncology, with Medical Education and Professional Development also carrying major attention. We will use the official agenda as the spine, title-level abstract signals as watch points, and reviewed audience or media inputs as interruptions. Poster wall callout, W-poster watch: Hall A - Posters and Exhibits is the floor to watch. If a poster wall stop is buzzing, say the hall twice, ask listeners to verify the location in the ASCO app and on-site signage, and invite #ASCOHype posts from attendees on the ground. Audience fuel check: if you find the best snacks or coffee in the Exhibitor Hall, tag #ASCOHype on X and tell the desk where you found it. ASCO Hype will treat these as audience recommendations, not endorsements.",
+      "hostClose": "That is the Friday, May 29 arc: follow the official schedule, watch the high-density tracks, and treat every abstract-title signal as provisional until primary sources and full text are available. Keep tagging #ASCOHype on X with the best snacks, coffee, poster-wall hits, and media/broadcast tips you find so the desk can review audience signals. ASCO Hype is AI-generated conference commentary for informational and entertainment purposes only. It is not medical, clinical, scientific, legal, or financial advice. Always consult qualified professionals and primary sources."
     },
     {
       "date": "2026-05-30",
@@ -1535,9 +1539,10 @@
       "broadcastArc": [
         "Open with the room map: 46 sessions are scheduled, and the leading tracks are Lung Cancer—Non-Small Cell Metastatic, Special Sessions, Melanoma/Skin Cancers, Gynecologic Cancer.",
         "Use the oral abstract sessions as the evidence spine for the day, with education and special sessions providing context between data-heavy blocks.",
+        "Run poster wall and W-poster watch callouts for Hall A - Posters and Exhibits, especially when a poster session block opens.",
         "thoracic oncology sets up the high-attention evidence stream, with metastatic non-small cell disease and local-regional or small-cell sessions giving the channel a recurring clinical-science storyline",
         "GI oncology supplies a dense cross-section of colorectal, gastroesophageal, pancreatic, hepatobiliary, and anal-cancer discussion",
-        "Close the day by teasing the next set of agenda turns and reminding viewers that this is commentary, not medical advice or ASCO-affiliated reporting."
+        "Close the day with a media-monitor reset: reviewed media and broadcast signals can interrupt the schedule spine, but they must be attributed and clearly labeled."
       ],
       "watchTracks": [
         {
@@ -1770,6 +1775,141 @@
           "panelists": "Jeffrey S. Weinberg, MD; Koichi Mitsuya, MD, PhD; Ryuta Saito, MD, PhD; Nduka Amankulor, MD; Andrew Connor Puett, MD, PhD; Craig Gedye, PhD, FRACP, MBChB; David A. Reardon, MD; Roy E. Strowd, MD, MEd; Dinu STEFAN, MD; Anna Sophie Berghoff, MD; To Be Determined; Yuankai Shi, MD, PhD",
           "topics": "• Final results of a randomized, controlled, phase 3 trial comparing resection and post-operative stereotactic radiation versus resection and cesium-131 tile-based radiation for treatment of newly diagnosed brain metastases.\n• A multicenter randomized phase III study for newly diagnosed, maximally resected glioblastoma comparing carmustine wafer implantation followed by chemoradiotherapy with temozolomide versus chemoradiotherapy alone: Japan Clinical Oncology Group study JCOG1703 (MACS study).\n• Connectome-sparing stereotactic radiosurgery: Results from the phase II COG-SRS trial.\n• Neoadjuvant fractionated stereotactic radiotherapy followed by surgical resection for brain metastases: A multicenter, single arm phase II trial (NEO-TACTICS).\n• Optimizing Local Tumor Treatment While Protecting Global Function\n• Panel Question and Answer\n• MAGMA: Multi-arm glioblastoma Australasia phase 3...",
           "overview": "Presenters summarize their novel research findings and provide background on their methodologies. Discussants analyze the significance of each abstract within the context of current knowledge, highlighting clinical application and implications for future research and practice. Abstract presenters and discussants answer questions during a moderated panel discussion.",
+          "sourceName": "ASCO 2026 Annual Meeting Program Guide",
+          "sourceUrl": "https://meetings.asco.org/"
+        }
+      ],
+      "posterSessions": [
+        {
+          "id": "asco2026-session-806ea9edc18014cb",
+          "date": "2026-05-30",
+          "startTime": "09:00 AM",
+          "endTime": "12:00 PM",
+          "startAt": "2026-05-30T09:00:00-05:00",
+          "endAt": "2026-05-30T12:00:00-05:00",
+          "title": "Care Delivery/Models of Care",
+          "sessionType": "Poster Session",
+          "location": "Hall A - Posters and Exhibits",
+          "track": "Care Delivery/Models of Care",
+          "chairs": "",
+          "speakers": "Chaewon Hwang, MD (Department of Radiation Oncology, Tufts Medical Center | Department of Radiation Oncology, Beth Israel Deaconess Medical Center); Vaidehi Mujumdar, MD (Atrium Health Levine Cancer); Daniela Tovar (UT Southwestern); Rima Torosyan, MD (Yerevan State Medical University); Akul Purohit, MBChB (The Christie NHS Foundation Trust); Ryan James Crowley, MPhil (NYU Grossman School of Medicine); Govind Warrier, MD, MPH (Bloomberg-Kimmel Institute for Cancer Immunotherapy, Johns Hopkins Sidney Kimmel Comprehensive Cancer Center); Michael Sheen, BS (The Warren Alpert Medical School of Brown University); Ashley Hernandez, BSN, RN (Florid...",
+          "panelists": "",
+          "topics": "• Association of socioeconomic and clinical factors with overall survival in immunotherapy-eligible stage III non-small cell lung cancer following definitive chemoradiation.\n• Intersecting rural, racial, and Medicaid disparities in cervical cancer outcomes across North Carolina, 2019–2023.\n• Lost in translation? Evaluating associations between English proficiency and next generation sequencing completion, and comparing understandability across different translation modalities among Spanish speakers with metastatic breast cancer.\n• Mapping access to retinoblastoma care: Geographic disparities and service availability across Africa, and West and Central Asia.\n• Financial toxicity in early-phase cancer clinical trials: A review of sponsor-supplied information at a large trials unit.\n• Geographic migration patterns of practicing medical oncologists in the United States, 2020-2025.\n• Scaling...",
+          "overview": "Presenters outline their research via posters displayed throughout their assigned Session(s). Authors are available to answer questions from attendees regarding the data presented. Electronic posters and supplemental materials are available online beginning on the day of their assigned Poster Session(s).",
+          "sourceName": "ASCO 2026 Annual Meeting Program Guide",
+          "sourceUrl": "https://meetings.asco.org/"
+        },
+        {
+          "id": "asco2026-session-a706410356e1191f",
+          "date": "2026-05-30",
+          "startTime": "09:00 AM",
+          "endTime": "12:00 PM",
+          "startAt": "2026-05-30T09:00:00-05:00",
+          "endAt": "2026-05-30T12:00:00-05:00",
+          "title": "Gastrointestinal Cancer—Colorectal and Anal",
+          "sessionType": "Poster Session",
+          "location": "Hall A - Posters and Exhibits",
+          "track": "Gastrointestinal Cancer—Colorectal and Anal",
+          "chairs": "",
+          "speakers": "Andrea Garcia-Leal (Medical Oncology Service, Hospital Universitario La Paz); Mir Lim, MD (The University of Texas MD Anderson Cancer Center); Pahini Pandya, PhD (Panakeia Technologies); Aydan Farzaliyeva, MD (Department of Medical Oncology, Baskent University); Piotr Keller, MS (Predictive Systems in Biomedicine (PRISM) Lab, Department of Computer Science, University of Warwick); Gertjan Rasschaert, MD (Laboratory for Digestive Oncology, KU Leuven); Céline Bazille (Centre Hospitalier Universitaire de Caen); Frank A. Sinicrope, MD (Mayo Clinic Rochester); Erik N. Bergstrom, PhD, BS (Natera, Inc.); Jaime A. González Montero, MD, PhD (Bradford...",
+          "panelists": "",
+          "topics": "• Role of microbiota in response to treatment in anal squamous cell carcinoma.\n• TROP2 as an actionable biomarker for anal cancer.\n• H&E–based MSI/MMR testing with artificial intelligence in colorectal cancer: A blinded evaluation across diverse clinicopathological subgroups.\n• Large language model–assisted decision-making in multidisciplinary tumor boards for colorectal cancer.\n• Inferring molecular signatures in colorectal cancer directly from routine whole-slide images.\n• HistoChrome: Virtual multiplex immunohistochemistry from routine H&E in colorectal cancer.\n• Validation of DiaSurv, an AI-based algorithm for stage II colon cancer risk stratification.\n• A deep learning approach to quantify tumor microenvironment features associated with postoperative ctDNA status and outcomes in a phase III FOLFOX-based adjuvant colon cancer trial (N0147; Alliance).\n• A large-scale, multi-target de...",
+          "overview": "Presenters outline their research via posters displayed throughout their assigned Session(s). Authors are available to answer questions from attendees regarding the data presented. Electronic posters and supplemental materials are available online beginning on the day of their assigned Poster Session(s).",
+          "sourceName": "ASCO 2026 Annual Meeting Program Guide",
+          "sourceUrl": "https://meetings.asco.org/"
+        },
+        {
+          "id": "asco2026-session-102f370e9a627846",
+          "date": "2026-05-30",
+          "startTime": "09:00 AM",
+          "endTime": "12:00 PM",
+          "startAt": "2026-05-30T09:00:00-05:00",
+          "endAt": "2026-05-30T12:00:00-05:00",
+          "title": "Gastrointestinal Cancer—Gastroesophageal, Pancreatic, and Hepatobiliary",
+          "sessionType": "Poster Session",
+          "location": "Hall A - Posters and Exhibits",
+          "track": "Gastrointestinal Cancer—Gastroesophageal, Pancreatic, and Hepatobiliary",
+          "chairs": "",
+          "speakers": "Veronica Diermayr, PhD (EDDC; A*STAR, Agency for Science, Technology and Research); Takashi Kokudo (National Center for Global Health and Medicine); Marc Robert de Massy, PhD (Orakl Oncology); To Be Determined; Yelena Y. Janjigian, MD, FASCO (Gastrointestinal Oncology, Memorial Sloan Kettering Cancer Center); Kohei Shitara, MD (National Cancer Center Hospital East); Yu Aoki, MD (Department of Gastroenterology and Gastrointestinal Oncology, National Cancer Center Hospital East); Qianchen Zhang, BS, MSc (Carle Illinois College of Medicine); Zhi Peng, MD (Department of GI Oncology, Peking University Cancer Hospital & Institute); Xiaojie Xia, MD...",
+          "panelists": "",
+          "topics": "• H&E 2.0: Artificial intelligence–driven prediction of N256-glycosylated CEACAM5/6 expression in esophageal and gastric adenocarcinomas.\n• A machine learning algorithm for optimizing treatment selection for patients with up to three hepatocellular carcinomas measuring ≤ 3 cm.\n• Multi-modal AI modeling to predict clinical trial outcomes and benchmarks pan-RAS versus KRAS G12D inhibition in KRAS G12D–mutant PDAC.\n• Benchmarking the KEYNOTE-811 standard of care using AI-reconstructed external control arms in advanced gastric cancer.\n• First-line (1L) trastuzumab deruxtecan (T-DXd)–based regimens in advanced HER2-expressing gastric cancer (GC), gastroesophageal junction adenocarcinoma (GEJA), or esophageal adenocarcinoma (EA): Safety results from DESTINY-Gastric03 (DG-03) Part 2 arms D and F, and Part 4.\n• Sonesitatug vedotin (Sone-Ve) monotherapy in patients (pts) with claudin 18.2–positi...",
+          "overview": "Presenters outline their research via posters displayed throughout their assigned Session(s). Authors are available to answer questions from attendees regarding the data presented. Electronic posters and supplemental materials are available online beginning on the day of their assigned Poster Session(s).",
+          "sourceName": "ASCO 2026 Annual Meeting Program Guide",
+          "sourceUrl": "https://meetings.asco.org/"
+        },
+        {
+          "id": "asco2026-session-6a2ba802fa4916f0",
+          "date": "2026-05-30",
+          "startTime": "01:30 PM",
+          "endTime": "04:30 PM",
+          "startAt": "2026-05-30T13:30:00-05:00",
+          "endAt": "2026-05-30T16:30:00-05:00",
+          "title": "Developmental Therapeutics—Immunotherapy",
+          "sessionType": "Poster Session",
+          "location": "Hall A - Posters and Exhibits",
+          "track": "Developmental Therapeutics—Immunotherapy",
+          "chairs": "",
+          "speakers": "Charlotte Rose Lemech, FRACP, MBBS (Medical Oncology, Scientia Clinical Research and Prince of Wales Clinical School, UNSW Sydney); Meredith Leston (Invivyd, Inc.); Judith Raimbourg (Institut de Cancerologie de l’Ouest); Ji Hyung Hong, MD, PhD (Center for Breast Cancer, National Cancer Center); Takafumi Koyama, MD, PhD (Department of Experimental Therapeutics, National Cancer Center Hospital); Qingyu Wang, MD (Shanghai Henlius Biotech, Inc.); Jun Guo, MD (Department of Melanoma and Sarcoma, Key Laboratory of Carcinogenesis and Translational Research (Ministry of Education/Beijing), Peking University Cancer Hospital and Institute); Xiaoli Che...",
+          "panelists": "",
+          "topics": "• CS2009, a novel PD-1/VEGF/CTLA-4 trispecific antibody, in patients with advanced solid tumors: Updated results from an open-label, multicenter, phase 1 first-in-human study.\n• Pemivibart for prevention of COVID-19: Subset analysis of CANOPY participants with solid tumor or hematologic malignancies.\n• A phase 1 study of BGB-A3055 (anti-CCR8) with or without tislelizumab (anti–PD-1) in patients with solid tumors.\n• Phase 1b dose-expansion study of IMC-002, a anti-CD47 monoclonal antibody, in patients with advanced triple negative breast cancer (TNBC).\n• Phase I trial of the anti-CAPRIN1 antibody TRK-950 alone or with nivolumab in Japanese patients with advanced solid tumors.\n• Safety, pharmacokinetics, and immunogenicity of HLX6018, a monoclonal antibody targeting the GARP/TGF-β1 complex, in healthy subjects: A randomized, double-blind, placebo-controlled, phase I clinical study.\n• Safe...",
+          "overview": "Presenters outline their research via posters displayed throughout their assigned Session(s). Authors are available to answer questions from attendees regarding the data presented. Electronic posters and supplemental materials are available online beginning on the day of their assigned Poster Session(s).",
+          "sourceName": "ASCO 2026 Annual Meeting Program Guide",
+          "sourceUrl": "https://meetings.asco.org/"
+        },
+        {
+          "id": "asco2026-session-be369dc04e7680f8",
+          "date": "2026-05-30",
+          "startTime": "01:30 PM",
+          "endTime": "04:30 PM",
+          "startAt": "2026-05-30T13:30:00-05:00",
+          "endAt": "2026-05-30T16:30:00-05:00",
+          "title": "Developmental Therapeutics—Molecularly Targeted Agents and Tumor Biology",
+          "sessionType": "Poster Session",
+          "location": "Hall A - Posters and Exhibits",
+          "track": "Developmental Therapeutics—Molecularly Targeted Agents and Tumor Biology",
+          "chairs": "",
+          "speakers": "XUEMEI ZHU, MD, PhD (Ruijin Hospital, Shanghai Jiao Tong University School of Medicine); Orly Alter, PhD (University of Utah and Prism AI Therapeutics, Inc.); Qiyuan Isabelle Hu, PhD (Tempus AI, Inc.); Violet Zahedi, MD (Synamics Therapeutics); YUQIAN Cai, BS, MPharm (Shanghai Biophy Biological Pharmaceutical Co., Ltd); Dan-yun Ruan, MD, PhD (Sun Yat-sen University Cancer Center); Xiaohua Wu, MD (Department of Gynecologic Oncology, Fudan University Shanghai Cancer Center); Chirayu Mohindroo, MD, MBBS (National Cancer Institute, National Institutes of Health); Hong Zhao, PhD (National Cancer Center/National Clinical Research Center for Cancer...",
+          "panelists": "",
+          "topics": "• The efficacy and safety of azvudine (FNC) in phase 1 investigator-initiated study in patients with advanced solid tumors.\n• Discovery from single-cell RNA sequencing profiles of 18 CPTAC glioblastoma patients and validation in bulk profiles of 138 TCGA patients and two human-derived cell lines of a whole-transcriptome predictor of overall survival and drug targets by using quantum mechanics–based AI/ML.\n• Quantum mechanics-based multi-tensor AI/ML as predictor of patients' overall survival, gene targets, and drug responses from their glioblastoma tumors' whole genomes.\n• Development and clinical utility of an H&E-based tumor origin prediction model.\n• Prospective prediction of alisertib-induced Aurora-A kinase resistance mutations in patients with metastatic ER+ breast cancer using an innovative artificial intelligence approach.\n• Light-activated EGFR antibody–drug conjugate: Analysis...",
+          "overview": "Presenters outline their research via posters displayed throughout their assigned Session(s). Authors are available to answer questions from attendees regarding the data presented. Electronic posters and supplemental materials are available online beginning on the day of their assigned Poster Session(s).",
+          "sourceName": "ASCO 2026 Annual Meeting Program Guide",
+          "sourceUrl": "https://meetings.asco.org/"
+        },
+        {
+          "id": "asco2026-session-53912b449f61fcfe",
+          "date": "2026-05-30",
+          "startTime": "01:30 PM",
+          "endTime": "04:30 PM",
+          "startAt": "2026-05-30T13:30:00-05:00",
+          "endAt": "2026-05-30T16:30:00-05:00",
+          "title": "Head and Neck Cancer",
+          "sessionType": "Poster Session",
+          "location": "Hall A - Posters and Exhibits",
+          "track": "Head and Neck Cancer",
+          "chairs": "",
+          "speakers": "Yusuf Sadek, BA (The Ohio State University); Tingxi Tang, MD (Nanfang Hospital, Southern Medical University); Jiyoon Lim, MD (Northwestern University Feinberg School of Medicine); Ye Guo, MD (Department of Oncology, Shanghai East Hospital, School of Medicine, Tongji University); Christine Auberle, MD (Washington University in St. Louis); Victoria Meucci Villaflor, MD (University of California, Irvine Health Chao Family Comprehensive Cancer Center); Vivek Subbiah, MD (The University of Texas MD Anderson Cancer Center and Sarah Cannon Research Institute); Shu Tian, MD (Eye & ENT Hospital of Fudan University); Hideki Tanaka, PhD (Department of...",
+          "panelists": "",
+          "topics": "• Whole slide imaging–based prediction of immunohistochemistry markers and surgical pathological features.\n• Development and multicenter validation of a machine learning framework for predicting severe myelosuppression in nasopharyngeal carcinoma: Evidence from large-scale real-world data and prospective clinical trials.\n• AI-powered assessment of tertiary lymphoid structures (TLS) from H&E whole-slide images as a prognostic tool in HNSCC.\n• Volrustomig monotherapy for recurrent/metastatic HNSCC: Substudy 2 of the eVOLVE-02 phase 2 study.\n• An open-label, randomized phase 2 trial of ramucirumab and pembrolizumab versus pembrolizumab as first-line therapy for PD-L1–positive, recurrent or metastatic head and neck squamous cell carcinoma (RM-HNSCC).\n• Phase 1 basket study of telisotuzumab adizutecan (Temab-A, ABBV-400), a c-Met protein–targeting antibody-drug conjugate: Results from patien...",
+          "overview": "Presenters outline their research via posters displayed throughout their assigned Session(s). Authors are available to answer questions from attendees regarding the data presented. Electronic posters and supplemental materials are available online beginning on the day of their assigned Poster Session(s).",
+          "sourceName": "ASCO 2026 Annual Meeting Program Guide",
+          "sourceUrl": "https://meetings.asco.org/"
+        },
+        {
+          "id": "asco2026-session-e3b42381442864e7",
+          "date": "2026-05-30",
+          "startTime": "01:30 PM",
+          "endTime": "04:30 PM",
+          "startAt": "2026-05-30T13:30:00-05:00",
+          "endAt": "2026-05-30T16:30:00-05:00",
+          "title": "Symptom Science and Palliative Care",
+          "sessionType": "Poster Session",
+          "location": "Hall A - Posters and Exhibits",
+          "track": "Symptom Science and Palliative Care",
+          "chairs": "",
+          "speakers": "Vidhya Nair, DO (University of Washington); Hassan M. Abushukair, MD, MS (Stephenson Cancer Center); Frances Dean, MA (University of California, San Francisco); Gabriel Aleixo, MD (University of Pennsylvania); Erika Libiar Estrada, MPH, MPP (Kaiser Permanente Southern California, Research and Evaluation Department); Jianbo Wang, MD (Qilu Hospital of Shandong University); Ming-Hua Cong, PhD, PhyD (National Cancer Center/National Clinical Research Center for Cancer/Cancer Hospital, Chinese Academy of Medical Sciences and Peking Union Medical College); Robert C. Shepard, MD, FACP (Moleculin Biotech); Tae Hoon Kim, MD (Valley Health System); Ree...",
+          "panelists": "",
+          "topics": "• Cardiovascular disease incidence in women with early-onset breast cancer.\n• Machine learning (ML)-based prediction of fatal immune checkpoint inhibitor (ICI)–associated myocarditis (MC) with multi-cohort validation.\n• Artificial intelligence surrogate models to predict long-term cardiovascular effects of immune checkpoint inhibitor therapies using electrocardiograms.\n• The impact of body composition on cardiac function in women with early breast cancer taking cardiotoxic chemotherapy.\n• Exercise and cardiovascular risk among breast cancer patients.\n• Time-resolved cardiovascular risk after immune checkpoint inhibitors: A large real-world cancer cohort study.\n• The genetic polymorphism underlying immune checkpoint inhibitor–induced endocrine toxicity.\n• Cardiac safety of L-annamycin at high cumulative anthracycline exposure: Pooled analysis.\n• The association between cardiovascular dis...",
+          "overview": "Presenters outline their research via posters displayed throughout their assigned Session(s). Authors are available to answer questions from attendees regarding the data presented. Electronic posters and supplemental materials are available online beginning on the day of their assigned Poster Session(s).",
           "sourceName": "ASCO 2026 Annual Meeting Program Guide",
           "sourceUrl": "https://meetings.asco.org/"
         }
@@ -3637,10 +3777,12 @@
       "audiencePrompts": [
         "Run this prompt during the morning ramp: Audience fuel check: if you find the best snacks or coffee in the Exhibitor Hall, tag #ASCOHype on X and tell the desk where you found it. ASCO Hype will treat these as audience recommendations, not endorsements.",
         "Run this prompt around midday, when foot traffic and coffee lines are useful signals: Audience fuel check: if you find the best snacks or coffee in the Exhibitor Hall, tag #ASCOHype on X and tell the desk where you found it. ASCO Hype will treat these as audience recommendations, not endorsements.",
-        "Run this prompt during the afternoon reset between session blocks: Audience fuel check: if you find the best snacks or coffee in the Exhibitor Hall, tag #ASCOHype on X and tell the desk where you found it. ASCO Hype will treat these as audience recommendations, not endorsements."
+        "Run this prompt during the afternoon reset between session blocks: Audience fuel check: if you find the best snacks or coffee in the Exhibitor Hall, tag #ASCOHype on X and tell the desk where you found it. ASCO Hype will treat these as audience recommendations, not endorsements.",
+        "Run this poster-floor prompt when Hall A traffic picks up: Poster wall callout, W-poster watch: Hall A - Posters and Exhibits is the floor to watch. If a poster wall stop is buzzing, say the hall twice, ask listeners to verify the location in the ASCO app and on-site signage, and invite #ASCOHype posts from attendees on the ground.",
+        "Run this media reset between agenda blocks: Media monitor callout: keep an ear on reviewed signals from OncLive, STAT News, The ASCO Post, X posts, and other operator-approved broadcast sources. Label media chatter as reported or discussed, not confirmed science unless primary sources support it."
       ],
-      "hostOpen": "Welcome to ASCO Hype for Saturday, May 30. Today the agenda leans into Lung Cancer—Non-Small Cell Metastatic, with Special Sessions also carrying major attention. We will use the official agenda as the spine, title-level abstract signals as watch points, and reviewed audience or media inputs as interruptions. Audience fuel check: if you find the best snacks or coffee in the Exhibitor Hall, tag #ASCOHype on X and tell the desk where you found it. ASCO Hype will treat these as audience recommendations, not endorsements.",
-      "hostClose": "That is the Saturday, May 30 arc: follow the official schedule, watch the high-density tracks, and treat every abstract-title signal as provisional until primary sources and full text are available. Keep tagging #ASCOHype on X with the best snacks and coffee you find in the Exhibitor Hall so the desk can review audience tips. ASCO Hype is AI-generated conference commentary for informational and entertainment purposes only. It is not medical, clinical, scientific, legal, or financial advice. Always consult qualified professionals and primary sources."
+      "hostOpen": "Welcome to ASCO Hype for Saturday, May 30. Turn it up: this is the live conference desk, radio-DJ style, source-forward and moving fast. Today the agenda leans into Lung Cancer—Non-Small Cell Metastatic, with Special Sessions also carrying major attention. We will use the official agenda as the spine, title-level abstract signals as watch points, and reviewed audience or media inputs as interruptions. Poster wall callout, W-poster watch: Hall A - Posters and Exhibits is the floor to watch. If a poster wall stop is buzzing, say the hall twice, ask listeners to verify the location in the ASCO app and on-site signage, and invite #ASCOHype posts from attendees on the ground. Audience fuel check: if you find the best snacks or coffee in the Exhibitor Hall, tag #ASCOHype on X and tell the desk where you found it. ASCO Hype will treat these as audience recommendations, not endorsements.",
+      "hostClose": "That is the Saturday, May 30 arc: follow the official schedule, watch the high-density tracks, and treat every abstract-title signal as provisional until primary sources and full text are available. Keep tagging #ASCOHype on X with the best snacks, coffee, poster-wall hits, and media/broadcast tips you find so the desk can review audience signals. ASCO Hype is AI-generated conference commentary for informational and entertainment purposes only. It is not medical, clinical, scientific, legal, or financial advice. Always consult qualified professionals and primary sources."
     },
     {
       "date": "2026-05-31",
@@ -3650,9 +3792,10 @@
       "broadcastArc": [
         "Open with the room map: 43 sessions are scheduled, and the leading tracks are Special Sessions, Central Nervous System Tumors, Breast Cancer—Metastatic, Prevention, Risk Reduction, and Genetics.",
         "Make the plenary session the editorial center of gravity for the day, then use oral abstract sessions to build the before-and-after context.",
+        "Run poster wall and W-poster watch callouts for Hall A - Posters and Exhibits, especially when a poster session block opens.",
         "thoracic oncology sets up the high-attention evidence stream, with metastatic non-small cell disease and local-regional or small-cell sessions giving the channel a recurring clinical-science storyline",
         "breast cancer anchors patient-centered treatment sequencing, adjuvant strategy, metastatic decision-making, and antibody-drug-conjugate watch points",
-        "Close the day by teasing the next set of agenda turns and reminding viewers that this is commentary, not medical advice or ASCO-affiliated reporting."
+        "Close the day with a media-monitor reset: reviewed media and broadcast signals can interrupt the schedule spine, but they must be attributed and clearly labeled."
       ],
       "watchTracks": [
         {
@@ -3905,6 +4048,103 @@
           "panelists": "Shannon L. Maude, MD, PhD; Jordane Chaix, MD; Rachel Mendelson, MD; Navin Pinto, MD; Tara M. Brinkman, PhD; Noha Sharafeldin, MD, PhD, MSc; Lynda M. Vrooman, MD; Tara O. Henderson, MD, MPH, FASCO",
           "topics": "• Tisagenlecleucel (tisa-cel) in pediatric and young adult patients with high-risk (HR) B-cell acute lymphoblastic leukemia (B-ALL) and minimal residual disease (MRD) at the end of frontline consolidation (EOC).\n• SPARTO: A phase I study of PD-1 inhibitor spartalizumab (PDR001) in combination with low dose of pazopanib in pediatric relapsed/refractory tumors.\n• Targeting metastatic sites with radiation and outcomes in high-risk pediatric rhabdomyosarcoma.\n• New Immunotherapy or Radiotherapy Approaches for Children With High-Risk Cancers\n• Panel Question and Answer\n• Digital health intervention for comorbid insomnia and neurocognitive impairment in adult survivors of childhood cancer: Results from a randomized clinical trial.\n• The ASPIRES study: Promoting colorectal cancer surveillance in childhood cancer survivors—A randomized intervention trial from the Childhood Cancer Survivor study...",
           "overview": "Presenters summarize their novel research findings and provide background on their methodologies. Discussants analyze the significance of each abstract within the context of current knowledge, highlighting clinical application and implications for future research and practice. Abstract presenters and discussants answer questions during a moderated panel discussion.",
+          "sourceName": "ASCO 2026 Annual Meeting Program Guide",
+          "sourceUrl": "https://meetings.asco.org/"
+        }
+      ],
+      "posterSessions": [
+        {
+          "id": "asco2026-session-326c6f0fdf7f953c",
+          "date": "2026-05-31",
+          "startTime": "09:00 AM",
+          "endTime": "12:00 PM",
+          "startAt": "2026-05-31T09:00:00-05:00",
+          "endAt": "2026-05-31T12:00:00-05:00",
+          "title": "Genitourinary Cancer—Kidney and Bladder",
+          "sessionType": "Poster Session",
+          "location": "Hall A - Posters and Exhibits",
+          "track": "Genitourinary Cancer—Kidney and Bladder",
+          "chairs": "",
+          "speakers": "Eric Martin, MD, PhD (Inova Schar Cancer Institute); Hannah Timm, MSc (Institute for AI in Medicine, University Hospital Essen); Betul Gok Yavuz, MD, PhD (The University of Chicago); Matthew D. Galsky, MD, FASCO (Icahn School of Medicine at Mount Sinai, Tisch Cancer Institute); Peng Li, MS (Division of Medical Oncology, Department of Internal Medicine, The Ohio State University Comprehensive Cancer Center); Viktor Grünwald, MD (University Hospital Essen); Andrea B. Apolo, MD, FASCO (National Cancer Institute, National Institutes of Health); Gautham Prakash, MD (University of Virginia, Division of Hematology/Oncology); Amishi Yogesh Shah, MD...",
+          "panelists": "",
+          "topics": "• Artificial intelligence (AI)–augmented analysis of quantitative circulating tumor DNA (ctDNA) burden and longitudinal kinetics to identify prognostic risk stratification in metastatic clear cell renal cell carcinoma (mccRCC).\n• Vessel branching patterns quantified by artificial intelligence as a novel prognostic biomarker in advanced renal cell carcinoma: A post-hoc analysis of the CM914 trial.\n• Deciphering the genomic landscape of renal cell carcinoma brain metastases.\n• CheckMate-901: Association of tumor and peripheral biomarker profiles with durable disease control in metastatic urothelial carcinoma treated with nivolumab plus ipilimumab.\n• Machine learning–based transcriptomic signatures to predict treatment outcomes across targeted and immunotherapy regimens in renal cell carcinoma.\n• Efficacy outcomes by patterns of progression in patients with advanced renal cell carcinoma fr...",
+          "overview": "Presenters outline their research via posters displayed throughout their assigned Session(s). Authors are available to answer questions from attendees regarding the data presented. Electronic posters and supplemental materials are available online beginning on the day of their assigned Poster Session(s).",
+          "sourceName": "ASCO 2026 Annual Meeting Program Guide",
+          "sourceUrl": "https://meetings.asco.org/"
+        },
+        {
+          "id": "asco2026-session-e3bad8b70a8056a1",
+          "date": "2026-05-31",
+          "startTime": "09:00 AM",
+          "endTime": "12:00 PM",
+          "startAt": "2026-05-31T09:00:00-05:00",
+          "endAt": "2026-05-31T12:00:00-05:00",
+          "title": "Genitourinary Cancer—Prostate, Testicular, and Penile",
+          "sessionType": "Poster Session",
+          "location": "Hall A - Posters and Exhibits",
+          "track": "Genitourinary Cancer—Prostate, Testicular, and Penile",
+          "chairs": "",
+          "speakers": "Andrea Juliana Gomes, MD (Liga Norte Riograndense Contra o Câncer); Mitchell Singstock, MD (Hunstman Cancer Institute at The University of Utah); Xinglei Shen, MD (University of Kansas Medical Center); Bo Dai (Fudan University Shanghai Cancer Center); João Lobo (Portuguese Oncology Institute of Porto (IPO-Porto)); Michal Mego, MD, PhD (Department of Oncology, Faculty of Medicine, Comenius University and National Cancer Institute); Vincent D'Andrea, MD (Memorial Sloan Kettering Cancer Center); Nurlan Mammadzada, MD (Ankara Gülhane Eği̇ti̇m ve Araştirma Hastanesi̇); Zachariah Thomas, MBBS (Department of Genitourinary Medical Oncology, The Univ...",
+          "panelists": "",
+          "topics": "• Validation of prostate-specific antigen (PSA) decline among the Latin American subgroup of LIBERTAS: A phase 3 study of apalutamide (APA) plus continuous versus intermittent androgen deprivation therapy (ADT) in metastatic castration-sensitive prostate cancer (mCSPC).\n• Real-world genetic testing patterns in prostate cancer assessed via artificial intelligence: Implications for NCCN guideline implementation.\n• Image-only and multimodal AI digital pathology biomarkers to demonstrate risk stratification across standard prostate cancer management strategies.\n• AI-assisted preoperative communication in prostate cancer: A prospective, single-blinded, randomized phase II trial.\n• Implementation of serum microRNA-371a-3p testing for testicular germ-cell tumors in a pathology department: Real-world data from a comprehensive cancer center.\n• Comparative transcriptomic analysis of chemotherapy-...",
+          "overview": "Presenters outline their research via posters displayed throughout their assigned Session(s). Authors are available to answer questions from attendees regarding the data presented. Electronic posters and supplemental materials are available online beginning on the day of their assigned Poster Session(s).",
+          "sourceName": "ASCO 2026 Annual Meeting Program Guide",
+          "sourceUrl": "https://meetings.asco.org/"
+        },
+        {
+          "id": "asco2026-session-eb60def247278131",
+          "date": "2026-05-31",
+          "startTime": "09:00 AM",
+          "endTime": "12:00 PM",
+          "startAt": "2026-05-31T09:00:00-05:00",
+          "endAt": "2026-05-31T12:00:00-05:00",
+          "title": "Lung Cancer—Non–Small Cell Local-Regional/Small Cell/Other Thoracic Cancers",
+          "sessionType": "Poster Session",
+          "location": "Hall A - Posters and Exhibits",
+          "track": "Lung Cancer—Non-Small Cell Local-Regional/Small Cell/Other Thoracic Cancers",
+          "chairs": "",
+          "speakers": "Amrik Majumdar, BS (Westfield High School); Yin Li, MD (School of Medicine, Shanghai Jiao Tong University, Shanghai Chest Hospital); Mohammadhadi Khorrami, PhD (Wallace H. Coulter Department of Biomedical Engineering, Georgia Institute of Technology and Emory University); To Be Determined; Loïc Ferrer, PhD (SOPHiA GENETICS); Lintong Yao, MD (Department of Thoracic Surgery, Guangdong Provincial People's Hospital (Guangdong Academy of Medical Sciences), Southern Medical University); Tsuyoshi Hirata, MD (National Cancer Center Hospital East); Zohra Nooruddin, MD (University of Texas Science Center at San Antonio); Jung Hun Oh, PhD (Memorial Slo...",
+          "panelists": "",
+          "topics": "• Lung cancer stage prediction using longitudinal CT imaging compared with single-timepoint assessment.\n• Rapid multi-task intraoperative diagnosis of lung cancer via deep neural network-driven label-free femtosecond laser imaging (FLI).\n• Noninvasive imaging biomarkers for survival risk stratification with tarlatamab in ES-SCLC.\n• Development and validation of an artificial intelligence–based deep learning imaging model for early lung cancer detection: DAVINCI, a retrospective study of 8,962 patients.\n• Cross-stage validation of a multimodal machine learning model to predict pathological complete response to neoadjuvant chemotherapy or chemoimmunotherapy in resectable stage III non–small cell lung cancer.\n• Multimodal intraoperative diagnosis and grading system integrating macroscopic images, CT imaging, and textual reports for adenocarcinoma (MaCTex) in early-stage LUAD: A multicentri...",
+          "overview": "Presenters outline their research via posters displayed throughout their assigned Session(s). Authors are available to answer questions from attendees regarding the data presented. Electronic posters and supplemental materials are available online beginning on the day of their assigned Poster Session(s).",
+          "sourceName": "ASCO 2026 Annual Meeting Program Guide",
+          "sourceUrl": "https://meetings.asco.org/"
+        },
+        {
+          "id": "asco2026-session-fb36c69ea1130f98",
+          "date": "2026-05-31",
+          "startTime": "09:00 AM",
+          "endTime": "12:00 PM",
+          "startAt": "2026-05-31T09:00:00-05:00",
+          "endAt": "2026-05-31T12:00:00-05:00",
+          "title": "Lung Cancer—Non-Small Cell Metastatic",
+          "sessionType": "Poster Session",
+          "location": "Hall A - Posters and Exhibits",
+          "track": "Lung Cancer—Non-Small Cell Metastatic",
+          "chairs": "",
+          "speakers": "Qing Zhou, MD, PhD (Guangdong Lung Cancer Institute, Guangdong Provincial People’s Hospital (Guangdong Academy of Medical Sciences), Southern Medical University); Jesus Corral Jaime, MD (Hospital Universitario de Jerez); To Be Determined; Jair Bar, MD, PhD (Jusidman Cancer Center, Sheba Medical Center, Ramat Gan, Israel; The Gray Faculty of Medical and Health Sciences, Tel Aviv University); Yi Hu (Cancer Center, Chinese PLA General Hospital); Tomoiki Aiba, MD, PhD (Department of Pulmonary Medicine, Sendai Kousei Hospital); Jin-Ji Yang, MD (Guangdong Lung Cancer Institute, Guangdong Provincial People’s Hospital (Guangdong Academy of Medical S...",
+          "panelists": "",
+          "topics": "• Amivantamab in <em>EGFR</em>-mutated NSCLC with refractory brain or leptomeningeal metastases: A multi-center real-world study.\n• Sigvotatug vedotin (SV), an investigational integrin beta-6 (IB6)─directed antibody-drug conjugate (ADC), plus pembrolizumab: Updated results from the phase 1 study (SGNB6A-001).\n• Dose-escalation results from a phase I study of FZ-AD004, a TROP2-directed ADC, in patients with advanced solid tumors.\n• Impact<em> </em>of <em>MET</em> amplification (amp) on telisotuzumab vedotin (Teliso-V) efficacy and safety in 2L+ non-squamous (NSQ) <em>EGFR </em>wild-type (WT) NSCLC with c-Met protein overexpression (OE).\n• SHR-1826, a c-MET directed antibody-drug conjugate (ADC), in advanced solid tumors: Updates from a phase 1 study.\n• SHR-A2102 in combination with adebrelimab as first-line treatment in patients with locally advanced or metastatic squamous or non-squamou...",
+          "overview": "",
+          "sourceName": "ASCO 2026 Annual Meeting Program Guide",
+          "sourceUrl": "https://meetings.asco.org/"
+        },
+        {
+          "id": "asco2026-session-1c513e4c6c29c471",
+          "date": "2026-05-31",
+          "startTime": "09:00 AM",
+          "endTime": "12:00 PM",
+          "startAt": "2026-05-31T09:00:00-05:00",
+          "endAt": "2026-05-31T12:00:00-05:00",
+          "title": "Melanoma/Skin Cancers",
+          "sessionType": "Poster Session",
+          "location": "Hall A - Posters and Exhibits",
+          "track": "Melanoma/Skin Cancers",
+          "chairs": "",
+          "speakers": "Jean Henri Maselli-Schoueri, MD, PhD (Princess Margaret Cancer Centre); Stergios J. Moschos, MD (The University of North Carolina at Chapel Hill); Alexander Xiao, MD (Mayo Clinic Rochester); Caitlyn Balsay-Patel, MD, MS (Moffitt Cancer Center); Zachary Scott Morris, MD, PhD (University of Wisconsin); Meredith McKean, MD, MPH (Sarah Cannon Research Institute, Tennessee Oncology); Georgina V. Long, MD, PhD, FRACP, FASCO (Melanoma Institute Australia, The University of Sydney); Michelle Ferreira, MD (Sidney Kimmel Comprehensive Cancer Center); Ryan J. Sullivan, MD, FASCO (Massachusetts General Hospital, Harvard Medical School); Hussein A. Tawbi...",
+          "panelists": "",
+          "topics": "• Metabolic signatures of response: 2-hydroxybutyric acid as a biomarker in melanoma patients receiving ipilimumab–nivolumab.\n• Final results and correlative analysis of entinostat (E) plus pembrolizumab (P) in patients (Pts) with metastatic melanoma (MM) previously treated with anti–PD-(L)1 therapy (Tx).\n• Clinical characteristics, molecular features, and treatment of primary central nervous system melanoma.\n• A propensity score-matched analysis comparing first-line regional, systemic, and intralesional treatments for melanoma in-transit metastases in a contemporary patient population.\n• A phase I/IIa, first-in-human, multicenter, monotherapy and combination therapy with nivolumab dose-finding study of [<sup>212</sup>Pb]VMT01 melanocortin-1-receptor–targeted, image-guided, alpha-particle therapy in subjects with previously treated unresectable or metastatic melanoma.\n• Imneskibart + lo...",
+          "overview": "Presenters outline their research via posters displayed throughout their assigned Session(s). Authors are available to answer questions from attendees regarding the data presented. Electronic posters and supplemental materials are available online beginning on the day of their assigned Poster Session(s).",
           "sourceName": "ASCO 2026 Annual Meeting Program Guide",
           "sourceUrl": "https://meetings.asco.org/"
         }
@@ -5932,10 +6172,12 @@
       "audiencePrompts": [
         "Run this prompt during the morning ramp: Audience fuel check: if you find the best snacks or coffee in the Exhibitor Hall, tag #ASCOHype on X and tell the desk where you found it. ASCO Hype will treat these as audience recommendations, not endorsements.",
         "Run this prompt around midday, when foot traffic and coffee lines are useful signals: Audience fuel check: if you find the best snacks or coffee in the Exhibitor Hall, tag #ASCOHype on X and tell the desk where you found it. ASCO Hype will treat these as audience recommendations, not endorsements.",
-        "Run this prompt during the afternoon reset between session blocks: Audience fuel check: if you find the best snacks or coffee in the Exhibitor Hall, tag #ASCOHype on X and tell the desk where you found it. ASCO Hype will treat these as audience recommendations, not endorsements."
+        "Run this prompt during the afternoon reset between session blocks: Audience fuel check: if you find the best snacks or coffee in the Exhibitor Hall, tag #ASCOHype on X and tell the desk where you found it. ASCO Hype will treat these as audience recommendations, not endorsements.",
+        "Run this poster-floor prompt when Hall A traffic picks up: Poster wall callout, W-poster watch: Hall A - Posters and Exhibits is the floor to watch. If a poster wall stop is buzzing, say the hall twice, ask listeners to verify the location in the ASCO app and on-site signage, and invite #ASCOHype posts from attendees on the ground.",
+        "Run this media reset between agenda blocks: Media monitor callout: keep an ear on reviewed signals from OncLive, STAT News, The ASCO Post, X posts, and other operator-approved broadcast sources. Label media chatter as reported or discussed, not confirmed science unless primary sources support it."
       ],
-      "hostOpen": "Welcome to ASCO Hype for Sunday, May 31. Today the agenda leans into Special Sessions, with Central Nervous System Tumors also carrying major attention. We will use the official agenda as the spine, title-level abstract signals as watch points, and reviewed audience or media inputs as interruptions. Audience fuel check: if you find the best snacks or coffee in the Exhibitor Hall, tag #ASCOHype on X and tell the desk where you found it. ASCO Hype will treat these as audience recommendations, not endorsements.",
-      "hostClose": "That is the Sunday, May 31 arc: follow the official schedule, watch the high-density tracks, and treat every abstract-title signal as provisional until primary sources and full text are available. Keep tagging #ASCOHype on X with the best snacks and coffee you find in the Exhibitor Hall so the desk can review audience tips. ASCO Hype is AI-generated conference commentary for informational and entertainment purposes only. It is not medical, clinical, scientific, legal, or financial advice. Always consult qualified professionals and primary sources."
+      "hostOpen": "Welcome to ASCO Hype for Sunday, May 31. Turn it up: this is the live conference desk, radio-DJ style, source-forward and moving fast. Today the agenda leans into Special Sessions, with Central Nervous System Tumors also carrying major attention. We will use the official agenda as the spine, title-level abstract signals as watch points, and reviewed audience or media inputs as interruptions. Poster wall callout, W-poster watch: Hall A - Posters and Exhibits is the floor to watch. If a poster wall stop is buzzing, say the hall twice, ask listeners to verify the location in the ASCO app and on-site signage, and invite #ASCOHype posts from attendees on the ground. Audience fuel check: if you find the best snacks or coffee in the Exhibitor Hall, tag #ASCOHype on X and tell the desk where you found it. ASCO Hype will treat these as audience recommendations, not endorsements.",
+      "hostClose": "That is the Sunday, May 31 arc: follow the official schedule, watch the high-density tracks, and treat every abstract-title signal as provisional until primary sources and full text are available. Keep tagging #ASCOHype on X with the best snacks, coffee, poster-wall hits, and media/broadcast tips you find so the desk can review audience signals. ASCO Hype is AI-generated conference commentary for informational and entertainment purposes only. It is not medical, clinical, scientific, legal, or financial advice. Always consult qualified professionals and primary sources."
     },
     {
       "date": "2026-06-01",
@@ -5945,9 +6187,10 @@
       "broadcastArc": [
         "Open with the room map: 66 sessions are scheduled, and the leading tracks are Special Sessions, Head and Neck Cancer, Gastrointestinal Cancer—Gastroesophageal, Pancreatic, and Hepatobiliary, Prevention, Risk Reduction, and Genetics.",
         "Use the oral abstract sessions as the evidence spine for the day, with education and special sessions providing context between data-heavy blocks.",
+        "Run poster wall and W-poster watch callouts for Hall A - Posters and Exhibits, especially when a poster session block opens.",
         "breast cancer anchors patient-centered treatment sequencing, adjuvant strategy, metastatic decision-making, and antibody-drug-conjugate watch points",
         "GI oncology supplies a dense cross-section of colorectal, gastroesophageal, pancreatic, hepatobiliary, and anal-cancer discussion",
-        "Close the day by teasing the next set of agenda turns and reminding viewers that this is commentary, not medical advice or ASCO-affiliated reporting."
+        "Close the day with a media-monitor reset: reviewed media and broadcast signals can interrupt the schedule spine, but they must be attributed and clearly labeled."
       ],
       "watchTracks": [
         {
@@ -6180,6 +6423,236 @@
           "panelists": "Mariano Provencio, MD, PhD; Ramaswamy Govindan, MD, FASCO; Chao Zhang, MD, PhD; Jamie E. Chaft, MD, FASCO; Katharine A. Rendle, PhD, MPH, MSW; Brendan Heiden, MD, MS, MBA; Raheem Bell, MD, MS; Bjorn Henning Gronberg, MD, PhD; Giannis S. Mountzios, MD; Yun Fan, MD; Misty Dawn Shields, MD, PhD; Lauren Averett Byers, MD, MSc",
           "topics": "• Randomized phase III study of nivolumab after surgery and adjuvant chemotherapy in NSCLC (ECOG-ACRIN EA5142, ALCHEMIST).\n• Adjuvant erlotinib versus observation after complete resection of <em>EGFR</em>-mutant NSCLC: Final overall survival results of Alliance A081105.\n• Neoadjuvant lorlatinib in stage III NSCLC harboring ALK fusion: A phase 2 multicenter study (LORIN).\n• Signals, Surprises, and Subtleties: Lessons From Early-Stage Lung Cancer Trials\n• Panel Question and Answer\n• Pollution and progression: Air quality and stage of lung cancer diagnosis across the U.S.\n• Redefining lung cancer screening eligibility: Smoking duration vs. pack-years in a national VA cohort of nearly 1 million patients.\n• From Air to Awareness: Pollution and the Path to Early Detection\n• Panel Question and Answer\n• Concurrent thoracic radiotherapy (TRT), platinum/etoposide chemotherapy, and durvalumab immu...",
           "overview": "Presenters summarize their novel research findings and provide background on their methodologies. Discussants analyze the significance of each abstract within the context of current knowledge, highlighting clinical application and implications for future research and practice. Abstract presenters and discussants answer questions during a moderated panel discussion.",
+          "sourceName": "ASCO 2026 Annual Meeting Program Guide",
+          "sourceUrl": "https://meetings.asco.org/"
+        }
+      ],
+      "posterSessions": [
+        {
+          "id": "asco2026-session-9393d9fb42cf34bf",
+          "date": "2026-06-01",
+          "startTime": "09:00 AM",
+          "endTime": "12:00 PM",
+          "startAt": "2026-06-01T09:00:00-05:00",
+          "endAt": "2026-06-01T12:00:00-05:00",
+          "title": "Gynecologic Cancer",
+          "sessionType": "Poster Session",
+          "location": "Hall A - Posters and Exhibits",
+          "track": "Gynecologic Cancer",
+          "chairs": "",
+          "speakers": "Andreia Cristina de Melo, MD, PhD, MBA (Division of Clinical Research and Technological Development, Brazilian National Cancer Institute (INCA)); Hatice Asoglu, MD (Cukurova University Department of Medical Oncology); Durga V. Sritharan, BS (Yale School of Medicine, Department of Therapeutic Radiology); To Be Determined; Ila Sruti, MPH (Ontada); Ting Peng, MD, MMedSc (Department of Obstetrics and Gynecology, Union Hospital, Tongji Medical College, Huazhong University of Science and Technology); Maeve Givens, BS (Weill Cornell Medical College); Min Zheng, MD, PhD (Sun Yat-sen University Cancer Center; State Key Laboratory of Oncology in South...",
+          "panelists": "",
+          "topics": "• Population-based prediction of cardiovascular mortality in gynecologic cancer survivors using machine learning (RISKHEART).\n• Feasibility and concordance of a large language model (ChatGPT-5) as a clinical decision support tool in gynecologic oncology tumor boards: A blinded, multi-observer study.\n• Quantitative pathology biomarkers for platinum resistance in ovarian cancer.\n• Income inequality and cervical cancer: A comparative analysis of demographics and healthcare burden of women in the lowest and highest income quartiles.\n• Treatment patterns and PD-L1 testing among persistent, recurrent, or metastatic cervical cancer patients in the United States community oncology setting.\n• Radiotherapy use among locally advanced cervical cancer patients (LACC) in the United States community oncology setting.\n• Targeting stromal FAK signaling to address chemotherapy and immunotherapy resistanc...",
+          "overview": "Presenters outline their research via posters displayed throughout their assigned Session(s). Authors are available to answer questions from attendees regarding the data presented. Electronic posters and supplemental materials are available online beginning on the day of their assigned Poster Session(s).",
+          "sourceName": "ASCO 2026 Annual Meeting Program Guide",
+          "sourceUrl": "https://meetings.asco.org/"
+        },
+        {
+          "id": "asco2026-session-a5e93df983619529",
+          "date": "2026-06-01",
+          "startTime": "09:00 AM",
+          "endTime": "12:00 PM",
+          "startAt": "2026-06-01T09:00:00-05:00",
+          "endAt": "2026-06-01T12:00:00-05:00",
+          "title": "Hematologic Malignancies—Leukemia, Myelodysplastic Syndromes, and Allotransplant",
+          "sessionType": "Poster Session",
+          "location": "Hall A - Posters and Exhibits",
+          "track": "Hematologic Malignancies—Leukemia, Myelodysplastic Syndromes, and Allotransplant",
+          "chairs": "",
+          "speakers": "Randa Elzein, MBBS (Upstate Medical University); Eno-obong Blessing Udoh, BS (Cleveland Clinic Lerner College of Medicine of Case Western Reserve University); Lukas Ronner, MD, MSc (Abramson Cancer Center of the Hospital of the University of Pennsylvania); Gabriel Ghiaur, MD, PhD (Johns Hopkins Medical Institutions); Fang Zhou, MD, PhD (Department of Hematology, Zhongda Hospital, School of Medicine, Southeast University); Justin M. Watts, MD (Division of Hematology, Department of Medicine, University of Miami Sylvester Comprehensive Cancer Center); Chandra Kakarala, MBBS (University of Kentucky); Sudhesh Kumar, MBBS (Division of Hematology,...",
+          "panelists": "",
+          "topics": "• Early G-CSF after venetoclax-based induction for acute myeloid leukemia: Multicenter associations with infections, neutrophil recovery, and early mortality.\n• Molecular landscape and outcomes of Black and White adults diagnosed with acute myeloid leukemia.\n• The association of<em> IDH</em> co-mutations with treatment outcomes and overall survival in <em>TP53</em>-mutated acute myeloid leukemia.\n• A targeted phosphoproteomic assay to enable the prediction of response to intensive chemotherapy in acute myeloid leukemia.\n• Investigation of the role of IFITM3 and the PI3K/Akt axis in the acute myeloid leukemia tumor microenvironment.\n• Association of acute myeloid leukemia (AML) patient, disease, and molecular characteristics with a long-term (LT) response to olutasidenib.\n• Comparing induction strategies in acute myeloid leukemia: 10-year real-world experience with 7+3 and HMA/venetoclax...",
+          "overview": "Presenters outline their research via posters displayed throughout their assigned Session(s). Authors are available to answer questions from attendees regarding the data presented. Electronic posters and supplemental materials are available online beginning on the day of their assigned Poster Session(s).",
+          "sourceName": "ASCO 2026 Annual Meeting Program Guide",
+          "sourceUrl": "https://meetings.asco.org/"
+        },
+        {
+          "id": "asco2026-session-967f1a9a52064fbd",
+          "date": "2026-06-01",
+          "startTime": "09:00 AM",
+          "endTime": "12:00 PM",
+          "startAt": "2026-06-01T09:00:00-05:00",
+          "endAt": "2026-06-01T12:00:00-05:00",
+          "title": "Hematologic Malignancies—Lymphoma and Chronic Lymphocytic Leukemia",
+          "sessionType": "Poster Session",
+          "location": "Hall A - Posters and Exhibits",
+          "track": "Hematologic Malignancies—Lymphoma and Chronic Lymphocytic Leukemia",
+          "chairs": "",
+          "speakers": "Yang Wang, MD (Shanghai Xiaohe Medical Laboratory Co. Ltd.); Rui Liu, MSc (Geneseeq Research Institute, Nanjing Geneseeq Technology Inc.); Randa Elzein, MBBS (Upstate Medical University); Guoai Su (Beijing GoBroad Boren Hospital); Daniel E. Goyco Vera, MD (UT Southwestern Medical Center); Renju V. Raj, MBBS (University of Tennessee Knoxville Medical Center); Emily Tomasulo, DO (University of Pennsylvania); Sahar Ansari (Bristol Myers Squibb); Jennifer Jing Huang, MD, PhD (Fred Hutchinson Cancer Center, University of Washington); Soon Jye Kho, PhD (Medidata Solutions, a Dassault Systèmes Company); Siddhartha Ganguly, MD, FACP (Houston Methodi...",
+          "panelists": "",
+          "topics": "• Epigenetic profiling to identify aggressiveness markers in non-Hodgkin lymphoma via a targeted methylation-based multi-cancer early detection (MCED) blood test.\n• Fragmentia AI–Lymphoma: A cfDNA language model for lymphoma detection using ultra-low-pass WGS.\n• Early corticosteroid dosing after anti-CD19 CAR-T therapy for large B-cell lymphoma: Multicenter associations with neurotoxicity, cytokine release syndrome, and survival.\n• Overcoming resistance to prior CAR-T therapy: Efficacy and safety of a sequential, multi-antigen targeted CAR T-cell strategy in B-cell NHL.\n• Late infectious complications after CD19-directed chimeric antigen receptor T-cell (CAR-T) therapy for large B-cell lymphomas (LCBL): Real-world predictors and outcomes.\n• Real-world patient characteristics, outcomes, and resource utilization of chimeric antigen receptor (CAR) T cell therapy across Foundation for the A...",
+          "overview": "Presenters outline their research via posters displayed throughout their assigned Session(s). Authors are available to answer questions from attendees regarding the data presented. Electronic posters and supplemental materials are available online beginning on the day of their assigned Poster Session(s).",
+          "sourceName": "ASCO 2026 Annual Meeting Program Guide",
+          "sourceUrl": "https://meetings.asco.org/"
+        },
+        {
+          "id": "asco2026-session-3bed23c989c316e6",
+          "date": "2026-06-01",
+          "startTime": "09:00 AM",
+          "endTime": "12:00 PM",
+          "startAt": "2026-06-01T09:00:00-05:00",
+          "endAt": "2026-06-01T12:00:00-05:00",
+          "title": "Hematologic Malignancies—Plasma Cell Dyscrasia",
+          "sessionType": "Poster Session",
+          "location": "Hall A - Posters and Exhibits",
+          "track": "Hematologic Malignancies—Plasma Cell Dyscrasia",
+          "chairs": "",
+          "speakers": "Vaishnavi Kumbhar (Division of Hematology, Mayo Clinic Rochester); Ciro Roberto Rinaldi, MD, PhD (United Lincolnshire Teaching Hospital and University of Lincoln); Arjun Raj RAJANNA, MSc (Sylvester Myeloma Institute, University of Miami, Sylvester Comprehensive Cancer Center); David Kaldas, MD, MSc (H. Lee Moffitt Cancer Center and Research Institute); Ariosto Siqueira Silva, PhD, BSc (H. Lee Moffitt Cancer Center); John Culnan, PhD (Massachusetts Veterans Epidemiology Research and Information Center, Department of Veterans Affairs Healthcare System); Nicholas Au, PhD, PharmD (Johnson & Johnson); To Be Determined; Hans C. Lee, MD (Sarah Cann...",
+          "panelists": "",
+          "topics": "• Prediction of progression in MGUS using transformer‑based survival time‑series modeling.\n• Early detection of multiple myeloma and MGUS progression risk using artificial intelligence and routine laboratory data.\n• Artificial intelligence predicted natural killer cell fitness to guide daratumumab and transplant strategies in newly diagnosed multiple myeloma.\n• AI-enabled multimodal adjudication of revised IMWG progression after BCMA CAR-T.\n• Echo cancer advisor: A modular AI framework for interpretable, patient-specific oncology decision support.\n• Identifying high-risk cytogenetic subgroups in multiple myeloma using large language artificial intelligence models.\n• RP2R dose selection of Tal + Tec for the treatment of EMD patients in the RedirecTT-1 study.\n• An integrated population pharmacokinetic/pharmacodynamic (popPK/PD) model to select the linvoseltamab (LINVO) dosing regimen in p...",
+          "overview": "",
+          "sourceName": "ASCO 2026 Annual Meeting Program Guide",
+          "sourceUrl": "https://meetings.asco.org/"
+        },
+        {
+          "id": "asco2026-session-8d58d7e6d41c5506",
+          "date": "2026-06-01",
+          "startTime": "09:00 AM",
+          "endTime": "12:00 PM",
+          "startAt": "2026-06-01T09:00:00-05:00",
+          "endAt": "2026-06-01T12:00:00-05:00",
+          "title": "Medical Education and Professional Development",
+          "sessionType": "Poster Session",
+          "location": "Hall A - Posters and Exhibits",
+          "track": "Medical Education and Professional Development",
+          "chairs": "",
+          "speakers": "Coral Olazagasti, MD (University of Miami/Sylvester Comprehensive Cancer Center); Luis Gabriel Parra Lara, MD, MSc (Universidad Icesi); Anastasia Danilova, MD (Moscow City Oncology Hospital 62); Ruth Hutch, MD, MSc (St. James's Hospital); Vangipuram Harshil Sai, MBBS (Department of Undergraduate Education, All India Institute of Medical Sciences (AIIMS)); Musa Kiyani, MD, MBA, MPH (HCA Florida JFK Hospital GME Consortium); Yasheen Gao, BS (Frank H. Netter MD School of Medicine, Quinnipiac University); Samantha Liu, BS (San Mateo High School); Shuhei Suzuki, MD, PhD (Yamagata Prefectural Shinjo Hospital); Emily Wolf, MD (Mayo Clinic Florida);...",
+          "panelists": "",
+          "topics": "• The hidden struggle? Mental health burden among oncology physicians globally.\n• Burnout among early-career oncologists in Latin America: A regional survey.\n• Emotional burnout among oncology clinicians in Russia: Results of a national cross-sectional survey.\n• Inspiring the next generation of medical oncologists: Passion, purpose, and preventing burnout.\n• Turning silence into rhythm: Outcomes of a school-based <em>Cancer Olympiad</em> in India.\n• Preparedness of internal medicine residents for oncologic emergencies and end-of-life discussions in a community training environment.\n• Benefits of utilizing experiential learning in a medical school cancer survivorship course.\n• Utilizing large language models for lung cancer patient education compared to publicly available information.\n• Psychological burden and burnout among regional healthcare providers communicating hereditary tumor fi...",
+          "overview": "Presenters outline their research via posters displayed throughout their assigned Session(s). Authors are available to answer questions from attendees regarding the data presented. Electronic posters and supplemental materials are available online beginning on the day of their assigned Poster Session(s).",
+          "sourceName": "ASCO 2026 Annual Meeting Program Guide",
+          "sourceUrl": "https://meetings.asco.org/"
+        },
+        {
+          "id": "asco2026-session-7debd61a15e5c2e0",
+          "date": "2026-06-01",
+          "startTime": "09:00 AM",
+          "endTime": "12:00 PM",
+          "startAt": "2026-06-01T09:00:00-05:00",
+          "endAt": "2026-06-01T12:00:00-05:00",
+          "title": "Quality Care/Health Services Research",
+          "sessionType": "Poster Session",
+          "location": "Hall A - Posters and Exhibits",
+          "track": "Quality Care/Health Services Research",
+          "chairs": "",
+          "speakers": "Andrew J. Yang, BS (The Warren Alpert Medical School of Brown University); Luke Xiyu Zhao, MD (Johns Hopkins University School of Medicine); Ryan Scott Imaikalani Kong, BS (University of Illinois Chicago College of Medicine); Mohammed Zuber, PharmD (Department of Clinical and Administrative Pharmacy, College of Pharmacy, University of Georgia); Stephen S. Yip, PhD (ConcertAI, LLC); Ian Kleckner, PhD, MPH (University of Maryland Baltimore); Oliver Overheu, MD (Fuqua School of Business, Duke University); Ahauve Orusa, MD, MPH (Mayo Clinic Rochester); Raymond Mailhot Vega, MD, MPH (University of Miami Miller School of Medicine-Sylvester Cancer...",
+          "panelists": "",
+          "topics": "• Temporal trends in oncology clinical trial complexity and duration: A retrospective analysis of 5,261 industry-sponsored trials.\n• A machine learning–enhanced analysis of temporal trends in biomarker-based eligibility restrictions in oncology clinical trials.\n• Restrictive eligibility criteria in FDA-approved oncology trials following ASCO Guideline updates.\n• Comparative effectiveness and safety of axicabtagene ciloleucel versus lisocabtagene maraleucel in large B-cell lymphoma: A real-world target trial emulation.\n• AI-enabled clinical trial framework for end-to-end site recommendation and enrollment projection.\n• Exploring neural correlates of chemotherapy-induced peripheral neurotoxicity (CIPN) and the impact of exercise: A URCC NCORP nationwide phase II randomized controlled trial (RCT).\n• Trends and characteristics of clinical trials presented in ASCO plenary sessions (2011–2025...",
+          "overview": "Presenters outline their research via posters displayed throughout their assigned Session(s). Authors are available to answer questions from attendees regarding the data presented. Electronic posters and supplemental materials are available online beginning on the day of their assigned Poster Session(s).",
+          "sourceName": "ASCO 2026 Annual Meeting Program Guide",
+          "sourceUrl": "https://meetings.asco.org/"
+        },
+        {
+          "id": "asco2026-session-b47fbe5ed2d7831c",
+          "date": "2026-06-01",
+          "startTime": "01:30 PM",
+          "endTime": "04:30 PM",
+          "startAt": "2026-06-01T13:30:00-05:00",
+          "endAt": "2026-06-01T16:30:00-05:00",
+          "title": "Breast Cancer—Local/Regional/Adjuvant",
+          "sessionType": "Poster Session",
+          "location": "Hall A - Posters and Exhibits",
+          "track": "Breast Cancer—Local/Regional/Adjuvant",
+          "chairs": "",
+          "speakers": "To Be Determined; Shom Goel, PhD, FRACP, MBBS (Peter MacCallum Cancer Centre); Lan Lei, MBBS, MS (Winship Cancer Institute of Emory University); Norah Lynn Henry, MD, PhD, FACP, FASCO (University of Michigan Rogel Cancer Center); Aruna Korlimarla, PhD (Sri Shankara Cancer Foundation); Armaan Jamal, BS (Department of Public Health Sciences, The University of Chicago); Grace Mei Yee Choong, MD (Mayo Clinic Rochester); Luca Arecco, MD (Université libre de Bruxelles (ULB), Hôpital Universitaire de Bruxelles (H.U.B), Institut Jules Bordet); Tara B. Sanft, MD (Yale University); Jesse Lopes da Silva, PhD (Division of Clinical Research and Technolog...",
+          "panelists": "",
+          "topics": "• International variation in diagnostic and treatment practices in patients with HER2+ EBC: The RWE PEARL-HER2 study.\n• Neoadjuvant atirmociclib plus letrozole versus letrozole alone in HR+/HER2− breast cancer: Results from FourLight-2, a randomized phase 2 window of opportunity study.\n• Overall survival (OS) in premenopausal ER+/PR+, HER2− breast cancer (BC) treated with endocrine therapy (ET) ± chemotherapy (CT): A National Cancer Database (NCDB) analysis.\n• Socioeconomic and racial disparities in receipt of treatment among early-stage ER+/PR+ HER2- breast cancer: Insights from invasive breast cancer OncoDX recurrence score database.\n• Associations between self-efficacy and symptom burden in young women with breast cancer initiating endocrine therapy (ET) on SWOG S2010.\n• Tumor-associated macrophage (TAM) score as an independent predictor of recurrence in residual disease after neoadj...",
+          "overview": "Presenters outline their research via posters displayed throughout their assigned Session(s). Authors are available to answer questions from attendees regarding the data presented. Electronic posters and supplemental materials are available online beginning on the day of their assigned Poster Session(s).",
+          "sourceName": "ASCO 2026 Annual Meeting Program Guide",
+          "sourceUrl": "https://meetings.asco.org/"
+        },
+        {
+          "id": "asco2026-session-d99319f8bf4984e3",
+          "date": "2026-06-01",
+          "startTime": "01:30 PM",
+          "endTime": "04:30 PM",
+          "startAt": "2026-06-01T13:30:00-05:00",
+          "endAt": "2026-06-01T16:30:00-05:00",
+          "title": "Breast Cancer—Metastatic",
+          "sessionType": "Poster Session",
+          "location": "Hall A - Posters and Exhibits",
+          "track": "Breast Cancer—Metastatic",
+          "chairs": "",
+          "speakers": "Savitri Krishnamurthy, MD (Department of Pathology, Division of Pathology and Laboratory Medicine, The University of Texas MD Anderson Cancer Center); Josh Wheeler, MD, PhD (Genialis, Inc.); Guilherme Nader Marta, MD (Medical Oncology, Dana-Farber Cancer Institute, Harvard Medical School); Michael Peng (Gilead Sciences); Sara M. Tolaney, MD, MPH, FASCO (Dana-Farber Cancer Institute, Harvard Medical School); Rishi Dakarapu, BS, MS (Emory University School of Medicine); Chao Feng, PhD (PATHOMIQ, Inc.); Jahnavi Ethakota, MD (Henry Ford Allegiance Health System); Shivani K Thaker, MD, PhD (UCLA Health Jonsson Comprehensive Cancer Center); Ana El...",
+          "panelists": "",
+          "topics": "• Identifying patients with human epidermal growth factor receptor 2 (HER2)–low and –ultralow breast cancer (BC): Use of digital, artificial intelligence (AI)–based computational algorithms to assist HER2 scoring by pathologists.\n• Biology-informed predictive modeling and resistance monitoring in trastuzumab deruxtecan–treated metastatic breast cancer.\n• Organ- and histology-specific molecular and immune landscape of metastatic breast cancer.\n• Using ML to predict rapid progression for patients (pts) with HR+/HER2- metastatic breast cancer (mBC) treated with frontline (1L) CDK 4/6 inhibitors (CDK 4/6i).\n• Development and evaluation of a novel digital pathology image analysis pipeline for prediction of clinical outcomes with the TROP2‑directed antibody-drug conjugate (ADC) sacituzumab tirumotecan (sac-TMT) in triple‑negative breast cancer (TNBC).\n• Antibody-drug conjugate (ADC) after ADC...",
+          "overview": "Presenters outline their research via posters displayed throughout their assigned Session(s). Authors are available to answer questions from attendees regarding the data presented. Electronic posters and supplemental materials are available online beginning on the day of their assigned Poster Session(s).",
+          "sourceName": "ASCO 2026 Annual Meeting Program Guide",
+          "sourceUrl": "https://meetings.asco.org/"
+        },
+        {
+          "id": "asco2026-session-290888d5ccb846e0",
+          "date": "2026-06-01",
+          "startTime": "01:30 PM",
+          "endTime": "04:30 PM",
+          "startAt": "2026-06-01T13:30:00-05:00",
+          "endAt": "2026-06-01T16:30:00-05:00",
+          "title": "Central Nervous System Tumors",
+          "sessionType": "Poster Session",
+          "location": "Hall A - Posters and Exhibits",
+          "track": "Central Nervous System Tumors",
+          "chairs": "",
+          "speakers": "To Be Determined; Constance Moore, PhD (Voiant); Emily Wo, PharmD (Memorial Sloan Kettering Cancer Center); Dhivya Bharathi Govindaraj, MD (Karur Government Medical College and Hospital); Aditya V. Shreenivas, MD, MS (City of Hope); Yuming Jiang, MD, PhD, MMed (Wake Forest University School of Medicine); Peter A.J. Forsyth, MD (H. Lee Moffitt Cancer Center and Research Institute); Irina Aleksandrovna Goroshinskaya (National Medical Research Centre for Oncology); Mark Yungjie Jeng, MD, PhD (Memorial Sloan Kettering Cancer Center); Ayelet Zafran (Nanocarry Therapeutics Ltd.); Atulya Aman Khosla, MBBS (Department of Internal Medicine, William B...",
+          "panelists": "",
+          "topics": "• Scaling deep learning for neuro-oncology: Knowledge-distilled EfficientNetB0 powered MRI classification of brain tumors with international expert validation.\n• Enabling hybrid AI–radiologist endpoints in clinical trials imaging workflows.\n• Impact of genomic subtype on intracranial outcomes in treatment-naive <em>EGFR</em>-mutant NSCLC with osimertinib (IGnITE).\n• Burden of mortality due to brain metastases secondary to lung cancer in the United States: A population-based study.\n• Risk of developing brain/central nervous system (CNS) metastases across multiple <em>ERBB2</em>-altered cancer types: Genotype as shaper of phenotype.\n• AI-assisted prediction of radiation failure patterns and survival after stereotactic radiosurgery for brain metastases: A multicenter study.\n• Preclinical activity of homoharringtonine against melanoma leptomeningeal disease using patient-derived tumor cells...",
+          "overview": "Presenters outline their research via posters displayed throughout their assigned Session(s). Authors are available to answer questions from attendees regarding the data presented. Electronic posters and supplemental materials are available online beginning on the day of their assigned Poster Session(s).",
+          "sourceName": "ASCO 2026 Annual Meeting Program Guide",
+          "sourceUrl": "https://meetings.asco.org/"
+        },
+        {
+          "id": "asco2026-session-ac8297f2cdc040b3",
+          "date": "2026-06-01",
+          "startTime": "01:30 PM",
+          "endTime": "04:30 PM",
+          "startAt": "2026-06-01T13:30:00-05:00",
+          "endAt": "2026-06-01T16:30:00-05:00",
+          "title": "Pediatric Oncology",
+          "sessionType": "Poster Session",
+          "location": "Hall A - Posters and Exhibits",
+          "track": "Pediatric Oncology",
+          "chairs": "",
+          "speakers": "Masab Mansoor, MBA (Edward Via College of Osteopathic Medicine); To Be Determined; Karen Dong-Tran, MD (UNR School of Medicine); Tara Pattilachan Menon, BS (Virginia Tech Carilion School of Medicine); Sushmitha Grama Srinivasan, MBBS (Stanford University School of Medicine); Samuel Sassine, MD, MSc (Division of Pediatric Hematology-Oncology, Department of Pediatrics, Charles-Bruneau Cancer Center, CHU Sainte-Justine); Joseph S. Kang, BS (Stanford University School of Medicine); Omnia Al Qadi, MD, MBBS (Department of Pediatric Oncology, Children Cancer Hospital Egypt); Samantha Martin, MD (Dana-Farber/Boston Children’s Cancer and Blood Disord...",
+          "panelists": "",
+          "topics": "• Integrating genomics, imaging, and clinical data for late-onset cardiomyopathy prediction in pediatric cancer survivors: A multi-modal machine-learning comparison using St. Jude Cloud.\n• Longitudinal genomic characterization of pediatric acute myeloid leukemia at diagnosis and relapse.\n• Distinct immunologic vs progenitor landscapes in myeloid leukemia recurrence: Adaptive immune persistence in pediatrics vs niche exhaustion in adults.\n• The burden of childhood cancers in the South Asian Association for Regional Cooperation (SAARC) region: A GLOBOCAN 2022 analysis.\n• A capacity assessment of pediatric oncology research biorepositories across a regional collaborative group in the Middle East, North Africa, and Asia.\n• Cancer outcome among adolescents in Canada.\n• Beyond translation: Leveraging interpreter expertise to enhance clinician training and language equity in pediatric oncology...",
+          "overview": "Presenters outline their research via posters displayed throughout their assigned Session(s). Authors are available to answer questions from attendees regarding the data presented. Electronic posters and supplemental materials are available online beginning on the day of their assigned Poster Session(s).",
+          "sourceName": "ASCO 2026 Annual Meeting Program Guide",
+          "sourceUrl": "https://meetings.asco.org/"
+        },
+        {
+          "id": "asco2026-session-7158f05911cf3269",
+          "date": "2026-06-01",
+          "startTime": "01:30 PM",
+          "endTime": "04:30 PM",
+          "startAt": "2026-06-01T13:30:00-05:00",
+          "endAt": "2026-06-01T16:30:00-05:00",
+          "title": "Prevention, Risk Reduction, and Genetics",
+          "sessionType": "Poster Session",
+          "location": "Hall A - Posters and Exhibits",
+          "track": "Prevention, Risk Reduction, and Genetics",
+          "chairs": "",
+          "speakers": "Adarsh Vardhan Tangella, MBBS (MedStar Washington Hospital Center); Chinenye Egwuonwu, MD, MPH (PAR Piedmont); To Be Determined; Noah Ritschard, BS (Western University of Health Sciences); Jonathan Dao, MD, BS (Long School of Medicine, University of Texas Health-San Antonio); Mao Mao, MD, PhD (SeekIn Inc.); Parijatham S. Thomas, MD (The University of Texas MD Anderson Cancer Center); Katharina Klein, BSc, MSc (Charité – Universitätsmedizin Berlin, Department of Gynecology with Breast Center, Hereditary Breast and Ovarian Cancer Center); Asaf Maoz, MD (Dana-Farber Cancer Institute/Mass General Brigham/Harvard Medical School); Steven J. Katz,...",
+          "panelists": "",
+          "topics": "• Global development and validation of the Lung Cancer Prevention Score (LCPS): A quantitative framework linking policy strength, incidence, and outcomes across 40 countries.\n• Family cancer history and perceived value of multi-cancer early detection tests in a national U.S. sample.\n• GLP-1 receptor agonists for primary prevention of breast cancer in high-risk women: A real-world analysis of efficacy and safety.\n• A SEER-based Joinpoint analysis investigating the effect of shared decision-making on prostate cancer stage at diagnosis.\n• Glucagon-like peptide-1 receptor agonist for primary prevention of hepatocellular carcinoma in high-risk patients: A real-world analysis across metabolic, viral, alcoholic, and hereditary liver disease.\n• Integrating multi-cancer early detection into cancer screening programs in the United States: A cost-effectiveness modeling study.\n• Time-restricted eat...",
+          "overview": "Presenters outline their research via posters displayed throughout their assigned Session(s). Authors are available to answer questions from attendees regarding the data presented. Electronic posters and supplemental materials are available online beginning on the day of their assigned Poster Session(s).",
+          "sourceName": "ASCO 2026 Annual Meeting Program Guide",
+          "sourceUrl": "https://meetings.asco.org/"
+        },
+        {
+          "id": "asco2026-session-9d0d2445c0df57ad",
+          "date": "2026-06-01",
+          "startTime": "01:30 PM",
+          "endTime": "04:30 PM",
+          "startAt": "2026-06-01T13:30:00-05:00",
+          "endAt": "2026-06-01T16:30:00-05:00",
+          "title": "Sarcoma",
+          "sessionType": "Poster Session",
+          "location": "Hall A - Posters and Exhibits",
+          "track": "Sarcoma",
+          "chairs": "",
+          "speakers": "Andy Karabajakian, MD, MS (Owkin); Annarita Peddio, MD (Department of Clinical Medicine and Surgery, University of Naples Federico II); Hongtao Li, MD (Department of Oncology, Shanghai Sixth People's Hospital Affiliated to Shanghai Jiao Tong University School of Medicine); Sandra J. Strauss, MD, PhD (University College London); Hui Li, MSc (Northwest Women's and Children's Hospital); Minxun Lu, MD (Department of Orthopedics, West China Hospital, Sichuan University); Anthony Paul Conley, MD (Department of Sarcoma Medical Oncology, The University of Texas MD Anderson Cancer Center); Luyuan Li, MD, PhD (North Alabama Medical Center); Jing Chen,...",
+          "panelists": "",
+          "topics": "• Feasibility of constructing an external control arm for early efficacy assessment in phase 1a: Methodological framework from the INVOKE trial.\n• AI-assisted systematic review and pooled analysis of anthracycline- versus taxane-based chemotherapy in advanced or metastatic angiosarcoma.\n• Efficacy and safety of continuous intra-arterial cisplatin and recombinant human endostatin combined with systemic chemotherapy in osteosarcoma: A phase II study.\n• ICONIC (Improving Outcomes Through Collaboration in Osteosarcoma): Insights from a national prospective cohort trial for newly diagnosed osteosarcoma patients.\n• Efficacy and safety analysis of anlotinib combined with etoposide plus ifosfamide in the treatment of children and adolescents with pulmonary metastatic osteosarcoma.\n• Efficacy and safety of perioperative anlotinib combined with cisplatin and doxorubicin in treatment-naive stage I...",
+          "overview": "Presenters outline their research via posters displayed throughout their assigned Session(s). Authors are available to answer questions from attendees regarding the data presented. Electronic posters and supplemental materials are available online beginning on the day of their assigned Poster Session(s).",
           "sourceName": "ASCO 2026 Annual Meeting Program Guide",
           "sourceUrl": "https://meetings.asco.org/"
         }
@@ -7807,10 +8280,12 @@
       "audiencePrompts": [
         "Run this prompt during the morning ramp: Audience fuel check: if you find the best snacks or coffee in the Exhibitor Hall, tag #ASCOHype on X and tell the desk where you found it. ASCO Hype will treat these as audience recommendations, not endorsements.",
         "Run this prompt around midday, when foot traffic and coffee lines are useful signals: Audience fuel check: if you find the best snacks or coffee in the Exhibitor Hall, tag #ASCOHype on X and tell the desk where you found it. ASCO Hype will treat these as audience recommendations, not endorsements.",
-        "Run this prompt during the afternoon reset between session blocks: Audience fuel check: if you find the best snacks or coffee in the Exhibitor Hall, tag #ASCOHype on X and tell the desk where you found it. ASCO Hype will treat these as audience recommendations, not endorsements."
+        "Run this prompt during the afternoon reset between session blocks: Audience fuel check: if you find the best snacks or coffee in the Exhibitor Hall, tag #ASCOHype on X and tell the desk where you found it. ASCO Hype will treat these as audience recommendations, not endorsements.",
+        "Run this poster-floor prompt when Hall A traffic picks up: Poster wall callout, W-poster watch: Hall A - Posters and Exhibits is the floor to watch. If a poster wall stop is buzzing, say the hall twice, ask listeners to verify the location in the ASCO app and on-site signage, and invite #ASCOHype posts from attendees on the ground.",
+        "Run this media reset between agenda blocks: Media monitor callout: keep an ear on reviewed signals from OncLive, STAT News, The ASCO Post, X posts, and other operator-approved broadcast sources. Label media chatter as reported or discussed, not confirmed science unless primary sources support it."
       ],
-      "hostOpen": "Welcome to ASCO Hype for Monday, June 1. Today the agenda leans into Special Sessions, with Head and Neck Cancer also carrying major attention. We will use the official agenda as the spine, title-level abstract signals as watch points, and reviewed audience or media inputs as interruptions. Audience fuel check: if you find the best snacks or coffee in the Exhibitor Hall, tag #ASCOHype on X and tell the desk where you found it. ASCO Hype will treat these as audience recommendations, not endorsements.",
-      "hostClose": "That is the Monday, June 1 arc: follow the official schedule, watch the high-density tracks, and treat every abstract-title signal as provisional until primary sources and full text are available. Keep tagging #ASCOHype on X with the best snacks and coffee you find in the Exhibitor Hall so the desk can review audience tips. ASCO Hype is AI-generated conference commentary for informational and entertainment purposes only. It is not medical, clinical, scientific, legal, or financial advice. Always consult qualified professionals and primary sources."
+      "hostOpen": "Welcome to ASCO Hype for Monday, June 1. Turn it up: this is the live conference desk, radio-DJ style, source-forward and moving fast. Today the agenda leans into Special Sessions, with Head and Neck Cancer also carrying major attention. We will use the official agenda as the spine, title-level abstract signals as watch points, and reviewed audience or media inputs as interruptions. Poster wall callout, W-poster watch: Hall A - Posters and Exhibits is the floor to watch. If a poster wall stop is buzzing, say the hall twice, ask listeners to verify the location in the ASCO app and on-site signage, and invite #ASCOHype posts from attendees on the ground. Audience fuel check: if you find the best snacks or coffee in the Exhibitor Hall, tag #ASCOHype on X and tell the desk where you found it. ASCO Hype will treat these as audience recommendations, not endorsements.",
+      "hostClose": "That is the Monday, June 1 arc: follow the official schedule, watch the high-density tracks, and treat every abstract-title signal as provisional until primary sources and full text are available. Keep tagging #ASCOHype on X with the best snacks, coffee, poster-wall hits, and media/broadcast tips you find so the desk can review audience signals. ASCO Hype is AI-generated conference commentary for informational and entertainment purposes only. It is not medical, clinical, scientific, legal, or financial advice. Always consult qualified professionals and primary sources."
     },
     {
       "date": "2026-06-02",
@@ -7820,9 +8295,10 @@
       "broadcastArc": [
         "Open with the room map: 11 sessions are scheduled, and the leading tracks are Gastrointestinal Cancer—Colorectal and Anal, Developmental Therapeutics—Molecularly Targeted Agents and Tumor Biology, Prevention, Risk Reduction, and Genetics, Breast Cancer—Metastatic.",
         "Use the oral abstract sessions as the evidence spine for the day, with education and special sessions providing context between data-heavy blocks.",
+        "Keep the poster wall callout ready for the next Hall A Posters and Exhibits block.",
         "breast cancer anchors patient-centered treatment sequencing, adjuvant strategy, metastatic decision-making, and antibody-drug-conjugate watch points",
         "GI oncology supplies a dense cross-section of colorectal, gastroesophageal, pancreatic, hepatobiliary, and anal-cancer discussion",
-        "Close the day by teasing the next set of agenda turns and reminding viewers that this is commentary, not medical advice or ASCO-affiliated reporting."
+        "Close the day with a media-monitor reset: reviewed media and broadcast signals can interrupt the schedule spine, but they must be attributed and clearly labeled."
       ],
       "watchTracks": [
         {
@@ -8059,6 +8535,7 @@
           "sourceUrl": "https://meetings.asco.org/"
         }
       ],
+      "posterSessions": [],
       "oralAbstracts": [
         {
           "id": "asco2026-abstract-LBA3509",
@@ -8946,10 +9423,12 @@
       "audiencePrompts": [
         "Run this prompt during the morning ramp: Audience fuel check: if you find the best snacks or coffee in the Exhibitor Hall, tag #ASCOHype on X and tell the desk where you found it. ASCO Hype will treat these as audience recommendations, not endorsements.",
         "Run this prompt around midday, when foot traffic and coffee lines are useful signals: Audience fuel check: if you find the best snacks or coffee in the Exhibitor Hall, tag #ASCOHype on X and tell the desk where you found it. ASCO Hype will treat these as audience recommendations, not endorsements.",
-        "Run this prompt during the afternoon reset between session blocks: Audience fuel check: if you find the best snacks or coffee in the Exhibitor Hall, tag #ASCOHype on X and tell the desk where you found it. ASCO Hype will treat these as audience recommendations, not endorsements."
+        "Run this prompt during the afternoon reset between session blocks: Audience fuel check: if you find the best snacks or coffee in the Exhibitor Hall, tag #ASCOHype on X and tell the desk where you found it. ASCO Hype will treat these as audience recommendations, not endorsements.",
+        "Run this poster-floor prompt when Hall A traffic picks up: Poster wall callout, W-poster watch: Hall A - Posters and Exhibits is the floor to watch. If a poster wall stop is buzzing, say the hall twice, ask listeners to verify the location in the ASCO app and on-site signage, and invite #ASCOHype posts from attendees on the ground.",
+        "Run this media reset between agenda blocks: Media monitor callout: keep an ear on reviewed signals from OncLive, STAT News, The ASCO Post, X posts, and other operator-approved broadcast sources. Label media chatter as reported or discussed, not confirmed science unless primary sources support it."
       ],
-      "hostOpen": "Welcome to ASCO Hype for Tuesday, June 2. Today the agenda leans into Gastrointestinal Cancer—Colorectal and Anal, with Developmental Therapeutics—Molecularly Targeted Agents and Tumor Biology also carrying major attention. We will use the official agenda as the spine, title-level abstract signals as watch points, and reviewed audience or media inputs as interruptions. Audience fuel check: if you find the best snacks or coffee in the Exhibitor Hall, tag #ASCOHype on X and tell the desk where you found it. ASCO Hype will treat these as audience recommendations, not endorsements.",
-      "hostClose": "That is the Tuesday, June 2 arc: follow the official schedule, watch the high-density tracks, and treat every abstract-title signal as provisional until primary sources and full text are available. Keep tagging #ASCOHype on X with the best snacks and coffee you find in the Exhibitor Hall so the desk can review audience tips. ASCO Hype is AI-generated conference commentary for informational and entertainment purposes only. It is not medical, clinical, scientific, legal, or financial advice. Always consult qualified professionals and primary sources."
+      "hostOpen": "Welcome to ASCO Hype for Tuesday, June 2. Turn it up: this is the live conference desk, radio-DJ style, source-forward and moving fast. Today the agenda leans into Gastrointestinal Cancer—Colorectal and Anal, with Developmental Therapeutics—Molecularly Targeted Agents and Tumor Biology also carrying major attention. We will use the official agenda as the spine, title-level abstract signals as watch points, and reviewed audience or media inputs as interruptions. Poster wall callout, W-poster watch: Hall A - Posters and Exhibits is the floor to watch. If a poster wall stop is buzzing, say the hall twice, ask listeners to verify the location in the ASCO app and on-site signage, and invite #ASCOHype posts from attendees on the ground. Audience fuel check: if you find the best snacks or coffee in the Exhibitor Hall, tag #ASCOHype on X and tell the desk where you found it. ASCO Hype will treat these as audience recommendations, not endorsements.",
+      "hostClose": "That is the Tuesday, June 2 arc: follow the official schedule, watch the high-density tracks, and treat every abstract-title signal as provisional until primary sources and full text are available. Keep tagging #ASCOHype on X with the best snacks, coffee, poster-wall hits, and media/broadcast tips you find so the desk can review audience signals. ASCO Hype is AI-generated conference commentary for informational and entertainment purposes only. It is not medical, clinical, scientific, legal, or financial advice. Always consult qualified professionals and primary sources."
     }
   ]
 }

@@ -41,6 +41,7 @@ type DayNarrative = {
   watchTracks: { track: string; sessionCount: number; abstractCount: number }[];
   plenarySessions: CoreSession[];
   tentpoleSessions: CoreSession[];
+  posterSessions: CoreSession[];
   oralAbstracts: CoreAbstract[];
   abstractSignals: CoreAbstract[];
   audiencePrompts: string[];
@@ -56,6 +57,12 @@ const LOCATION_VERIFY =
 
 const EXHIBITOR_HALL_PROMPT =
   "Audience fuel check: if you find the best snacks or coffee in the Exhibitor Hall, tag #ASCOHype on X and tell the desk where you found it. ASCO Hype will treat these as audience recommendations, not endorsements.";
+
+const MEDIA_MONITOR_PROMPT =
+  "Media monitor callout: keep an ear on reviewed signals from OncLive, STAT News, The ASCO Post, X posts, and other operator-approved broadcast sources. Label media chatter as reported or discussed, not confirmed science unless primary sources support it.";
+
+const POSTER_WALL_PROMPT =
+  "Poster wall callout, W-poster watch: Hall A - Posters and Exhibits is the floor to watch. If a poster wall stop is buzzing, say the hall twice, ask listeners to verify the location in the ASCO app and on-site signage, and invite #ASCOHype posts from attendees on the ground.";
 
 const DAY_LABELS: Record<string, string> = {
   "2026-05-29": "Friday, May 29",
@@ -345,6 +352,10 @@ function selectTentpoles(daySessions: CoreSession[]) {
     .slice(0, 10);
 }
 
+function isPosterSession(session: CoreSession) {
+  return /poster/i.test(`${session.title} ${session.sessionType} ${session.location}`);
+}
+
 function isPlenarySession(session: CoreSession) {
   return /plenary/i.test(`${session.title} ${session.sessionType}`);
 }
@@ -355,6 +366,12 @@ function isOralAbstract(abstract: CoreAbstract) {
 
 function selectPlenarySessions(daySessions: CoreSession[]) {
   return daySessions.filter(isPlenarySession);
+}
+
+function selectPosterSessions(daySessions: CoreSession[]) {
+  return daySessions
+    .filter(isPosterSession)
+    .sort((a, b) => (a.startAt ?? "").localeCompare(b.startAt ?? "") || a.track.localeCompare(b.track));
 }
 
 function selectOralAbstracts(date: string, allAbstracts: CoreAbstract[]) {
@@ -414,6 +431,7 @@ function buildNarrative(date: string, sessions: CoreSession[], abstracts: CoreAb
   const watchTracks = buildDayWatchTracks(daySessions, abstracts);
   const plenarySessions = selectPlenarySessions(daySessions);
   const tentpoleSessions = selectTentpoles(daySessions);
+  const posterSessions = selectPosterSessions(daySessions);
   const oralAbstracts = selectOralAbstracts(date, abstracts);
   const abstractSignals = selectAbstractSignals(date, watchTracks, abstracts);
   const frames = familyFrames(watchTracks);
@@ -430,14 +448,19 @@ function buildNarrative(date: string, sessions: CoreSession[], abstracts: CoreAb
     plenarySessions.length > 0
       ? `Make the plenary session the editorial center of gravity for the day, then use oral abstract sessions to build the before-and-after context.`
       : `Use the oral abstract sessions as the evidence spine for the day, with education and special sessions providing context between data-heavy blocks.`,
+    posterSessions.length > 0
+      ? `Run poster wall and W-poster watch callouts for Hall A - Posters and Exhibits, especially when a poster session block opens.`
+      : `Keep the poster wall callout ready for the next Hall A Posters and Exhibits block.`,
     frames[0] ?? "Frame the day as a scan across official sessions, oral abstracts, education blocks, and practical care-delivery themes.",
     frames[1] ?? "Use the abstract titles as watch signals only, because the current export marks abstract bodies as embargoed or pending.",
-    `Close the day by teasing the next set of agenda turns and reminding viewers that this is commentary, not medical advice or ASCO-affiliated reporting.`
+    `Close the day with a media-monitor reset: reviewed media and broadcast signals can interrupt the schedule spine, but they must be attributed and clearly labeled.`
   ];
   const audiencePrompts = [
     `Run this prompt during the morning ramp: ${EXHIBITOR_HALL_PROMPT}`,
     `Run this prompt around midday, when foot traffic and coffee lines are useful signals: ${EXHIBITOR_HALL_PROMPT}`,
-    `Run this prompt during the afternoon reset between session blocks: ${EXHIBITOR_HALL_PROMPT}`
+    `Run this prompt during the afternoon reset between session blocks: ${EXHIBITOR_HALL_PROMPT}`,
+    `Run this poster-floor prompt when Hall A traffic picks up: ${POSTER_WALL_PROMPT}`,
+    `Run this media reset between agenda blocks: ${MEDIA_MONITOR_PROMPT}`
   ];
 
   return {
@@ -449,11 +472,12 @@ function buildNarrative(date: string, sessions: CoreSession[], abstracts: CoreAb
     watchTracks,
     plenarySessions,
     tentpoleSessions,
+    posterSessions,
     oralAbstracts,
     abstractSignals,
     audiencePrompts,
-    hostOpen: `Welcome to ASCO Hype for ${label}. Today the agenda leans into ${topTrack}, with ${secondTrack} also carrying major attention. We will use the official agenda as the spine, title-level abstract signals as watch points, and reviewed audience or media inputs as interruptions. ${EXHIBITOR_HALL_PROMPT}`,
-    hostClose: `That is the ${label} arc: follow the official schedule, watch the high-density tracks, and treat every abstract-title signal as provisional until primary sources and full text are available. Keep tagging #ASCOHype on X with the best snacks and coffee you find in the Exhibitor Hall so the desk can review audience tips. ${DISCLAIMER}`
+    hostOpen: `Welcome to ASCO Hype for ${label}. Turn it up: this is the live conference desk, radio-DJ style, source-forward and moving fast. Today the agenda leans into ${topTrack}, with ${secondTrack} also carrying major attention. We will use the official agenda as the spine, title-level abstract signals as watch points, and reviewed audience or media inputs as interruptions. ${POSTER_WALL_PROMPT} ${EXHIBITOR_HALL_PROMPT}`,
+    hostClose: `That is the ${label} arc: follow the official schedule, watch the high-density tracks, and treat every abstract-title signal as provisional until primary sources and full text are available. Keep tagging #ASCOHype on X with the best snacks, coffee, poster-wall hits, and media/broadcast tips you find so the desk can review audience signals. ${DISCLAIMER}`
   };
 }
 
@@ -510,6 +534,21 @@ function renderMarkdown(narratives: DayNarrative[], index: CoreIndex) {
       } else if (session.topics) {
         const cleanedTopics = cleanText(session.topics);
         lines.push(`  - Narrative use: ${cleanedTopics.slice(0, 260)}${cleanedTopics.length > 260 ? "..." : ""}`);
+      }
+    }
+    lines.push("");
+    lines.push(`### Poster Wall / W-Poster Watch (${day.posterSessions.length})`, "");
+    if (day.posterSessions.length === 0) {
+      lines.push(`- No poster session block is scheduled for this day in the provided agenda index. Keep the callout ready for Hall A - Posters and Exhibits on the next poster-heavy day.`);
+    } else {
+      for (const session of day.posterSessions) {
+        lines.push(formatSessionLine(session));
+        if (session.topics) {
+          const cleanedTopics = cleanText(session.topics);
+          lines.push(`  - DJ callout: Poster wall energy check. ${cleanedTopics.slice(0, 320)}${cleanedTopics.length > 320 ? "..." : ""}`);
+        } else {
+          lines.push("  - DJ callout: Poster wall energy check. Send viewers to verify the Hall A poster location and tag #ASCOHype with what is drawing hallway buzz.");
+        }
       }
     }
     lines.push("");
