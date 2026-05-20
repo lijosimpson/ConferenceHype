@@ -14,7 +14,7 @@ export async function fetchTaggedSocialPosts(): Promise<IngestedItem[]> {
         title: "Mock tagged post: ASCO Hype audience signal",
         url: "https://x.com/hashtag/ASCOHype",
         excerpt:
-          "A sample audience post tagged with #ASCOHype. Configure X_BEARER_TOKEN to ingest real tagged posts and bot mentions.",
+          "A sample audience post tagged with #ASCOHype. Configure X_BEARER_TOKEN to ingest real tagged posts, bot mentions, and audience snack or coffee recommendations from the Exhibitor Hall.",
         sourceName: "X hashtag monitor",
         sourceType: "general_social",
         rank: 5,

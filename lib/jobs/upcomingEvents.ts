@@ -59,7 +59,8 @@ function buildNoTokenUpcomingSegment(sources: IngestedItem[], now: Date): Segmen
       abstractLines.length
         ? `Related abstract context on the desk: ${abstractLines.join(" ")}`
         : "No extra abstract context is being added to this window.",
-      "Between these schedule checks, the channel can be interrupted by audience posts, #ASCOHype tags, X posts, Instagram-style social signals, OncLive, STAT News, The ASCO Post, exhibitor updates, or operator-injected topics when those items clear review."
+      "Audience check-in: if you find genuinely good snacks or coffee in the Exhibitor Hall, post it on X with #ASCOHype so the desk can see it. We will treat those posts as audience tips, not endorsements, and operators can review the best ones for broadcast.",
+      "Between these schedule checks, the channel can be interrupted by audience posts, #ASCOHype tags, X posts, Instagram-style social signals, OncLive, STAT News, The ASCO Post, exhibitor updates, snack and coffee recommendations from the Exhibitor Hall, or operator-injected topics when those items clear review."
     ].join("\n\n")
   );
 

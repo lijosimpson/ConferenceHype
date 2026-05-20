@@ -16,7 +16,9 @@ export async function runGenerateJob() {
     generateSegmentFromSources({
       sources: socialItems.slice(0, 8),
       personaId: "vesper-quill",
-      hypeLevel: "high_energy"
+      hypeLevel: "high_energy",
+      editorialInstruction:
+        "Treat #ASCOHype posts as audience buzz that requires review. If posts recommend snacks or coffee in the Exhibitor Hall, frame them as attendee tips, not endorsements, and remind listeners that availability and locations can change."
     })
   ]);
   await saveGeneratedSegmentsToDb(segments);

@@ -12,6 +12,7 @@
     "job:generate": "tsx scripts/worker.ts generate",
     "job:briefing": "tsx scripts/worker.ts briefing",
     "job:upcoming": "tsx scripts/worker.ts upcoming",
+    "job:narrative": "tsx scripts/generate-asco-narrative.ts",
     "job:render": "tsx scripts/ffmpeg-render.ts",
     "job:stream": "tsx scripts/youtube-rtmp-loop.ts"
   },
