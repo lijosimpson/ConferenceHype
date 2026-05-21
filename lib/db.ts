@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import { hasSupabase } from "@/lib/env";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { sourceRegistry } from "@/lib/sources/registry";
+import { sourceRegistry, sourceToXVoice, type XVoice } from "@/lib/sources/registry";
 import type {
   AnalyticsSnapshot,
   Citation,
@@ -169,6 +169,16 @@ export async function getSourcesFromDb() {
   return (data as SourceRow[]).map(toSource);
 }
 
+export async function getXFollowVoicesFromDb(): Promise<XVoice[] | null> {
+  const sources = await getSourcesFromDb();
+  if (!sources) {
+    return null;
+  }
+  return sources
+    .map(sourceToXVoice)
+    .filter((voice): voice is XVoice => Boolean(voice));
+}
+
 export async function getAnalyticsFromDb() {
   if (!hasSupabase()) {
     return null;
@@ -212,6 +222,51 @@ export async function upsertSourcesToDb() {
   if (error) {
     throw error;
   }
+}
+
+export async function addXFollowSourceToDb({
+  handle,
+  label,
+  note
+}: {
+  handle: string;
+  label: string;
+  note?: string;
+}) {
+  if (!hasSupabase()) {
+    return null;
+  }
+  const username = handle.replace(/^@/, "");
+  const normalizedHandle = `@${username}`;
+  const supabase = createAdminClient();
+  const { data, error } = await supabase
+    .from("sources")
+    .upsert(
+      {
+        name: `X follow: ${label || normalizedHandle}`,
+        url: `https://x.com/${username}`,
+        type: "general_social",
+        rank: 5,
+        enabled: true
+      },
+      { onConflict: "url" }
+    )
+    .select("*")
+    .single();
+
+  if (error) {
+    throw error;
+  }
+
+  const source = toSource(data as SourceRow);
+  return {
+    source,
+    voice: {
+      label: label || normalizedHandle,
+      handle: normalizedHandle,
+      note: note || "operator-added X follow"
+    } satisfies XVoice
+  };
 }
 
 export async function saveIngestedItemsToDb(items: IngestedItem[]) {

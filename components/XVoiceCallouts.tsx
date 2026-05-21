@@ -1,8 +1,8 @@
 "use client";
 
-import { AtSign, Send } from "lucide-react";
+import { AtSign, Plus, Send } from "lucide-react";
 import { useState, useTransition } from "react";
-import { monitoredXVoices } from "@/lib/sources/registry";
+import { monitoredXVoices, type XVoice } from "@/lib/sources/registry";
 
 function handleToUrl(handle: string) {
   return `https://x.com/${handle.replace(/^@/, "")}`;
@@ -33,12 +33,51 @@ async function focusXVoice({
   return payload as { segment?: { title?: string } };
 }
 
-export function XVoiceCallouts() {
+async function addXFollow({
+  handle,
+  label,
+  note
+}: {
+  handle: string;
+  label: string;
+  note: string;
+}) {
+  const response = await fetch("/api/admin/x-follows", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ handle, label, note })
+  });
+  const payload = await response.json();
+  if (!response.ok || !payload.ok) {
+    throw new Error(payload.error ?? "Could not add this X account.");
+  }
+  return payload as { voice: XVoice };
+}
+
+function dedupeVoices(voices: XVoice[]) {
+  const seen = new Set<string>();
+  return voices.filter((voice) => {
+    const key = voice.handle.toLowerCase();
+    if (seen.has(key)) {
+      return false;
+    }
+    seen.add(key);
+    return true;
+  });
+}
+
+export function XVoiceCallouts({ customVoices = [] }: { customVoices?: XVoice[] }) {
+  const [voices, setVoices] = useState(() =>
+    dedupeVoices([...monitoredXVoices, ...customVoices])
+  );
+  const [newHandle, setNewHandle] = useState("");
+  const [newLabel, setNewLabel] = useState("");
+  const [newNote, setNewNote] = useState("");
   const [message, setMessage] = useState("");
   const [activeHandle, setActiveHandle] = useState("");
   const [pending, startTransition] = useTransition();
 
-  const run = (voice: (typeof monitoredXVoices)[number]) => {
+  const run = (voice: XVoice) => {
     setActiveHandle(voice.handle);
     startTransition(async () => {
       try {
@@ -50,6 +89,25 @@ export function XVoiceCallouts() {
         setMessage(error instanceof Error ? error.message : "Could not focus this X voice.");
       } finally {
         setActiveHandle("");
+      }
+    });
+  };
+
+  const saveFollow = () => {
+    startTransition(async () => {
+      try {
+        const result = await addXFollow({
+          handle: newHandle,
+          label: newLabel,
+          note: newNote
+        });
+        setVoices((current) => dedupeVoices([...current, result.voice]));
+        setMessage(`${result.voice.handle} added to X follows.`);
+        setNewHandle("");
+        setNewLabel("");
+        setNewNote("");
+      } catch (error) {
+        setMessage(error instanceof Error ? error.message : "Could not add this X account.");
       }
     });
   };
@@ -69,8 +127,41 @@ export function XVoiceCallouts() {
           {message}
         </div>
       ) : null}
+      <div className="mt-4 border border-ink/10 bg-paper/60 p-4">
+        <div className="text-sm font-black uppercase text-ink">
+          Add X account to follow
+        </div>
+        <div className="mt-3 grid gap-3">
+          <input
+            value={newHandle}
+            onChange={(event) => setNewHandle(event.target.value)}
+            placeholder="@account or x.com/account"
+            className="w-full border border-ink/20 px-3 py-3 text-sm outline-none focus:border-broadcast"
+          />
+          <input
+            value={newLabel}
+            onChange={(event) => setNewLabel(event.target.value)}
+            placeholder="Display name, optional"
+            className="w-full border border-ink/20 px-3 py-3 text-sm outline-none focus:border-broadcast"
+          />
+          <input
+            value={newNote}
+            onChange={(event) => setNewNote(event.target.value)}
+            placeholder="Why follow this account?"
+            className="w-full border border-ink/20 px-3 py-3 text-sm outline-none focus:border-broadcast"
+          />
+          <button
+            className="inline-flex items-center justify-center gap-2 bg-broadcast px-4 py-3 text-sm font-black uppercase text-white disabled:opacity-50"
+            disabled={pending || newHandle.trim().length < 2}
+            onClick={saveFollow}
+          >
+            <Plus className="h-4 w-4" />
+            Add X follow
+          </button>
+        </div>
+      </div>
       <div className="mt-4 grid gap-3">
-        {monitoredXVoices.map((voice) => (
+        {voices.map((voice) => (
           <div key={voice.handle} className="border border-ink/10 p-3">
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div>

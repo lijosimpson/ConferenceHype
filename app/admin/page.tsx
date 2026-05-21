@@ -19,7 +19,7 @@ export default async function AdminPage() {
         <div className="grid gap-6">
           <FocusSocialPost />
           <InstagramPushPanel />
-          <XVoiceCallouts />
+          <XVoiceCallouts customVoices={snapshot.xFollowVoices} />
           <EmergencyOverride streamState={snapshot.streamState} />
           <LanguageControls />
           <SourceManager sources={snapshot.sources} />

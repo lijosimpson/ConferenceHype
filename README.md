@@ -151,6 +151,8 @@ Ask users to post with:
 
 The X ingestion job searches those terms, creates `social_signal` source items, and sends generated commentary to the human review queue. Operators must approve or edit scripts before airing.
 
+Operators can add more X accounts from the admin **X voices to call out** panel. Added follows are stored as enabled social sources and included in the X recent-search query when Supabase and `X_BEARER_TOKEN` are configured.
+
 Instagram posts, reels, and caption ideas can be pasted into the admin Instagram panel. They are treated as manual social signals, generate review-gated commentary, and can use the caption starter for outward posts asking viewers to tag `#ASCOHype` and `#ASCO26`.
 
 ## Useful Commands

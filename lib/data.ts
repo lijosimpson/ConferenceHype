@@ -5,7 +5,8 @@ import {
   getApprovedSegmentsFromDb,
   getPendingSegmentsFromDb,
   getSourcesFromDb,
-  getStreamStateFromDb
+  getStreamStateFromDb,
+  getXFollowVoicesFromDb
 } from "@/lib/db";
 import type { AnalyticsSnapshot, Segment, StreamState } from "@/lib/types";
 
@@ -104,6 +105,7 @@ export async function getAdminSnapshot() {
     pendingSegments,
     streamState: await getStreamState(),
     sources: (await getSourcesFromDb()) ?? sourceRegistry,
+    xFollowVoices: (await getXFollowVoicesFromDb()) ?? [],
     analytics
   };
 }

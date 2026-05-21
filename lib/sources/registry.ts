@@ -1,5 +1,11 @@
 import type { SourceConfig } from "@/lib/types";
 
+export type XVoice = {
+  label: string;
+  handle: string;
+  note: string;
+};
+
 export const monitoredSocialTags = {
   primaryHashtag: "#ASCOHype",
   secondaryHashtag: "#AskASCOHype",
@@ -9,7 +15,7 @@ export const monitoredSocialTags = {
   instagramConferenceHashtag: "#ASCO26"
 };
 
-export const monitoredXVoices = [
+export const monitoredXVoices: XVoice[] = [
   {
     label: "ASCO",
     handle: "@ASCO",
@@ -31,6 +37,25 @@ export const monitoredXVoices = [
     note: "health and medicine media signal"
   }
 ];
+
+export function sourceToXVoice(source: SourceConfig): XVoice | null {
+  if (
+    source.type !== "general_social" ||
+    !/\b(x\.com|twitter\.com)\//i.test(source.url)
+  ) {
+    return null;
+  }
+  const match = source.url.match(/\b(?:x\.com|twitter\.com)\/([A-Za-z0-9_]{1,15})/i);
+  if (!match?.[1]) {
+    return null;
+  }
+  const label = source.name.replace(/^X follow:\s*/i, "").trim() || match[1];
+  return {
+    label,
+    handle: `@${match[1]}`,
+    note: "operator-added X follow"
+  };
+}
 
 export const instagramPushPrompts = [
   {

@@ -1,23 +1,26 @@
 import { env } from "@/lib/env";
 import { monitoredSocialTags, monitoredXVoices } from "@/lib/sources/registry";
 import type { IngestedItem } from "@/lib/types";
+import type { XVoice } from "@/lib/sources/registry";
 
 function toXUsername(handle: string) {
   return handle.replace(/^@/, "");
 }
 
-export function buildXSearchQuery() {
+export function buildXSearchQuery(extraVoices: XVoice[] = []) {
   const tagTerms = [
     monitoredSocialTags.primaryHashtag,
     monitoredSocialTags.secondaryHashtag,
     monitoredSocialTags.conferenceHashtag,
     monitoredSocialTags.botHandle
   ];
-  const voiceTerms = monitoredXVoices.map((voice) => `from:${toXUsername(voice.handle)}`);
+  const voices = [...monitoredXVoices, ...extraVoices];
+  const voiceTerms = voices.map((voice) => `from:${toXUsername(voice.handle)}`);
   return `(${[...tagTerms, ...voiceTerms].join(" OR ")}) -is:retweet lang:en`;
 }
 
-export async function fetchTaggedSocialPosts(): Promise<IngestedItem[]> {
+export async function fetchTaggedSocialPosts(extraVoices: XVoice[] = []): Promise<IngestedItem[]> {
+  const voices = [...monitoredXVoices, ...extraVoices];
   if (!env.X_BEARER_TOKEN) {
     return [
       {
@@ -45,7 +48,7 @@ export async function fetchTaggedSocialPosts(): Promise<IngestedItem[]> {
     ];
   }
 
-  const query = encodeURIComponent(buildXSearchQuery());
+  const query = encodeURIComponent(buildXSearchQuery(extraVoices));
   const response = await fetch(
     `https://api.x.com/2/tweets/search/recent?query=${query}&max_results=20&tweet.fields=author_id,created_at,public_metrics&expansions=author_id&user.fields=username,name`,
     {
@@ -70,7 +73,7 @@ export async function fetchTaggedSocialPosts(): Promise<IngestedItem[]> {
   return (payload.data ?? []).map((tweet) => {
     const user = tweet.author_id ? usersById.get(tweet.author_id) : undefined;
     const author = user?.username ? `@${user.username}` : tweet.author_id;
-    const watchedVoice = monitoredXVoices.find(
+    const watchedVoice = voices.find(
       (voice) => voice.handle.toLowerCase() === author?.toLowerCase()
     );
 
