@@ -12,3 +12,5 @@ public/clips/*
 
 .vercel
 .admin-secret.local.txt
+
+.env*

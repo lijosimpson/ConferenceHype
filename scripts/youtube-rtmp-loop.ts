@@ -1,8 +1,10 @@
 import { spawn } from "node:child_process";
+import { loadEnvConfig } from "@next/env";
 import { getFfmpegBinary } from "@/lib/media/ffmpeg";
-import { getYoutubeRtmpTarget } from "@/lib/media/stream";
 
 async function main() {
+  loadEnvConfig(process.cwd());
+  const { getYoutubeRtmpTarget } = await import("@/lib/media/stream");
   const input = process.env.STREAM_INPUT_PATH ?? "public/rendered/fallback-loop.mp4";
   const target = getYoutubeRtmpTarget();
   const args = [
