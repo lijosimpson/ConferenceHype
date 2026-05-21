@@ -43,7 +43,7 @@ export function SocialVoiceCompetition({
             className="grid gap-3 border border-ink/10 p-3 sm:grid-cols-[auto_1fr_auto]"
           >
             <div className="flex h-10 w-10 items-center justify-center bg-ink text-sm font-black text-white">
-              #{index + 1}
+              {`#${index + 1}`}
             </div>
             <div>
               <div className="text-sm font-black text-ink">
