@@ -1,4 +1,9 @@
 import { spawn } from "node:child_process";
+import ffmpegStatic from "ffmpeg-static";
+
+export function getFfmpegBinary() {
+  return process.env.FFMPEG_PATH ?? ffmpegStatic ?? "ffmpeg";
+}
 
 export function buildSegmentRenderCommand({
   voicePath,
@@ -13,7 +18,7 @@ export function buildSegmentRenderCommand({
 }) {
   if (!withMusic) {
     return [
-      "ffmpeg",
+      getFfmpegBinary(),
       "-y",
       "-i",
       voicePath,
@@ -26,7 +31,7 @@ export function buildSegmentRenderCommand({
   }
 
   return [
-    "ffmpeg",
+    getFfmpegBinary(),
     "-y",
     "-stream_loop",
     "-1",

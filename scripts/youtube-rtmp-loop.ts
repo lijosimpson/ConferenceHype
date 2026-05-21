@@ -1,4 +1,5 @@
 import { spawn } from "node:child_process";
+import { getFfmpegBinary } from "@/lib/media/ffmpeg";
 import { getYoutubeRtmpTarget } from "@/lib/media/stream";
 
 async function main() {
@@ -28,8 +29,9 @@ async function main() {
     "flv",
     target
   ];
-  console.log(`ffmpeg ${args.map((arg) => (arg.includes(" ") ? `"${arg}"` : arg)).join(" ")}`);
-  const child = spawn("ffmpeg", args, { stdio: "inherit" });
+  const ffmpeg = getFfmpegBinary();
+  console.log(`${ffmpeg} ${args.map((arg) => (arg.includes(" ") ? `"${arg}"` : arg)).join(" ")}`);
+  const child = spawn(ffmpeg, args, { stdio: "inherit" });
   child.on("exit", (code) => process.exit(code ?? 1));
 }
 
