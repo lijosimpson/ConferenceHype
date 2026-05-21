@@ -38,8 +38,8 @@ export function SourceManager({ sources }: { sources: SourceConfig[] }) {
           ))}
         </div>
         <p className="mt-3 text-sm leading-6 text-ink/65">
-          Posts from these handles can become callout ideas, but they still
-          require operator review before airing.
+          Use the X voices panel above to focus one of these handles into the
+          human review queue.
         </p>
       </div>
       <div className="mt-4 grid gap-2">

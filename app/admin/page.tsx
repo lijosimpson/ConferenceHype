@@ -5,6 +5,7 @@ import { FocusSocialPost } from "@/components/FocusSocialPost";
 import { LanguageControls } from "@/components/LanguageControls";
 import { ReviewQueue } from "@/components/ReviewQueue";
 import { SourceManager } from "@/components/SourceManager";
+import { XVoiceCallouts } from "@/components/XVoiceCallouts";
 import { getAdminSnapshot } from "@/lib/data";
 
 export default async function AdminPage() {
@@ -16,6 +17,7 @@ export default async function AdminPage() {
         <ReviewQueue segments={snapshot.pendingSegments} />
         <div className="grid gap-6">
           <FocusSocialPost />
+          <XVoiceCallouts />
           <EmergencyOverride streamState={snapshot.streamState} />
           <LanguageControls />
           <SourceManager sources={snapshot.sources} />
