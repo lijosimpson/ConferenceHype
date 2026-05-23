@@ -81,6 +81,9 @@ export async function generateSegmentFromSources({
     social_buzz_items?: GeneratedCitation[];
     risk_flags?: string[];
   };
+  if (!parsed.script?.trim()) {
+    throw new Error("LLM returned no real script content.");
+  }
 
   return {
     id: `draft-${randomUUID()}`,

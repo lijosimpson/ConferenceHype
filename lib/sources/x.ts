@@ -23,30 +23,7 @@ export function buildXSearchQuery(extraVoices: XVoice[] = []) {
 export async function fetchTaggedSocialPosts(extraVoices: XVoice[] = []): Promise<IngestedItem[]> {
   const voices = [...monitoredXVoices, ...extraVoices];
   if (!env.X_BEARER_TOKEN) {
-    return [
-      {
-        id: "mock-social-tag",
-        title: "Mock tagged post: ASCO Hype audience signal",
-        url: "https://x.com/hashtag/ASCOHype",
-        excerpt:
-          "A sample audience post tagged with #ASCOHype, #ASCO26, @ASCOHypeAI, or @ConferenceHype. Configure X_BEARER_TOKEN to ingest real tagged posts, bot mentions, monitored X voices, commentary ideas, audience snack or coffee recommendations, and end-of-day steps or workout shoutouts.",
-        sourceName: "X hashtag and voice monitor",
-        sourceType: "general_social",
-        rank: 5,
-        author: monitoredSocialTags.botHandle
-      },
-      {
-        id: "mock-x-voice",
-        title: "Mock monitored X voice: ASCO meeting signal",
-        url: "https://x.com/ASCO",
-        excerpt:
-          "A sample monitored X voice item. Posts from watched handles can be called out as commentary ideas only after operator review.",
-        sourceName: "X voice monitor",
-        sourceType: "general_social",
-        rank: 5,
-        author: "@ASCO"
-      }
-    ];
+    return [];
   }
 
   const query = encodeURIComponent(buildXSearchQuery(extraVoices));

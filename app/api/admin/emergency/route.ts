@@ -16,15 +16,14 @@ export async function POST(request: NextRequest) {
     if (dbState) {
       return NextResponse.json({ ok: true, streamState: dbState });
     }
-    return NextResponse.json({
-      ok: true,
-      streamState: {
-        emergencyActive: body.active,
-        emergencyMessage: body.message
+    return NextResponse.json(
+      {
+        ok: false,
+        error:
+          "Database is not configured, so emergency stream state cannot be written. Mock override mode is disabled."
       },
-      note:
-        "Mock mode accepted the override. With Supabase configured this updates stream_state in realtime."
-    });
+      { status: 503 }
+    );
   } catch (error) {
     return NextResponse.json({ ok: false, error: String(error) }, { status: 400 });
   }

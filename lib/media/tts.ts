@@ -15,7 +15,7 @@ export async function synthesizeSpeech({
   const voiceId = process.env[persona.voiceEnvKey];
   if (!env.ELEVENLABS_API_KEY || !voiceId) {
     return {
-      provider: "mock",
+      provider: "skipped",
       audioPath: null,
       note:
         "TTS skipped. Configure ELEVENLABS_API_KEY and persona voice environment variables."

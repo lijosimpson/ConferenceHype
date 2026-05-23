@@ -94,9 +94,13 @@ function buildNoTokenUpcomingSegment(sources: IngestedItem[], now: Date): Segmen
   };
 }
 
-export async function runUpcomingEventsJob(now = new Date()) {
+export function buildScheduleFallbackSegment(now = new Date()) {
   const sources = getAscoUpcomingEventSources(now);
-  const segment = buildNoTokenUpcomingSegment(sources, now);
+  return buildNoTokenUpcomingSegment(sources, now);
+}
+
+export async function runUpcomingEventsJob(now = new Date()) {
+  const segment = buildScheduleFallbackSegment(now);
   await saveGeneratedSegmentsToDb([segment]);
   return [segment];
 }

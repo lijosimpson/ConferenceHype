@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { assertAdminRequest } from "@/lib/auth";
-import { mockSegments } from "@/lib/data";
 import { getSegmentByIdFromDb, updateSegmentDecisionInDb } from "@/lib/db";
 import { validateSegmentForApproval } from "@/lib/generation/validator";
 
@@ -35,24 +34,14 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    const segment = mockSegments.find((item) => item.id === body.segmentId);
-    if (!segment) {
-      return NextResponse.json({ ok: false, error: "Segment not found." }, { status: 404 });
-    }
-    const editedSegment = { ...segment, script: body.script };
-    if (body.action === "approve") {
-      const errors = validateSegmentForApproval(editedSegment);
-      if (errors.length > 0) {
-        return NextResponse.json({ ok: false, errors }, { status: 422 });
-      }
-    }
-    return NextResponse.json({
-      ok: true,
-      segmentId: body.segmentId,
-      action: body.action,
-      note:
-        "Mock mode accepted the action. With Supabase configured this writes to the segments table and audit log."
-    });
+    return NextResponse.json(
+      {
+        ok: false,
+        error:
+          "Database is not configured, so approval cannot be written. Mock approval mode is disabled."
+      },
+      { status: 503 }
+    );
   } catch (error) {
     return NextResponse.json({ ok: false, error: String(error) }, { status: 400 });
   }

@@ -1,5 +1,5 @@
-import { defaultDisclaimer } from "@/lib/generation/disclaimers";
 import { sourceRegistry } from "@/lib/sources/registry";
+import { buildScheduleFallbackSegment } from "@/lib/jobs/upcomingEvents";
 import {
   getAnalyticsFromDb,
   getApprovedSegmentsFromDb,
@@ -13,70 +13,11 @@ import {
   buildSocialVoiceLeaderboard,
   shouldRunSocialVoiceCompetition
 } from "@/lib/social/leaderboard";
-import type { AnalyticsSnapshot, Segment, StreamState } from "@/lib/types";
-
-const now = new Date().toISOString();
-
-export const mockSegments: Segment[] = [
-  {
-    id: "seg-echo-agenda",
-    title: "TumorCrusher hourly voice cycle and disease reporters ASCO 2026 run",
-    summary:
-      "TumorCrusher opens the ASCO 2026 Day 1 test run with an hourly voice cycle: Fenrir, Marisol, Rebecca, Jax, AussieOnc, Maya, Cole, and Adam, plus assigned reporters for breast, lung, GU, Gyn, skin, colorectal, upper GI and hepatobiliary, CNS, endocrine, and soft tissue cancers.",
-    script: `${defaultDisclaimer}\n\nWelcome to ASCO Hype. We are watching the 2026 annual meeting buildup like a live conference desk: agenda previews, media roundups, exhibitor signals, and the social posts people tag with #ASCOHype, #ASCO26, or @ASCOHypeAI. The key thing to remember: social posts are buzz, not confirmation, until they are checked against stronger sources.\n\nReminder: ${defaultDisclaimer}`,
-    contentType: "agenda_preview",
-    personaId: "echo-sage",
-    personaName: "TumorCrusher",
-    hypeLevel: "standard",
-    language: "English",
-    status: "approved",
-    citations: [
-      {
-        label: "ASCO meeting site",
-        url: "https://meetings.asco.org/",
-        sourceType: "official"
-      }
-    ],
-    socialBuzzItems: [],
-    riskFlags: [],
-    confidenceScore: 94,
-    createdAt: now
-  },
-  {
-    id: "seg-social-loop",
-    title: "How the ASCO Hype hashtag gets on the desk",
-    summary:
-      "A short operator-ready explainer for audience posts, bot mentions, and the social buzz review path.",
-    script: `${defaultDisclaimer}\n\nIf you want the desk to see a post, tag #ASCOHype, #AskASCOHype, #ASCO26, or @ASCOHypeAI. The post enters the social signal intake, gets labeled as audience buzz, and waits for operator approval before any commentary airs.\n\nReminder: ${defaultDisclaimer}`,
-    contentType: "social_signal",
-    personaId: "vesper-quill",
-    personaName: "Vesper Quill",
-    hypeLevel: "high_energy",
-    language: "English",
-    status: "pending_review",
-    citations: [
-      {
-        label: "ASCO Hype source policy",
-        url: "https://asco-hype.example.com/admin",
-        sourceType: "manual"
-      }
-    ],
-    socialBuzzItems: [
-      {
-        label: "#ASCOHype monitored tag",
-        url: "https://x.com/hashtag/ASCOHype",
-        sourceType: "general_social"
-      }
-    ],
-    riskFlags: ["social_buzz_requires_review"],
-    confidenceScore: 88,
-    createdAt: now
-  }
-];
+import type { AnalyticsSnapshot, StreamState } from "@/lib/types";
 
 export async function getPublicSegments() {
   const dbSegments = await getApprovedSegmentsFromDb();
-  return dbSegments ?? mockSegments.filter((segment) => segment.status === "approved");
+  return dbSegments?.length ? dbSegments : [buildScheduleFallbackSegment()];
 }
 
 export async function getStreamState(): Promise<StreamState> {
@@ -93,7 +34,7 @@ export async function getStreamState(): Promise<StreamState> {
     emergencyActive: false,
     emergencyMessage:
       "ASCO Hype automation is paused while the operator desk reviews the queue.",
-    currentSegmentId: mockSegments[0]?.id
+    currentSegmentId: undefined
   };
 }
 
@@ -104,9 +45,7 @@ export async function getAdminSnapshot() {
     recentSocialItems,
     xFollowVoices
   );
-  const pendingSegments = (await getPendingSegmentsFromDb()) ?? mockSegments.filter(
-    (segment) => segment.status === "pending_review"
-  );
+  const pendingSegments = (await getPendingSegmentsFromDb()) ?? [];
   const analytics: AnalyticsSnapshot = (await getAnalyticsFromDb()) ?? {
     views: 128,
     clipsCreated: 4,
