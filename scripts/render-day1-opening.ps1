@@ -6,7 +6,7 @@ $recordingsDir = Join-Path $renderDir "recordings"
 New-Item -ItemType Directory -Force $renderDir | Out-Null
 New-Item -ItemType Directory -Force $recordingsDir | Out-Null
 
-$durationSeconds = 180
+$durationSeconds = if ($env:INTRO_DURATION_SECONDS) { [int]$env:INTRO_DURATION_SECONDS } else { 60 }
 $slideSeconds = [int]($durationSeconds / 6)
 
 $slides = @(
@@ -14,8 +14,8 @@ $slides = @(
 TumorCrusher on the desk
 ASCO 2026 is ON
 Friday May 29, 7:00 AM CT test clock
-Three-minute channel intro
-Three voice open-source booth test
+One-minute Adam voice test
+Club-DJ bass pass
 "@,
 @"
 Day 1 is not a warm-up
@@ -72,7 +72,7 @@ Coffee line, snack win, poster crowd, media moment, hallway buzz: tag #ASCOHype.
 
 $scriptPath = Join-Path $renderDir "day1-opening-script.txt"
 $voicePath = Join-Path $renderDir "day1-opening-voice.mp3"
-$preferredCacheFile = if ($env:INTRO_VOICE_CACHE) { $env:INTRO_VOICE_CACHE } else { "tumorcrusher-free-dj-day1-intro-v1.mp3" }
+$preferredCacheFile = if ($env:INTRO_VOICE_CACHE) { $env:INTRO_VOICE_CACHE } else { "tumorcrusher-kokoro-am_adam-minute-v1.mp3" }
 $cachedVoicePath = Join-Path $recordingsDir $preferredCacheFile
 $paidVoicePath = Join-Path $recordingsDir "tumorcrusher-tyler-cruz-day1-intro-v1.mp3"
 $outputPath = Join-Path $renderDir "fallback-loop.mp4"
@@ -80,7 +80,7 @@ $previewPath = Join-Path $renderDir "fallback-loop-preview.png"
 
 Set-Content -LiteralPath $scriptPath -Value $script -Encoding UTF8
 
-if ((Test-Path -LiteralPath $cachedVoicePath) -and !(Test-Path -LiteralPath $voicePath)) {
+if (Test-Path -LiteralPath $cachedVoicePath) {
   Copy-Item -LiteralPath $cachedVoicePath -Destination $voicePath -Force
 }
 
