@@ -15,4 +15,7 @@ Recommended workflow:
 
 ## Licenses
 
-- Add track license details here before launch.
+- `conferencehype-gap-music-6min-v1.mp3`: generated in-repo with
+  `scripts/generate-gap-music.ps1` using synthetic ffmpeg tones/noise and
+  Kokoro open-source speech for ConferenceHype stingers. No third-party music
+  sample or paid voice is used.

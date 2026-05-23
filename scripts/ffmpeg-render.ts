@@ -69,7 +69,8 @@ async function main() {
   const safeSegmentId = segment.id.replace(/[^a-zA-Z0-9_-]/g, "-");
   const voicePath =
     process.env.VOICE_AUDIO_PATH ?? path.join(renderDir, `${safeSegmentId}-voice.mp3`);
-  const musicPath = process.env.MUSIC_AUDIO_PATH ?? "public/music/light-jazz-techno.mp3";
+  const musicPath =
+    process.env.MUSIC_AUDIO_PATH ?? "public/music/conferencehype-gap-music-6min-v1.mp3";
   const outputPath =
     process.env.RENDER_OUTPUT_PATH ?? path.join(renderDir, `${safeSegmentId}.m4a`);
 
