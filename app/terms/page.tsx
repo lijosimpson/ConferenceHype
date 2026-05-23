@@ -55,9 +55,12 @@ export default function TermsPage() {
             Posts using {monitoredSocialTags.primaryHashtag},{" "}
             {monitoredSocialTags.secondaryHashtag},{" "}
             {monitoredSocialTags.conferenceHashtag}, or{" "}
-            {monitoredSocialTags.botHandle} may be considered as topic
-            suggestions. Tagging ASCO Hype does not guarantee coverage,
-            accuracy, approval, publication, compensation, or response.
+            {monitoredSocialTags.botHandle}, or tagging{" "}
+            {monitoredSocialTags.conferenceHypeHandle} may be considered as
+            topic suggestions or end-of-day audience items. Steps, workouts,
+            walks, runs, and gym-session posts may be mentioned only after
+            review. Tagging ASCO Hype does not guarantee coverage, accuracy,
+            approval, publication, compensation, or response.
           </TermBlock>
 
           <TermBlock title="User content restrictions">

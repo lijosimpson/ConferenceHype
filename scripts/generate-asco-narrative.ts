@@ -56,7 +56,10 @@ const LOCATION_VERIFY =
   "please verify the room in the ASCO app and on-site signage, because meeting locations can change unexpectedly";
 
 const EXHIBITOR_HALL_PROMPT =
-  "Audience fuel check: if you find the best snacks or coffee in the Exhibitor Hall, tag #ASCOHype on X and tell the desk where you found it. ASCO Hype will treat these as audience recommendations, not endorsements.";
+  "Audience fuel check: if you find the best snacks or coffee in the Exhibitor Hall, tag #ASCOHype or @ConferenceHype on X and tell the desk where you found it. ASCO Hype will treat these as audience recommendations, not endorsements.";
+
+const WORKOUT_PROMPT =
+  "End-of-day movement check: invite listeners to tag @ConferenceHype with their conference steps, walks, runs, gym sessions, and other workouts. Treat these as audience shoutout candidates for the end-of-day broadcast after operator review, not fitness or medical advice.";
 
 const MEDIA_MONITOR_PROMPT =
   "Media monitor callout: keep an ear on reviewed signals from OncLive, STAT News, The ASCO Post, X posts, and other operator-approved broadcast sources. Label media chatter as reported or discussed, not confirmed science unless primary sources support it.";
@@ -459,6 +462,7 @@ function buildNarrative(date: string, sessions: CoreSession[], abstracts: CoreAb
     `Run this prompt during the morning ramp: ${EXHIBITOR_HALL_PROMPT}`,
     `Run this prompt around midday, when foot traffic and coffee lines are useful signals: ${EXHIBITOR_HALL_PROMPT}`,
     `Run this prompt during the afternoon reset between session blocks: ${EXHIBITOR_HALL_PROMPT}`,
+    `Run this prompt during late afternoon and before the wrap: ${WORKOUT_PROMPT}`,
     `Run this poster-floor prompt when Hall A traffic picks up: ${POSTER_WALL_PROMPT}`,
     `Run this media reset between agenda blocks: ${MEDIA_MONITOR_PROMPT}`
   ];
@@ -477,7 +481,7 @@ function buildNarrative(date: string, sessions: CoreSession[], abstracts: CoreAb
     abstractSignals,
     audiencePrompts,
     hostOpen: `Welcome to ASCO Hype for ${label}. Turn it up: this is the live conference desk, radio-DJ style, source-forward and moving fast. Today the agenda leans into ${topTrack}, with ${secondTrack} also carrying major attention. We will use the official agenda as the spine, title-level abstract signals as watch points, and reviewed audience or media inputs as interruptions. ${POSTER_WALL_PROMPT} ${EXHIBITOR_HALL_PROMPT}`,
-    hostClose: `That is the ${label} arc: follow the official schedule, watch the high-density tracks, and treat every abstract-title signal as provisional until primary sources and full text are available. Keep tagging #ASCOHype on X with the best snacks, coffee, poster-wall hits, and media/broadcast tips you find so the desk can review audience signals. ${DISCLAIMER}`
+    hostClose: `That is the ${label} arc: follow the official schedule, watch the high-density tracks, and treat every abstract-title signal as provisional until primary sources and full text are available. Keep tagging #ASCOHype and @ConferenceHype on X with the best snacks, coffee, poster-wall hits, media/broadcast tips, steps, and workouts you want the desk to review for end-of-day audience shoutouts. ${DISCLAIMER}`
   };
 }
 
@@ -492,7 +496,8 @@ function renderMarkdown(narratives: DayNarrative[], index: CoreIndex) {
     "",
     `Location narration rule: McCormick Place is a multi-building campus. Repeat every meeting location out loud, then ask viewers to verify the room in the ASCO app and on-site signage because meeting locations can change unexpectedly.`,
     "",
-    `Audience prompt rule: At regular intervals, ask viewers on X to tag #ASCOHype with the best snacks and coffee they find in the Exhibitor Hall. Treat those posts as audience recommendations that require operator review, not endorsements.`,
+    `Audience prompt rule: At regular intervals, ask viewers on X to tag #ASCOHype or @ConferenceHype with the best snacks and coffee they find in the Exhibitor Hall. Treat those posts as audience recommendations that require operator review, not endorsements.`,
+    `End-of-day movement prompt rule: Ask listeners to tag @ConferenceHype with steps, walks, runs, gym sessions, and other workouts. Treat those posts as reviewed audience shoutouts for the end-of-day broadcast, not medical or fitness advice.`,
     "",
     DISCLAIMER,
     ""

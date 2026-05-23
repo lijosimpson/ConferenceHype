@@ -11,8 +11,10 @@ export const monitoredSocialTags = {
   secondaryHashtag: "#AskASCOHype",
   conferenceHashtag: "#ASCO26",
   botHandle: "@ASCOHypeAI",
+  conferenceHypeHandle: "@ConferenceHype",
   instagramPrimaryHashtag: "#ASCOHype",
-  instagramConferenceHashtag: "#ASCO26"
+  instagramConferenceHashtag: "#ASCO26",
+  instagramConferenceHypeHandle: "@ConferenceHype"
 };
 
 export const monitoredXVoices: XVoice[] = [
@@ -35,6 +37,11 @@ export const monitoredXVoices: XVoice[] = [
     label: "STAT",
     handle: "@statnews",
     note: "health and medicine media signal"
+  },
+  {
+    label: "ConferenceHype",
+    handle: "@ConferenceHype",
+    note: "listener steps, workouts, end-of-day audience fuel, and ConferenceHype community signal"
   }
 ];
 
@@ -61,7 +68,12 @@ export const instagramPushPrompts = [
   {
     label: "Snack and coffee watch",
     prompt:
-      "Ask viewers to tag #ASCOHype and #ASCO26 on Instagram with the best snacks and coffee in the Exhibitor Hall. Treat replies as audience tips until reviewed."
+      "Ask viewers to tag #ASCOHype, #ASCO26, and @ConferenceHype on Instagram with the best snacks and coffee in the Exhibitor Hall. Treat replies as audience tips until reviewed."
+  },
+  {
+    label: "Steps and workout watch",
+    prompt:
+      "Ask listeners to tag @ConferenceHype with their conference steps, walks, gym sessions, runs, and other workouts. Collect these for an end-of-day reviewed audience fitness shoutout, not medical or fitness advice."
   },
   {
     label: "W-poster watch",
@@ -71,7 +83,7 @@ export const instagramPushPrompts = [
   {
     label: "Media desk callout",
     prompt:
-      "Ask viewers to tag #ASCOHype on Instagram when media hits, hallway interviews, or broadcast moments deserve operator review."
+      "Ask viewers to tag #ASCOHype and @ConferenceHype on Instagram when media hits, hallway interviews, or broadcast moments deserve operator review."
   }
 ];
 
@@ -111,7 +123,7 @@ export const sourceRegistry: SourceConfig[] = [
   {
     id: "asco-hype-tags",
     name: "Audience tags, X voices, and Instagram prompts",
-    url: `${monitoredSocialTags.primaryHashtag} ${monitoredSocialTags.secondaryHashtag} ${monitoredSocialTags.conferenceHashtag} ${monitoredSocialTags.botHandle} ${monitoredSocialTags.instagramPrimaryHashtag} ${monitoredSocialTags.instagramConferenceHashtag} ${monitoredXVoices.map((voice) => voice.handle).join(" ")}`,
+    url: `${monitoredSocialTags.primaryHashtag} ${monitoredSocialTags.secondaryHashtag} ${monitoredSocialTags.conferenceHashtag} ${monitoredSocialTags.botHandle} ${monitoredSocialTags.conferenceHypeHandle} ${monitoredSocialTags.instagramPrimaryHashtag} ${monitoredSocialTags.instagramConferenceHashtag} ${monitoredSocialTags.instagramConferenceHypeHandle} ${monitoredXVoices.map((voice) => voice.handle).join(" ")}`,
     type: "general_social",
     rank: 5,
     enabled: true

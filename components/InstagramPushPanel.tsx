@@ -25,9 +25,9 @@ async function focusInstagramItem({
   return payload as { segment?: { title?: string } };
 }
 
-const captionStarter = `ASCO Hype is live from the conference desk. Tag ${monitoredSocialTags.instagramPrimaryHashtag} and ${monitoredSocialTags.instagramConferenceHashtag} with the best snack finds, coffee stops, W-poster buzz, and media moments you think deserve a broadcast callout.
+const captionStarter = `ASCO Hype is live from the conference desk. Tag ${monitoredSocialTags.instagramPrimaryHashtag}, ${monitoredSocialTags.instagramConferenceHashtag}, and ${monitoredSocialTags.instagramConferenceHypeHandle} with the best snack finds, coffee stops, W-poster buzz, media moments, steps, walks, runs, gym sessions, and other workouts you want considered for broadcast.
 
-Audience tips are reviewed before anything airs. Locations can change unexpectedly, so verify rooms and halls in the ASCO app and on-site signage.`;
+Audience tips are reviewed before anything airs. Steps and workout posts are collected for an end-of-day audience shoutout. Locations can change unexpectedly, so verify rooms and halls in the ASCO app and on-site signage.`;
 
 export function InstagramPushPanel() {
   const [postUrl, setPostUrl] = useState("");

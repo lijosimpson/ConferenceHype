@@ -12,7 +12,8 @@ export function buildXSearchQuery(extraVoices: XVoice[] = []) {
     monitoredSocialTags.primaryHashtag,
     monitoredSocialTags.secondaryHashtag,
     monitoredSocialTags.conferenceHashtag,
-    monitoredSocialTags.botHandle
+    monitoredSocialTags.botHandle,
+    monitoredSocialTags.conferenceHypeHandle
   ];
   const voices = [...monitoredXVoices, ...extraVoices];
   const voiceTerms = voices.map((voice) => `from:${toXUsername(voice.handle)}`);
@@ -28,7 +29,7 @@ export async function fetchTaggedSocialPosts(extraVoices: XVoice[] = []): Promis
         title: "Mock tagged post: ASCO Hype audience signal",
         url: "https://x.com/hashtag/ASCOHype",
         excerpt:
-          "A sample audience post tagged with #ASCOHype or #ASCO26. Configure X_BEARER_TOKEN to ingest real tagged posts, bot mentions, monitored X voices, commentary ideas, and audience snack or coffee recommendations from the Exhibitor Hall.",
+          "A sample audience post tagged with #ASCOHype, #ASCO26, @ASCOHypeAI, or @ConferenceHype. Configure X_BEARER_TOKEN to ingest real tagged posts, bot mentions, monitored X voices, commentary ideas, audience snack or coffee recommendations, and end-of-day steps or workout shoutouts.",
         sourceName: "X hashtag and voice monitor",
         sourceType: "general_social",
         rank: 5,

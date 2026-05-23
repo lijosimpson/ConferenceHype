@@ -75,6 +75,7 @@ Use these in the public site and X profile:
 - `#AskASCOHype`
 - `#ASCO26`
 - `@ASCOHypeAI`
+- `@ConferenceHype`
 - watched X voices: `@ASCO`, `@ASCOPost`, `@OncLive`, `@statnews`
 
 Create or rename the X account to match the bot handle before launch.
@@ -125,5 +126,6 @@ Before May 25:
 - Run a 2-hour unlisted stream.
 - Test emergency override.
 - Test one social post with `#ASCOHype`.
+- Test one steps/workout social post with `@ConferenceHype` for end-of-day shoutout review.
 - Test one generated clip.
 - Confirm disclaimers and Terms links are visible.

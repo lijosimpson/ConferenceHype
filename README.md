@@ -6,7 +6,7 @@ ASCO Hype is an AI-powered, reporter-style oncology conference coverage channel 
 
 - A Next.js 15 public channel and protected operator dashboard.
 - A review-gated editorial workflow for AI-generated conference commentary.
-- A monitored hashtag, bot mention, X voice loop, and Instagram push-prep loop: `#ASCOHype`, `#AskASCOHype`, `#ASCO26`, `@ASCOHypeAI`, plus reviewed posts from watched X voices such as `@ASCO`, `@ASCOPost`, `@OncLive`, and `@statnews`.
+- A monitored hashtag, bot mention, X voice loop, and Instagram push-prep loop: `#ASCOHype`, `#AskASCOHype`, `#ASCO26`, `@ASCOHypeAI`, `@ConferenceHype`, plus reviewed posts from watched X voices such as `@ASCO`, `@ASCOPost`, `@OncLive`, and `@statnews`.
 - A low-cost deployment shape: Vercel for the app, Supabase for data/auth/storage, GitHub Actions for scheduled jobs, and a small stream worker for FFmpeg/YouTube.
 
 ## What This Is Not
@@ -148,13 +148,16 @@ Ask users to post with:
 - `#AskASCOHype`
 - `#ASCO26`
 - `@ASCOHypeAI`
+- `@ConferenceHype`
+
+Listeners can tag `@ConferenceHype` with steps, walks, runs, gym sessions, and other workouts during the meeting day. These posts are reviewed as audience shoutout candidates for the end-of-day broadcast, not as medical or fitness advice.
 - watched X voices: `@ASCO`, `@ASCOPost`, `@OncLive`, `@statnews`
 
 The X ingestion job searches those terms, creates `social_signal` source items, and sends generated commentary to the human review queue. Operators must approve or edit scripts before airing.
 
 Operators can add more X accounts from the admin **X voices to call out** panel. Added follows are stored as enabled social sources and included in the X recent-search query when Supabase and `X_BEARER_TOKEN` are configured.
 
-Instagram posts, reels, and caption ideas can be pasted into the admin Instagram panel. They are treated as manual social signals, generate review-gated commentary, and can use the caption starter for outward posts asking viewers to tag `#ASCOHype` and `#ASCO26`.
+Instagram posts, reels, and caption ideas can be pasted into the admin Instagram panel. They are treated as manual social signals, generate review-gated commentary, and can use the caption starter for outward posts asking viewers to tag `#ASCOHype`, `#ASCO26`, and `@ConferenceHype`.
 
 The admin **Social voice competition** panel shows the current scoreboard and whether the 3-hour competition segment is due in the current generation block.
 
