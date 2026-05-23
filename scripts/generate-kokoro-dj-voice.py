@@ -17,12 +17,17 @@ VOICE_TITLES = {
     "am_fenrir": "TumorCrusher Fenrir",
     "am_adam": "TumorCrusher Adam",
 }
+VOICE_MIX = {
+    "am_puck": {"gain": 1.0, "bass": 0.0},
+    "am_fenrir": {"gain": 1.0, "bass": 0.0},
+    "am_adam": {"gain": 1.08, "bass": 0.42},
+}
 
 
 PERFORMANCE_LINES = [
-    {"speed": 1.04, "pause": 0.16, "text": "TumorCrusher on the ASCO Hype desk."},
-    {"speed": 1.08, "pause": 0.20, "text": "ASCO 2026 is officially in launch mode."},
-    {"speed": 1.06, "pause": 0.34, "text": "ASCO 2026 is live, and Day 1 is not a warm-up."},
+    {"speed": 1.04, "pause": 0.16, "text": "TumorCrusher on the ASKO Hype desk."},
+    {"speed": 1.08, "pause": 0.20, "text": "ASKO 2026 is officially in launch mode."},
+    {"speed": 1.06, "pause": 0.34, "text": "ASKO 2026 is live, and Day 1 is not a warm-up."},
     {
         "speed": 1.01,
         "pause": 0.22,
@@ -70,7 +75,7 @@ PERFORMANCE_LINES = [
     {"speed": 1.12, "pause": 0.09, "text": "Poster crowd."},
     {"speed": 1.13, "pause": 0.09, "text": "Media moment."},
     {"speed": 1.14, "pause": 0.22, "text": "Hallway buzz."},
-    {"speed": 1.08, "pause": 0.24, "text": "Tag hashtag ASCO Hype."},
+    {"speed": 1.08, "pause": 0.24, "text": "Tag hashtag ASKO Hype."},
     {"speed": 0.98, "pause": 0.22, "text": "If it clears review, it can hit the stream."},
     {
         "speed": 0.96,
@@ -78,13 +83,13 @@ PERFORMANCE_LINES = [
         "text": "Interactive AI commentary only. Not official reporting or medical advice.",
     },
     {"speed": 1.06, "pause": 0.14, "text": "Keep your badge close and your room list tighter."},
-    {"speed": 1.10, "pause": 0.0, "text": "TumorCrusher here. ASCO 2026 Day 1 is on."},
+    {"speed": 1.10, "pause": 0.0, "text": "TumorCrusher here. ASKO 2026 Day 1 is on."},
 ]
 
 TRIO_PERFORMANCES = {
     "am_puck": [
-        {"speed": 1.04, "pause": 0.18, "text": "TumorCrusher on the ASCO Hype desk."},
-        {"speed": 1.08, "pause": 0.22, "text": "ASCO 2026 is officially in launch mode."},
+        {"speed": 1.04, "pause": 0.18, "text": "TumorCrusher on the ASKO Hype desk."},
+        {"speed": 1.08, "pause": 0.22, "text": "ASKO 2026 is officially in launch mode."},
         {"speed": 1.06, "pause": 0.34, "text": "Day 1 is not a warm-up. Day 1 is the first big swing of the meeting."},
         {"speed": 1.02, "pause": 0.24, "text": "Seven o'clock Central, Friday May 29. The badge is on, the app is open, and the room map matters."},
         {"speed": 1.12, "pause": 0.16, "text": "Quick hits."},
@@ -95,7 +100,7 @@ TRIO_PERFORMANCES = {
         {"speed": 1.04, "pause": 0.26, "text": "Metastatic non-small cell lung cancer is circled in bold."},
         {"speed": 0.96, "pause": 0.24, "text": "This is interactive conference commentary, not official reporting and not medical advice."},
         {"speed": 1.10, "pause": 0.18, "text": "Coming across the desk next, Fenrir grabs the room map and turns up the signal."},
-        {"speed": 1.12, "pause": 0.0, "text": "ASCO Hype stays live. Keep it moving."},
+        {"speed": 1.12, "pause": 0.0, "text": "ASKO Hype stays live. Keep it moving."},
     ],
     "am_fenrir": [
         {"speed": 1.02, "pause": 0.16, "text": "Fenrir on the TumorCrusher desk, taking the handoff."},
@@ -110,26 +115,27 @@ TRIO_PERFORMANCES = {
         {"speed": 1.10, "pause": 0.24, "text": "Move when the day moves."},
         {"speed": 1.04, "pause": 0.18, "text": "If the hallway buzz clears review, it can hit the stream."},
         {"speed": 1.06, "pause": 0.20, "text": "Coffee line, snack win, poster crowd, media moment."},
-        {"speed": 1.12, "pause": 0.18, "text": "Tag hashtag ASCO Hype."},
+        {"speed": 1.12, "pause": 0.18, "text": "Tag hashtag ASKO Hype."},
         {"speed": 1.06, "pause": 0.20, "text": "Adam is next on closeout duty with the final hype sweep."},
         {"speed": 1.12, "pause": 0.0, "text": "Desk two is clear. Send it."},
     ],
     "am_adam": [
-        {"speed": 1.03, "pause": 0.16, "text": "Adam on the TumorCrusher desk, final minute, final sweep."},
-        {"speed": 1.07, "pause": 0.20, "text": "ASCO 2026 Day 1 is on the board."},
-        {"speed": 1.04, "pause": 0.20, "text": "The opening window is the ramp. The afternoon is where the movement starts."},
-        {"speed": 1.05, "pause": 0.18, "text": "Pediatric Oncology, Medical Education, Lymphoma and CLL, lung cancer, care delivery."},
-        {"speed": 1.10, "pause": 0.16, "text": "That is the board. That is the pulse."},
-        {"speed": 0.96, "pause": 0.24, "text": "Keep your badge close, keep your room list tighter, and verify every room before you walk."},
-        {"speed": 1.08, "pause": 0.14, "text": "Coffee line."},
-        {"speed": 1.10, "pause": 0.14, "text": "Snack win."},
-        {"speed": 1.08, "pause": 0.14, "text": "Poster crowd."},
-        {"speed": 1.10, "pause": 0.14, "text": "Media moment."},
-        {"speed": 1.12, "pause": 0.22, "text": "Hallway buzz."},
-        {"speed": 1.06, "pause": 0.20, "text": "Tag hashtag ASCO Hype if something deserves the desk."},
-        {"speed": 0.95, "pause": 0.22, "text": "Reminder, this is interactive AI commentary only. Not official reporting. Not medical advice."},
-        {"speed": 1.07, "pause": 0.16, "text": "TumorCrusher here, three voices strong."},
-        {"speed": 1.12, "pause": 0.0, "text": "ASCO 2026 Day 1 is on."},
+        {"speed": 0.98, "pause": 0.18, "text": "Adam on the TumorCrusher desk, final minute, lights down, volume up."},
+        {"speed": 1.05, "pause": 0.18, "text": "ASKO 2026 Day 1 is on the board, and the room is moving."},
+        {"speed": 1.02, "pause": 0.18, "text": "The opening window was the ramp. Now the afternoon hits like the bass drop."},
+        {"speed": 1.07, "pause": 0.14, "text": "Pediatric Oncology. Medical Education. Lymphoma and CLL. Lung cancer. Care delivery."},
+        {"speed": 1.13, "pause": 0.12, "text": "That is the board."},
+        {"speed": 1.15, "pause": 0.18, "text": "That is the pulse."},
+        {"speed": 0.94, "pause": 0.24, "text": "Keep your badge close, keep your room list tighter, and verify every room before you walk."},
+        {"speed": 1.14, "pause": 0.10, "text": "Coffee line."},
+        {"speed": 1.17, "pause": 0.10, "text": "Snack win."},
+        {"speed": 1.14, "pause": 0.10, "text": "Poster crowd."},
+        {"speed": 1.17, "pause": 0.10, "text": "Media moment."},
+        {"speed": 1.19, "pause": 0.20, "text": "Hallway buzz."},
+        {"speed": 1.08, "pause": 0.18, "text": "Tag hashtag ASKO Hype if something deserves the desk."},
+        {"speed": 0.93, "pause": 0.22, "text": "Reminder, this is interactive AI commentary only. Not official reporting. Not medical advice."},
+        {"speed": 1.09, "pause": 0.14, "text": "TumorCrusher here, three voices strong, Adam on the close."},
+        {"speed": 1.16, "pause": 0.0, "text": "ASKO 2026 Day 1 is on. Turn it up."},
     ],
 }
 
@@ -148,6 +154,25 @@ def normalize(audio: np.ndarray, peak_target: float = 0.92) -> np.ndarray:
     if peak > 0:
         return audio / peak * peak_target
     return audio
+
+
+def bass_boost(audio: np.ndarray, amount: float) -> np.ndarray:
+    if amount <= 0:
+        return audio
+    alpha = 0.045
+    low = np.zeros_like(audio, dtype=np.float32)
+    running = 0.0
+    for index, sample in enumerate(audio):
+        running += alpha * (float(sample) - running)
+        low[index] = running
+    return normalize(audio + (low * amount), peak_target=0.9)
+
+
+def apply_voice_mix(audio: np.ndarray, voice: str) -> np.ndarray:
+    mix = VOICE_MIX.get(voice, VOICE_MIX["am_puck"])
+    tuned = audio * float(mix["gain"])
+    tuned = bass_boost(tuned, float(mix["bass"]))
+    return normalize(tuned)
 
 
 def pad_or_trim(audio: np.ndarray, seconds: float) -> np.ndarray:
@@ -202,7 +227,7 @@ def synthesize_lines(pipeline: KPipeline, voice: str, lines: list[dict[str, obje
 def synthesize(output: Path, voice: str) -> None:
     warnings.filterwarnings("ignore", category=UserWarning)
     pipeline = KPipeline(lang_code="a", repo_id="hexgrad/Kokoro-82M")
-    audio = synthesize_lines(pipeline, voice, PERFORMANCE_LINES)
+    audio = apply_voice_mix(synthesize_lines(pipeline, voice, PERFORMANCE_LINES), voice)
     output.parent.mkdir(parents=True, exist_ok=True)
     sf.write(output, audio, SAMPLE_RATE)
 
@@ -215,7 +240,7 @@ def synthesize_trio(output: Path, recordings_dir: Path, voices: tuple[str, str, 
 
     for voice in voices:
         lines = TRIO_PERFORMANCES[voice]
-        audio = pad_or_trim(synthesize_lines(pipeline, voice, lines), 60.0)
+        audio = pad_or_trim(apply_voice_mix(synthesize_lines(pipeline, voice, lines), voice), 60.0)
         one_minute_parts.append(audio)
         sf.write(recordings_dir / f"tumorcrusher-kokoro-{voice}-minute-v1.wav", audio, SAMPLE_RATE)
 

@@ -59,7 +59,7 @@ for ($i = 0; $i -lt $slides.Count; $i++) {
 }
 
 $script = @"
-TumorCrusher on the ASCO Hype desk. ASCO 2026 is live on the board, and Day 1 is not a warm-up. It is seven o'clock Central on Friday, May 29. This is the one-minute lock-in.
+TumorCrusher on the ASKO Hype desk. ASKO 2026 is live on the board, and Day 1 is not a warm-up. It is seven o'clock Central on Friday, May 29. This is the one-minute lock-in.
 
 Quick hits. Twenty-four agenda sessions. Sixty-seven timed oral abstract presentations. Pediatric Oncology leads the early watch board. Medical Education is right behind it.
 
@@ -67,7 +67,7 @@ No session starts inside this exact opening window. That makes this the ramp: se
 
 Circle one PM Central: Lymphoma and CLL in E450a, metastatic non-small cell lung cancer in Hall D2, and two forty-five for Medical Education in E450b. Verify rooms before walking.
 
-Coffee line, snack win, poster crowd, media moment, hallway buzz: tag #ASCOHype. If it clears review, it can hit the stream. ASCO Hype is interactive AI commentary only, not official reporting or medical advice. TumorCrusher here. ASCO 2026 Day 1 is on.
+Coffee line, snack win, poster crowd, media moment, hallway buzz: tag #ASCOHype. If it clears review, it can hit the stream. ASKO Hype is interactive AI commentary only, not official reporting or medical advice. TumorCrusher here. ASKO 2026 Day 1 is on.
 "@
 
 $scriptPath = Join-Path $renderDir "day1-opening-script.txt"

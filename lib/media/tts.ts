@@ -1,6 +1,10 @@
 import { env } from "@/lib/env";
 import type { Persona } from "@/lib/types";
 
+function applySpokenPronunciations(script: string) {
+  return script.replace(/\bASCO\b/g, "ASKO");
+}
+
 export async function synthesizeSpeech({
   script,
   persona
@@ -27,7 +31,7 @@ export async function synthesizeSpeech({
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        text: script,
+        text: applySpokenPronunciations(script),
         model_id: "eleven_multilingual_v2",
         voice_settings: {
           stability: 0.18,
