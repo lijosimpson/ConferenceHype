@@ -23,9 +23,9 @@ VOICE_MIX = {
 
 
 PERFORMANCE_LINES = [
-    {"speed": 1.04, "pause": 0.16, "text": "TumorCrusher on the ASKO Hype desk."},
-    {"speed": 1.08, "pause": 0.20, "text": "ASKO 2026 is officially in launch mode."},
-    {"speed": 1.06, "pause": 0.34, "text": "ASKO 2026 is live, and Day 1 is not a warm-up."},
+    {"speed": 1.04, "pause": 0.16, "text": "TumorCrusher on the Ask-oh Hype desk."},
+    {"speed": 1.08, "pause": 0.20, "text": "Ask-oh 2026 is officially in launch mode."},
+    {"speed": 1.06, "pause": 0.34, "text": "Ask-oh 2026 is live, and Day 1 is not a warm-up."},
     {
         "speed": 1.01,
         "pause": 0.22,
@@ -73,7 +73,7 @@ PERFORMANCE_LINES = [
     {"speed": 1.12, "pause": 0.09, "text": "Poster crowd."},
     {"speed": 1.13, "pause": 0.09, "text": "Media moment."},
     {"speed": 1.14, "pause": 0.22, "text": "Hallway buzz."},
-    {"speed": 1.08, "pause": 0.24, "text": "Tag hashtag ASKO Hype."},
+    {"speed": 1.08, "pause": 0.24, "text": "Tag hashtag Ask-oh Hype."},
     {"speed": 0.98, "pause": 0.22, "text": "If it clears review, it can hit the stream."},
     {
         "speed": 0.96,
@@ -81,13 +81,13 @@ PERFORMANCE_LINES = [
         "text": "Interactive AI commentary only. Not official reporting or medical advice.",
     },
     {"speed": 1.06, "pause": 0.14, "text": "Keep your badge close and your room list tighter."},
-    {"speed": 1.10, "pause": 0.0, "text": "TumorCrusher here. ASKO 2026 Day 1 is on."},
+    {"speed": 1.10, "pause": 0.0, "text": "TumorCrusher here. Ask-oh 2026 Day 1 is on."},
 ]
 
 VOICE_PERFORMANCES = {
     "am_fenrir": [
         {"speed": 1.01, "pause": 0.18, "text": "Fenrir on the TumorCrusher schedule desk."},
-        {"speed": 1.05, "pause": 0.20, "text": "ASKO 2026 Day 1 is live, and this is the room map."},
+        {"speed": 1.05, "pause": 0.20, "text": "Ask-oh 2026 Day 1 is live, and this is the room map."},
         {"speed": 1.06, "pause": 0.18, "text": "Quick schedule hit."},
         {"speed": 1.03, "pause": 0.18, "text": "Twenty-four agenda sessions are on the board."},
         {"speed": 1.03, "pause": 0.18, "text": "Sixty-seven timed oral abstract presentations are ready to move."},
@@ -96,7 +96,7 @@ VOICE_PERFORMANCES = {
         {"speed": 0.98, "pause": 0.18, "text": "Lymphoma and CLL in E450a."},
         {"speed": 0.98, "pause": 0.18, "text": "Metastatic non-small cell lung cancer in Hall D2."},
         {"speed": 0.98, "pause": 0.20, "text": "Then two forty-five for Medical Education in E450b."},
-        {"speed": 0.93, "pause": 0.28, "text": "Verify every room in the ASKO app and on-site signage before walking."},
+        {"speed": 0.93, "pause": 0.28, "text": "Verify every room in the Ask-oh app and on-site signage before walking."},
         {"speed": 1.05, "pause": 0.14, "text": "Set the map."},
         {"speed": 1.06, "pause": 0.14, "text": "Mark the rooms."},
         {"speed": 1.08, "pause": 0.22, "text": "Move when the day moves."},
@@ -105,19 +105,19 @@ VOICE_PERFORMANCES = {
     ],
     "am_adam": [
         {"speed": 0.98, "pause": 0.18, "text": "Adam on social, which means the internet has entered the booth."},
-        {"speed": 1.06, "pause": 0.18, "text": "ASKO 2026 Day 1 is moving, and the feed is already doing feed things."},
+        {"speed": 1.06, "pause": 0.18, "text": "Ask-oh 2026 Day 1 is moving, and the feed is already doing feed things."},
         {"speed": 1.10, "pause": 0.14, "text": "Coffee line."},
         {"speed": 1.13, "pause": 0.12, "text": "Snack win."},
         {"speed": 1.10, "pause": 0.12, "text": "Poster crowd."},
         {"speed": 1.15, "pause": 0.16, "text": "Somebody is definitely posting a hallway selfie like it is breaking news."},
-        {"speed": 1.04, "pause": 0.20, "text": "Tag hashtag ASKO Hype when something actually deserves the desk."},
+        {"speed": 1.04, "pause": 0.20, "text": "Tag hashtag Ask-oh Hype when something actually deserves the desk."},
         {"speed": 0.98, "pause": 0.20, "text": "If it is just a blurry badge photo, congratulations, you have invented evidence-free cardio."},
         {"speed": 1.12, "pause": 0.14, "text": "Media moment."},
         {"speed": 1.12, "pause": 0.14, "text": "Hallway buzz."},
         {"speed": 1.06, "pause": 0.18, "text": "Snack reports are welcome. Snack manifestos are concerning."},
         {"speed": 0.94, "pause": 0.22, "text": "Social posts are buzz until an operator reviews them. We attribute, we verify, then we air."},
         {"speed": 1.06, "pause": 0.18, "text": "TumorCrusher keeps it moving: Fenrir owns the schedule, Adam handles the feed."},
-        {"speed": 1.13, "pause": 0.0, "text": "ASKO Hype is live. Post better. We are listening."},
+        {"speed": 1.13, "pause": 0.0, "text": "Ask-oh Hype is live. Post better. We are listening."},
     ],
 }
 

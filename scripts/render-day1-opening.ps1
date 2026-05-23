@@ -59,7 +59,7 @@ for ($i = 0; $i -lt $slides.Count; $i++) {
 }
 
 $script = @"
-Fenrir on the TumorCrusher schedule desk. ASKO 2026 Day 1 is live, and this is the room map.
+Fenrir on the TumorCrusher schedule desk. Ask-oh 2026 Day 1 is live, and this is the room map.
 
 Quick hits. Twenty-four agenda sessions. Sixty-seven timed oral abstract presentations. Pediatric Oncology leads the early watch board. Medical Education is right behind it.
 
@@ -67,7 +67,7 @@ No session starts inside this exact opening window. That makes this the ramp: se
 
 Circle one PM Central: Lymphoma and CLL in E450a, metastatic non-small cell lung cancer in Hall D2, and two forty-five for Medical Education in E450b. Verify rooms before walking.
 
-Adam on social. Coffee line, snack win, poster crowd, media moment, hallway buzz: tag #ASCOHype. If it clears review, it can hit the stream. ASKO Hype is interactive AI commentary only, not official reporting or medical advice. TumorCrusher here. ASKO 2026 Day 1 is on.
+Adam on social. Coffee line, snack win, poster crowd, media moment, hallway buzz: tag #ASCOHype. If it clears review, it can hit the stream. Ask-oh Hype is interactive AI commentary only, not official reporting or medical advice. TumorCrusher here. Ask-oh 2026 Day 1 is on.
 "@
 
 $scriptPath = Join-Path $renderDir "day1-opening-script.txt"
