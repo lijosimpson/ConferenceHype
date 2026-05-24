@@ -19,3 +19,6 @@ Recommended workflow:
   `scripts/generate-gap-music.ps1` using synthetic ffmpeg tones/noise and
   Kokoro open-source speech for ConferenceHype stingers. No third-party music
   sample or paid voice is used.
+- `conferencehype-gap-music-6min-v2.mp3`: smoother replacement gap bed with
+  fewer ConferenceHype stingers, less high-frequency synth, deeper bass, and no
+  chirpy pulse layer.
