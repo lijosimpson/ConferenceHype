@@ -82,6 +82,11 @@ $voicePath = Join-Path $renderDir "day1-opening-voice.mp3"
 $preferredCacheFile = if ($env:INTRO_VOICE_CACHE) { $env:INTRO_VOICE_CACHE } else { "tumorcrusher-hourly-cycle-voices-day1-v1.mp3" }
 $cachedVoicePath = Join-Path $recordingsDir $preferredCacheFile
 $paidVoicePath = Join-Path $recordingsDir "tumorcrusher-tyler-cruz-day1-intro-v1.mp3"
+$musicPath = if ($env:INTRO_MUSIC_PATH) {
+  $env:INTRO_MUSIC_PATH
+} else {
+  Join-Path $root "public\music\conferencehype-gap-music-6min-v3.mp3"
+}
 $outputPath = Join-Path $renderDir "fallback-loop.mp4"
 $previewPath = Join-Path $renderDir "fallback-loop-preview.png"
 
@@ -119,22 +124,42 @@ for ($i = 0; $i -lt $slides.Count; $i++) {
   $chain += "drawbox=x=0:y=0:w=1280:h=16:color=0xf4483a@1:t=fill,drawbox=x=0:y=704:w=1280:h=16:color=0x33d6c5@1:t=fill[v$i]"
   $slideFilters += $chain
 }
-$filter = ($slideFilters -join ";") + ";[v0][v1][v2][v3][v4][v5]concat=n=6:v=1:a=0[v]"
+if (Test-Path -LiteralPath $musicPath) {
+  $filter = ($slideFilters -join ";") + ";[v0][v1][v2][v3][v4][v5]concat=n=6:v=1:a=0[v];[6:a]volume=1.0[voice];[7:a]volume=0.18[music];[voice][music]amix=inputs=2:duration=first:dropout_transition=0[a]"
 
-& $ffmpeg -y `
-  -f lavfi -i "color=c=0x11151f:s=1280x720:r=30:d=$slideSeconds" `
-  -f lavfi -i "color=c=0x151a27:s=1280x720:r=30:d=$slideSeconds" `
-  -f lavfi -i "color=c=0x101722:s=1280x720:r=30:d=$slideSeconds" `
-  -f lavfi -i "color=c=0x171925:s=1280x720:r=30:d=$slideSeconds" `
-  -f lavfi -i "color=c=0x11151f:s=1280x720:r=30:d=$slideSeconds" `
-  -f lavfi -i "color=c=0x151a27:s=1280x720:r=30:d=$slideSeconds" `
-  -i $voicePath `
-  -filter_complex $filter `
-  -map "[v]" -map "6:a" `
-  -t $durationSeconds `
-  -c:v libx264 -preset veryfast -pix_fmt yuv420p `
-  -c:a aac -b:a 128k `
-  -shortest $outputPath
+  & $ffmpeg -y `
+    -f lavfi -i "color=c=0x11151f:s=1280x720:r=30:d=$slideSeconds" `
+    -f lavfi -i "color=c=0x151a27:s=1280x720:r=30:d=$slideSeconds" `
+    -f lavfi -i "color=c=0x101722:s=1280x720:r=30:d=$slideSeconds" `
+    -f lavfi -i "color=c=0x171925:s=1280x720:r=30:d=$slideSeconds" `
+    -f lavfi -i "color=c=0x11151f:s=1280x720:r=30:d=$slideSeconds" `
+    -f lavfi -i "color=c=0x151a27:s=1280x720:r=30:d=$slideSeconds" `
+    -i $voicePath `
+    -stream_loop -1 -i $musicPath `
+    -filter_complex $filter `
+    -map "[v]" -map "[a]" `
+    -t $durationSeconds `
+    -c:v libx264 -preset veryfast -pix_fmt yuv420p `
+    -c:a aac -b:a 128k `
+    -shortest $outputPath
+} else {
+  $filter = ($slideFilters -join ";") + ";[v0][v1][v2][v3][v4][v5]concat=n=6:v=1:a=0[v]"
+
+  & $ffmpeg -y `
+    -f lavfi -i "color=c=0x11151f:s=1280x720:r=30:d=$slideSeconds" `
+    -f lavfi -i "color=c=0x151a27:s=1280x720:r=30:d=$slideSeconds" `
+    -f lavfi -i "color=c=0x101722:s=1280x720:r=30:d=$slideSeconds" `
+    -f lavfi -i "color=c=0x171925:s=1280x720:r=30:d=$slideSeconds" `
+    -f lavfi -i "color=c=0x11151f:s=1280x720:r=30:d=$slideSeconds" `
+    -f lavfi -i "color=c=0x151a27:s=1280x720:r=30:d=$slideSeconds" `
+    -i $voicePath `
+    -filter_complex $filter `
+    -map "[v]" -map "6:a" `
+    -t $durationSeconds `
+    -c:v libx264 -preset veryfast -pix_fmt yuv420p `
+    -c:a aac -b:a 128k `
+    -shortest $outputPath
+}
 
 & $ffmpeg -y -i $outputPath -frames:v 1 -update 1 $previewPath
 Write-Host "Rendered fallback loop: $outputPath"
