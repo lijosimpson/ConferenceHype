@@ -13,15 +13,19 @@ on:
           - "15"
           - "30"
           - "60"
+          - "180"
       stream_input_path:
         description: "Video file to loop into YouTube"
         required: true
         default: "public/rendered/fallback-loop.mp4"
+  schedule:
+    # 8:00 AM EDT on May 24. Remove after the 2026 test run if not needed again.
+    - cron: "0 12 24 5 *"
 
 jobs:
   stream:
     runs-on: ubuntu-latest
-    timeout-minutes: ${{ fromJSON(inputs.duration_minutes) }}
+    timeout-minutes: ${{ fromJSON(github.event_name == 'schedule' && '180' || inputs.duration_minutes) }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -34,4 +38,5 @@ jobs:
         env:
           YOUTUBE_RTMP_URL: ${{ secrets.YOUTUBE_RTMP_URL }}
           YOUTUBE_STREAM_KEY: ${{ secrets.YOUTUBE_STREAM_KEY }}
-          STREAM_INPUT_PATH: ${{ inputs.stream_input_path }}
+          STREAM_INPUT_PATH: ${{ github.event_name == 'schedule' && 'public/rendered/fallback-loop.mp4' || inputs.stream_input_path }}
+          STREAM_DURATION_SECONDS: ${{ github.event_name == 'schedule' && '10800' || '' }}
