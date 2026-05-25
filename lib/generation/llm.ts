@@ -4,6 +4,7 @@ import { env } from "@/lib/env";
 import { buildReporterPrompt } from "@/lib/generation/prompts";
 import { getPersona } from "@/lib/generation/personas";
 import { withSpokenDisclaimer } from "@/lib/generation/disclaimers";
+import { getUnsafeGeneratedSourceErrors } from "@/lib/generation/sourceSafety";
 import { applySpokenPronunciations } from "@/lib/media/tts";
 import type { HypeLevel, IngestedItem, Segment } from "@/lib/types";
 
@@ -90,7 +91,7 @@ export async function generateSegmentFromSources({
     throw new Error("LLM returned no real script content.");
   }
 
-  return {
+  const segment = {
     id: `draft-${randomUUID()}`,
     title: parsed.title ?? "Generated ASCO Hype segment",
     summary: parsed.summary ?? "Generated reporter-style segment for review.",
@@ -113,4 +114,9 @@ export async function generateSegmentFromSources({
     confidenceScore: social ? 76 : 88,
     createdAt: new Date().toISOString()
   };
+  const safetyErrors = getUnsafeGeneratedSourceErrors({ segment, sources });
+  if (safetyErrors.length > 0) {
+    throw new Error(`Unsafe generated segment blocked: ${safetyErrors.join(" ")}`);
+  }
+  return segment;
 }

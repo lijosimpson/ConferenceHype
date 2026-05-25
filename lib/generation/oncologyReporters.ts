@@ -11,7 +11,7 @@ export type OncologyReporterPersona = {
 export const oncologyReporters: OncologyReporterPersona[] = [
   {
     id: "nova-quinn",
-    name: "Dr. Nova Quinn",
+    name: "Nova Quinn",
     desk: "Breast",
     voiceRole: "Breast cancer reporter",
     coverageFocus: [

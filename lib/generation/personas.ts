@@ -11,7 +11,7 @@ export const personas: Persona[] = [
   },
   {
     id: "nova-quinn",
-    name: "Dr. Nova Quinn",
+    name: "Nova Quinn",
     specialty: "Breast cancer reporter",
     voiceGender: "female",
     voiceEnvKey: "VOICE_NOVA_QUINN",

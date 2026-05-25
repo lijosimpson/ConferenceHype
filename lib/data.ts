@@ -18,7 +18,8 @@ import {
   buildSocialVoiceLeaderboard,
   shouldRunSocialVoiceCompetition
 } from "@/lib/social/leaderboard";
-import type { AnalyticsSnapshot, StreamState } from "@/lib/types";
+import { getUnsafeReviewSourceErrors } from "@/lib/generation/sourceSafety";
+import type { AnalyticsSnapshot, Citation, StreamState } from "@/lib/types";
 
 const fullSpokenDisclaimer =
   "ASCO Hype is interactive AI commentary only. It is not reporting, journalism, medical education, clinical guidance, scientific validation, legal advice, or financial advice. ASCO Hype is not associated with the American Society of Clinical Oncology in any way.";
@@ -32,7 +33,7 @@ function isUnsafeForBroadcastRundown(scriptish: string) {
   );
 }
 
-function hasVerifiedBroadcastSource(segment: { script: string; summary: string; citations: { sourceType: string }[]; contentType: string }) {
+function hasVerifiedBroadcastSource(segment: { script: string; summary: string; citations: Citation[]; contentType: string }) {
   if (segment.contentType === "agenda_preview" || segment.contentType === "industry_floor") {
     return true;
   }
@@ -41,12 +42,21 @@ function hasVerifiedBroadcastSource(segment: { script: string; summary: string; 
   );
 }
 
-export function filterBroadcastReadySegments<T extends { script: string; summary: string; citations: { sourceType: string }[]; contentType: string }>(
+export function filterBroadcastReadySegments<T extends { script: string; summary: string; citations: Citation[]; contentType: string }>(
   segments: T[]
 ) {
   return segments.filter((segment) => {
     const text = `${segment.summary}\n${segment.script}`;
-    return !isUnsafeForBroadcastRundown(text) && hasVerifiedBroadcastSource(segment);
+    return (
+      !isUnsafeForBroadcastRundown(text) &&
+      hasVerifiedBroadcastSource(segment) &&
+      getUnsafeReviewSourceErrors({
+        title: "",
+        summary: segment.summary,
+        script: segment.script,
+        citations: segment.citations
+      }).length === 0
+    );
   });
 }
 

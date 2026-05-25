@@ -1,4 +1,5 @@
 import type { Segment } from "@/lib/types";
+import { getUnsafeReviewSourceErrors } from "@/lib/generation/sourceSafety";
 
 const bannedAdvicePatterns = [
   /\bpatients should\b/i,
@@ -11,11 +12,12 @@ const bannedAdvicePatterns = [
   /\bguaranteed\b/i
 ];
 
-export function validateSegmentForApproval(segment: Pick<Segment, "script" | "citations" | "contentType">) {
+export function validateSegmentForApproval(segment: Pick<Segment, "title" | "summary" | "script" | "citations" | "contentType">) {
   const errors: string[] = [];
   if (segment.citations.length === 0) {
     errors.push("At least one citation is required before approval.");
   }
+  errors.push(...getUnsafeReviewSourceErrors(segment));
   for (const pattern of bannedAdvicePatterns) {
     if (pattern.test(segment.script)) {
       errors.push(`Script contains disallowed advice language: ${pattern}`);
