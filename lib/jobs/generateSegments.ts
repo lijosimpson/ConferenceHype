@@ -120,8 +120,13 @@ export async function runGenerateJob() {
             personaId: "echo-sage",
             hypeLevel: "standard",
             contentType: abstractSources.length ? "abstract_buzz" : "media_roundup",
+            status:
+              abstractSources.length &&
+              xVoiceItems.some((item) => abstractSources.includes(item))
+                ? "approved"
+                : undefined,
             editorialInstruction: abstractSources.length
-              ? "Create an abstract/science chatter segment only. Focus on abstracts, trials, posters, data, biomarkers, disease tracks, presenters, and source-attributed scientific discussion. Do not include exhibitor booths, sponsor copy, product-floor chatter, or commercial showcases."
+              ? "Create an abstract/science chatter segment only. Focus on abstracts, trials, posters, data, biomarkers, disease tracks, presenters, and source-attributed scientific discussion. Monitored X voice material may be broadcast when source-attributed. Do not include exhibitor booths, sponsor copy, product-floor chatter, or commercial showcases."
               : "Create a media/source roundup segment only. Do not mix in exhibitor booths, sponsor copy, product-floor chatter, or commercial showcases."
           }),
         now

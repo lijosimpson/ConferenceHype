@@ -421,7 +421,7 @@ export async function saveGeneratedSegmentsToDb(segments: Segment[]) {
         risk_flags: segment.riskFlags,
         confidence_score: segment.confidenceScore,
         approved_at: segment.approvedAt,
-        updated_at: segment.updatedAt
+        updated_at: segment.updatedAt ?? segment.approvedAt ?? segment.createdAt
       }))
     )
     .select("*");

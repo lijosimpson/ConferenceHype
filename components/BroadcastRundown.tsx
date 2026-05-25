@@ -3,14 +3,8 @@
 import { Clock3, Music2, Trash2, Mic2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState, useTransition } from "react";
+import { buildBroadcastHourBuckets, buildBroadcastSlots } from "@/lib/rundown/slots";
 import type { Segment } from "@/lib/types";
-
-type Slot = {
-  at: Date;
-  kind: "music" | "schedule" | "statement" | "backup";
-  segment?: Segment;
-  label: string;
-};
 
 async function rejectSegment(segment: Segment) {
   const response = await fetch("/api/admin/approve", {
@@ -38,71 +32,6 @@ function timeLabel(value?: string) {
   }).format(new Date(value));
 }
 
-function addMinutes(date: Date, minutes: number) {
-  return new Date(date.getTime() + minutes * 60 * 1000);
-}
-
-function firstSlotTime(segment: Segment) {
-  return new Date(segment.approvedAt ?? segment.createdAt);
-}
-
-function buildSlots(segments: Segment[], scheduleSegments: Segment[], baseTime: Date) {
-  const now = baseTime;
-  const end = addMinutes(now, 180);
-  const statements = segments
-    .filter((segment) => firstSlotTime(segment) <= end)
-    .sort((a, b) => firstSlotTime(a).getTime() - firstSlotTime(b).getTime());
-
-  const slots: Slot[] = [];
-  for (let minute = 0; minute < 180; minute += 5) {
-    const at = addMinutes(now, minute);
-    slots.push({
-      at,
-      kind: "music",
-      label: "Music bed / transition space"
-    });
-  }
-  for (const segment of scheduleSegments) {
-    slots.push({
-      at: firstSlotTime(segment),
-      kind: "schedule",
-      label: "10-minute session/location rundown",
-      segment
-    });
-  }
-  for (const segment of statements) {
-    slots.push({
-      at: firstSlotTime(segment),
-      kind: "statement",
-      label: segment.personaName || "Voice statement",
-      segment
-    });
-  }
-  return slots.sort((a, b) => a.at.getTime() - b.at.getTime());
-}
-
-function hourBuckets(slots: Slot[], baseTime: Date) {
-  const now = baseTime;
-  return [0, 1, 2].map((hourIndex) => {
-    const start = addMinutes(now, hourIndex * 60);
-    const end = addMinutes(start, 60);
-    const hourSlots = slots.filter((slot) => slot.at >= start && slot.at < end);
-    const statements = hourSlots.filter((slot) => slot.kind === "statement");
-    const primaryStatementIds = new Set(
-      statements.slice(0, Math.max(statements.length - 2, 0)).map((slot) => slot.segment?.id)
-    );
-    return {
-      start,
-      end,
-      slots: hourSlots.map((slot) =>
-        slot.kind === "statement" && !primaryStatementIds.has(slot.segment?.id)
-          ? { ...slot, kind: "backup" as const, label: `${slot.label} backup` }
-          : slot
-      )
-    };
-  });
-}
-
 export function BroadcastRundown({
   segments,
   scheduleSegments,
@@ -119,7 +48,15 @@ export function BroadcastRundown({
   const [pending, startTransition] = useTransition();
   const baseDate = useMemo(() => new Date(baseTime), [baseTime]);
   const buckets = useMemo(
-    () => hourBuckets(buildSlots(visibleSegments, scheduleSegments, baseDate), baseDate),
+    () =>
+      buildBroadcastHourBuckets(
+        buildBroadcastSlots({
+          segments: visibleSegments,
+          scheduleSegments,
+          baseTime: baseDate
+        }),
+        baseDate
+      ),
     [visibleSegments, scheduleSegments, baseDate]
   );
 

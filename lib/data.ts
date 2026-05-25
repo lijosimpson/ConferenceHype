@@ -20,9 +20,15 @@ import {
 } from "@/lib/social/leaderboard";
 import type { AnalyticsSnapshot, StreamState } from "@/lib/types";
 
+const fullSpokenDisclaimer =
+  "ASCO Hype is interactive AI commentary only. It is not reporting, journalism, medical education, clinical guidance, scientific validation, legal advice, or financial advice. ASCO Hype is not associated with the American Society of Clinical Oncology in any way.";
+
 function isUnsafeForBroadcastRundown(scriptish: string) {
-  return /\b(early social chatter|unverified buzz|operator-selected audience tip|audience tip|snack|coffee|hallway energy|rising energy|pending review)\b/i.test(
-    scriptish
+  return (
+    scriptish.includes(fullSpokenDisclaimer) ||
+    /\b(early social chatter|unverified buzz|operator-selected audience tip|audience tip|snack|coffee|hallway energy|rising energy|pending review)\b/i.test(
+      scriptish
+    )
   );
 }
 
@@ -35,7 +41,7 @@ function hasVerifiedBroadcastSource(segment: { script: string; summary: string; 
   );
 }
 
-function filterBroadcastReadySegments<T extends { script: string; summary: string; citations: { sourceType: string }[]; contentType: string }>(
+export function filterBroadcastReadySegments<T extends { script: string; summary: string; citations: { sourceType: string }[]; contentType: string }>(
   segments: T[]
 ) {
   return segments.filter((segment) => {
@@ -67,7 +73,7 @@ export async function getStreamState(): Promise<StreamState> {
   };
 }
 
-export async function getAdminSnapshot() {
+export async function getAdminSnapshot(baseTime = new Date()) {
   const xFollowVoices = (await getXFollowVoicesFromDb()) ?? [];
   const recentSocialItems = (await getRecentSocialItemsFromDb(3)) ?? [];
   const socialVoiceLeaderboard = buildSocialVoiceLeaderboard(
@@ -80,7 +86,7 @@ export async function getAdminSnapshot() {
   const nextBroadcastSegments = filterBroadcastReadySegments(
     (await getNextBroadcastSegmentsFromDb()) ?? []
   );
-  const scheduleRundownSegments = buildScheduleRundownSegments();
+  const scheduleRundownSegments = buildScheduleRundownSegments(baseTime);
   const airedSegments = (await getAiredSegmentsFromDb()) ?? [];
   const analytics: AnalyticsSnapshot = (await getAnalyticsFromDb()) ?? {
     views: 128,

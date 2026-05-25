@@ -1,0 +1,146 @@
+import { mkdir, writeFile } from "node:fs/promises";
+import path from "node:path";
+import { loadEnvConfig } from "@next/env";
+import {
+  addMinutes,
+  buildBroadcastHourBuckets,
+  buildBroadcastSlots,
+  type BroadcastSlot
+} from "@/lib/rundown/slots";
+import type { Segment } from "@/lib/types";
+
+loadEnvConfig(process.cwd());
+
+function easternDateParts(date: Date) {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/New_York",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit"
+  }).formatToParts(date);
+  const value = (type: string) => parts.find((part) => part.type === type)?.value ?? "";
+  return {
+    year: value("year"),
+    month: value("month"),
+    day: value("day")
+  };
+}
+
+function todayAtNoonEastern(now = new Date()) {
+  const { year, month, day } = easternDateParts(now);
+  return new Date(`${year}-${month}-${day}T12:00:00-04:00`);
+}
+
+function parseStart() {
+  const start = process.argv[2] ?? process.env.STREAM_PREVIEW_START ?? "today-noon";
+  if (start === "today-noon") {
+    return todayAtNoonEastern();
+  }
+  const parsed = new Date(start);
+  if (Number.isNaN(parsed.getTime())) {
+    throw new Error(`Invalid preview start: ${start}`);
+  }
+  return parsed;
+}
+
+function timeLabel(date: Date) {
+  return new Intl.DateTimeFormat("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+    timeZoneName: "short"
+  }).format(date);
+}
+
+function contentLabel(segment?: Segment) {
+  if (!segment) {
+    return "";
+  }
+  if (segment.contentType === "industry_floor") {
+    return "exhibitor chatter";
+  }
+  if (segment.contentType === "abstract_buzz") {
+    return "abstract chatter";
+  }
+  return segment.contentType.replace(/_/g, " ");
+}
+
+function renderPreview(slots: BroadcastSlot[], start: Date) {
+  const end = addMinutes(start, 180);
+  const lines = [
+    `# ASCO Hype Noon Stream Narration Preview`,
+    "",
+    `Start: ${timeLabel(start)}`,
+    `End: ${timeLabel(end)}`,
+    "",
+    "This preview includes schedule/location narration every 10 minutes, music space every 5 minutes, and any approved voice cards scheduled inside the window.",
+    ""
+  ];
+
+  for (const slot of slots) {
+    lines.push(`## ${timeLabel(slot.at)} - ${slot.kind.toUpperCase()}`);
+    if (slot.kind === "music") {
+      lines.push("Music bed / transition space.");
+      lines.push("");
+      continue;
+    }
+
+    lines.push(`Voice: ${slot.segment?.personaName ?? "Schedule spine"}`);
+    lines.push(`Type: ${contentLabel(slot.segment)}`);
+    lines.push(`Title: ${slot.segment?.title ?? slot.label}`);
+    lines.push("");
+    lines.push(slot.segment?.script.trim() || slot.segment?.summary || slot.label);
+    if (slot.segment?.citations.length) {
+      lines.push("");
+      lines.push("Sources:");
+      for (const citation of slot.segment.citations) {
+        lines.push(`- ${citation.label}${citation.url ? ` (${citation.url})` : ""}`);
+      }
+    }
+    lines.push("");
+  }
+  return `${lines.join("\n")}\n`;
+}
+
+async function main() {
+  const [{ filterBroadcastReadySegments }, { getNextBroadcastSegmentsFromDb }, { buildScheduleRundownSegments }] =
+    await Promise.all([
+      import("@/lib/data"),
+      import("@/lib/db"),
+      import("@/lib/jobs/upcomingEvents")
+    ]);
+  const start = parseStart();
+  const rawApproved = (await getNextBroadcastSegmentsFromDb(120)) ?? [];
+  const approved = filterBroadcastReadySegments(rawApproved);
+  const scheduleSegments = buildScheduleRundownSegments(start);
+  const slots = buildBroadcastHourBuckets(
+    buildBroadcastSlots({ segments: approved, scheduleSegments, baseTime: start }),
+    start
+  ).flatMap((bucket) => bucket.slots);
+  const output = renderPreview(slots, start);
+  const outputDir = path.join(process.cwd(), ".tmp");
+  const outputPath = path.join(outputDir, "noon-stream-preview.md");
+  await mkdir(outputDir, { recursive: true });
+  await writeFile(outputPath, output, "utf8");
+  console.log(
+    JSON.stringify(
+      {
+        start: start.toISOString(),
+        outputPath,
+        slots: slots.length,
+        rawApprovedCards: rawApproved.length,
+        approvedBroadcastCards: approved.length,
+        scheduleNarrations: slots.filter((slot) => slot.kind === "schedule").length,
+        voiceCards: slots.filter((slot) => slot.kind === "statement").length,
+        backupVoiceCards: slots.filter((slot) => slot.kind === "backup").length,
+        musicBeds: slots.filter((slot) => slot.kind === "music").length
+      },
+      null,
+      2
+    )
+  );
+}
+
+main().catch((error) => {
+  console.error(error);
+  process.exit(1);
+});
