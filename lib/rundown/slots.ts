@@ -22,6 +22,27 @@ function minuteKey(date: Date) {
   return rounded.getTime();
 }
 
+function balanceTimesAcrossHours(times: Date[], baseTime: Date, hours: number) {
+  const hourGroups = Array.from({ length: hours }, (_, hourIndex) => {
+    const start = addMinutes(baseTime, hourIndex * 60);
+    const end = addMinutes(start, 60);
+    return times
+      .filter((time) => time >= start && time < end)
+      .sort((a, b) => a.getTime() - b.getTime());
+  });
+  const maxSlotsInHour = Math.max(...hourGroups.map((group) => group.length), 0);
+  const balanced: Date[] = [];
+  for (let slotIndex = 0; slotIndex < maxSlotsInHour; slotIndex += 1) {
+    for (const group of hourGroups) {
+      const time = group[slotIndex];
+      if (time) {
+        balanced.push(time);
+      }
+    }
+  }
+  return balanced;
+}
+
 function placeStatements(
   segments: Segment[],
   baseTime: Date,
@@ -118,7 +139,11 @@ export function buildBroadcastSlots({
     [...segments, ...reviewSegments],
     baseTime,
     hours,
-    slotTimes.filter((slotTime) => !blockedTimes.has(minuteKey(slotTime))),
+    balanceTimesAcrossHours(
+      slotTimes.filter((slotTime) => !blockedTimes.has(minuteKey(slotTime))),
+      baseTime,
+      hours
+    ),
     blockedTimes
   );
   const occupiedTimes = new Set([
