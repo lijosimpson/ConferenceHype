@@ -103,12 +103,13 @@ export function BroadcastRundown({
       buildBroadcastHourBuckets(
         buildBroadcastSlots({
           segments: visibleSegments,
+          reviewSegments: visibleReviewSegments,
           scheduleSegments,
           baseTime: baseDate
         }),
         baseDate
       ),
-    [visibleSegments, scheduleSegments, baseDate]
+    [visibleSegments, visibleReviewSegments, scheduleSegments, baseDate]
   );
 
   useEffect(() => {
@@ -129,6 +130,9 @@ export function BroadcastRundown({
       try {
         await rejectSegment(segment);
         setVisibleSegments((current) => current.filter((item) => item.id !== segment.id));
+        setVisibleReviewSegments((current) =>
+          current.filter((item) => item.id !== segment.id)
+        );
         setMessage(`${segment.title} rejected and removed from rundown.`);
         router.refresh();
       } catch (error) {

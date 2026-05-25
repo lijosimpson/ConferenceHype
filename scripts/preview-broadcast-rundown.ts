@@ -75,7 +75,7 @@ function renderPreview(slots: BroadcastSlot[], start: Date) {
     `Start: ${timeLabel(start)}`,
     `End: ${timeLabel(end)}`,
     "",
-    "This preview includes two-minute schedule/location narration every 10 minutes, music space every 5 minutes, and approved voice cards scheduled inside the window.",
+    "This preview includes two-minute schedule/location narration every 10 minutes, review/ready voice cards filling the remaining 5-minute slots, and music wherever no card is available.",
     ""
   ];
 
@@ -105,7 +105,7 @@ function renderPreview(slots: BroadcastSlot[], start: Date) {
 }
 
 async function main() {
-  const [{ filterBroadcastReadySegments }, { getNextBroadcastSegmentsFromDb }, { buildScheduleRundownSegments }] =
+  const [{ filterBroadcastReadySegments }, { getNextBroadcastSegmentsFromDb, getPendingSegmentsFromDb }, { buildScheduleRundownSegments }] =
     await Promise.all([
       import("@/lib/data"),
       import("@/lib/db"),
@@ -113,10 +113,17 @@ async function main() {
     ]);
   const start = parseStart();
   const rawApproved = (await getNextBroadcastSegmentsFromDb(120)) ?? [];
+  const rawReview = (await getPendingSegmentsFromDb()) ?? [];
   const approved = filterBroadcastReadySegments(rawApproved);
+  const review = filterBroadcastReadySegments(rawReview);
   const scheduleSegments = buildScheduleRundownSegments(start);
   const slots = buildBroadcastHourBuckets(
-    buildBroadcastSlots({ segments: approved, scheduleSegments, baseTime: start }),
+    buildBroadcastSlots({
+      segments: approved,
+      reviewSegments: review,
+      scheduleSegments,
+      baseTime: start
+    }),
     start
   ).flatMap((bucket) => bucket.slots);
   const output = renderPreview(slots, start);
@@ -132,6 +139,8 @@ async function main() {
         slots: slots.length,
         rawApprovedCards: rawApproved.length,
         approvedBroadcastCards: approved.length,
+        rawReviewCards: rawReview.length,
+        reviewBroadcastCards: review.length,
         scheduleNarrations: slots.filter((slot) => slot.kind === "schedule").length,
         voiceCards: slots.filter((slot) => slot.kind === "statement").length,
         backupVoiceCards: slots.filter((slot) => slot.kind === "backup").length,
