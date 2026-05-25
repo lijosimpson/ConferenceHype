@@ -28,6 +28,8 @@ type SegmentRow = {
   risk_flags: string[];
   confidence_score: number;
   created_at: string;
+  approved_at?: string | null;
+  updated_at?: string | null;
 };
 
 type SourceRow = {
@@ -67,7 +69,9 @@ function toSegment(row: SegmentRow): Segment {
     socialBuzzItems: row.social_buzz_items ?? [],
     riskFlags: row.risk_flags ?? [],
     confidenceScore: row.confidence_score,
-    createdAt: row.created_at
+    createdAt: row.created_at,
+    approvedAt: row.approved_at ?? undefined,
+    updatedAt: row.updated_at ?? undefined
   };
 }
 
@@ -115,6 +119,44 @@ export async function getApprovedSegmentsFromDb() {
     .in("status", ["approved", "rendered"])
     .order("created_at", { ascending: false })
     .limit(10);
+
+  if (error) {
+    throw error;
+  }
+  return (data as SegmentRow[]).map(toSegment);
+}
+
+export async function getNextBroadcastSegmentsFromDb(limit = 42) {
+  if (!hasSupabase()) {
+    return null;
+  }
+  const supabase = createAdminClient();
+  const { data, error } = await supabase
+    .from("segments")
+    .select("*")
+    .eq("status", "approved")
+    .order("approved_at", { ascending: true, nullsFirst: false })
+    .order("created_at", { ascending: true })
+    .limit(limit);
+
+  if (error) {
+    throw error;
+  }
+  return (data as SegmentRow[]).map(toSegment);
+}
+
+export async function getAiredSegmentsFromDb(limit = 40) {
+  if (!hasSupabase()) {
+    return null;
+  }
+  const supabase = createAdminClient();
+  const { data, error } = await supabase
+    .from("segments")
+    .select("*")
+    .eq("status", "rendered")
+    .order("updated_at", { ascending: false, nullsFirst: false })
+    .order("created_at", { ascending: false })
+    .limit(limit);
 
   if (error) {
     throw error;
@@ -377,7 +419,9 @@ export async function saveGeneratedSegmentsToDb(segments: Segment[]) {
         citations: segment.citations,
         social_buzz_items: segment.socialBuzzItems,
         risk_flags: segment.riskFlags,
-        confidence_score: segment.confidenceScore
+        confidence_score: segment.confidenceScore,
+        approved_at: segment.approvedAt,
+        updated_at: segment.updatedAt
       }))
     )
     .select("*");

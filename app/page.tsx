@@ -85,11 +85,8 @@ export default async function Home() {
             <p>
               ASCO Hype is interactive AI commentary only. It is not reporting,
               journalism, medical education, clinical guidance, scientific
-              validation, legal advice, or financial advice.
-            </p>
-            <p>
-              ASCO Hype is not associated with, endorsed by, sponsored by, or
-              affiliated with the American Society of Clinical Oncology in any
+              validation, legal advice, or financial advice. ASCO Hype is not
+              associated with the American Society of Clinical Oncology in any
               way.
             </p>
             <p>

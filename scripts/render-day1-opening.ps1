@@ -49,7 +49,7 @@ Keep the facts clean
 "@,
 @"
 Adam reads the feed
-Coffee lines. Snack wins. Step counts.
+Source lines. Official schedule. Verified media.
 Workout wins. Poster crowds.
 Media moments. Hallway buzz.
 Tag #ASCOHype and @ConferenceHype
@@ -74,7 +74,7 @@ Nova has breast. Kai has lung. Diego has G U. Amara has G Y N. Miles has skin. S
 
 Ask-oh pronunciation check: we say Ask-oh as one word in spoken scripts, not A S C O as letters.
 
-Adam on social. Coffee line, snack win, step count, workout win, poster crowd, media moment, hallway buzz: tag #ASCOHype and @ConferenceHype. Steps and workouts go into the end-of-day audience shoutout queue after review. If it clears review, it can hit the stream. Ask-oh Hype is interactive AI commentary only, not official reporting, medical advice, or fitness advice. TumorCrusher here. Ask-oh 2026 Day 1 is on.
+Adam on social. Source-attributed articles, official schedule items, monitored X voices, operator statements, and sponsor messages: tag #ASCOHype and @ConferenceHype when it has a real source. Vague audience chatter stays out of the broadcast rundown. Ask-oh Hype is interactive AI commentary only, not official reporting, medical advice, or fitness advice. TumorCrusher here. Ask-oh 2026 Day 1 is on.
 "@
 
 $scriptPath = Join-Path $renderDir "day1-opening-script.txt"

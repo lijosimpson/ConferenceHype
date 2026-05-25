@@ -130,7 +130,7 @@ async function buildCards() {
       eyebrow: "ASCO Hype live desk",
       title: "One-hour social/news presentation",
       body:
-        "Current ASCO 2026 meeting signals, media items, watched X voices, attendee chatter, and music-bed transitions. Social posts are treated as buzz until verified."
+        "Current ASCO 2026 official schedule signals, media items, monitored X voices, operator statements, sponsor messages, and music-bed transitions. Vague unverified audience chatter is excluded from broadcast."
     }),
     ...segmentCards(segments),
     ...socialCards(social)

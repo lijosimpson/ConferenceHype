@@ -81,7 +81,7 @@ export async function fetchTaggedSocialPosts(extraVoices: XVoice[] = []): Promis
         ? `https://x.com/${user.username}/status/${tweet.id}`
         : `https://x.com/i/web/status/${tweet.id}`,
       excerpt: watchedVoice
-        ? `${tweet.text}\n\nMonitored X voice note: ${watchedVoice.note}. Treat as a callout idea until reviewed.`
+        ? `${tweet.text}\n\nMonitored X voice note: ${watchedVoice.note}. Approved for broadcast callout when source-attributed.`
         : tweet.text,
       sourceName: watchedVoice ? "X voice monitor" : "X hashtag monitor",
       sourceType: "general_social" as const,

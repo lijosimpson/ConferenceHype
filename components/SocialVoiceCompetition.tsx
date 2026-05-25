@@ -29,9 +29,10 @@ export function SocialVoiceCompetition({
         <h2 className="text-xl font-black text-ink">Social voice competition</h2>
       </div>
       <p className="mt-2 text-sm leading-6 text-ink/65">
-        Every 3 hours, the coverage can call out the leading social media
-        voices like a scoreboard. This is hype and topic discovery, not
-        verification. Operators still approve before broadcast.
+        Every 3 hours, the coverage can automatically call out the leading
+        monitored X voices like a scoreboard. The data comes from recent X
+        search results, watched handles, mention counts, and engagement signals.
+        Operators can reject the broadcast card from the rundown.
       </p>
       <div className="mt-3 border border-cyanline/30 bg-cyanline/10 p-3 text-sm font-bold text-ink">
         {dueNow ? "Competition segment is due in this 3-hour block." : cadence}

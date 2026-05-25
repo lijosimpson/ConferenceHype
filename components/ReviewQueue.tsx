@@ -1,7 +1,8 @@
 "use client";
 
 import { Check, Clapperboard, Edit3, Trash2 } from "lucide-react";
-import { useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState, useTransition } from "react";
 import type { Segment } from "@/lib/types";
 
 type Action = "approve" | "reject" | "clip";
@@ -20,16 +21,31 @@ async function submitAction(segmentId: string, action: Action, script: string) {
 }
 
 export function ReviewQueue({ segments }: { segments: Segment[] }) {
+  const router = useRouter();
+  const [visibleSegments, setVisibleSegments] = useState(segments);
   const [drafts, setDrafts] = useState(
     Object.fromEntries(segments.map((segment) => [segment.id, segment.script]))
   );
   const [message, setMessage] = useState("");
   const [pending, startTransition] = useTransition();
 
+  useEffect(() => {
+    setVisibleSegments(segments);
+    setDrafts((current) => ({
+      ...Object.fromEntries(segments.map((segment) => [segment.id, segment.script])),
+      ...current
+    }));
+  }, [segments]);
+
   const run = (segment: Segment, action: Action) => {
     startTransition(async () => {
       try {
         await submitAction(segment.id, action, drafts[segment.id] ?? "");
+        if (action === "approve" || action === "reject") {
+          setVisibleSegments((current) =>
+            current.filter((item) => item.id !== segment.id)
+          );
+        }
         const actionLabel =
           action === "approve"
             ? "approved for broadcast"
@@ -37,6 +53,7 @@ export function ReviewQueue({ segments }: { segments: Segment[] }) {
               ? "rejected"
               : "clip queued";
         setMessage(`${segment.title}: ${actionLabel}`);
+        router.refresh();
       } catch (error) {
         setMessage(error instanceof Error ? error.message : "Action failed");
       }
@@ -48,8 +65,8 @@ export function ReviewQueue({ segments }: { segments: Segment[] }) {
       <div className="border-b border-ink/10 p-5">
         <h2 className="text-2xl font-black text-ink">Human review queue</h2>
         <p className="mt-2 text-sm font-semibold text-ink/60">
-          Approve before air. Social posts and hashtag mentions are treated as
-          buzz until an operator verifies the framing.
+          Approve before air. Broadcast-ready items must come from verified
+          sources, articles, monitored X voices, operator statements, or sponsor messages.
         </p>
         {message ? (
           <div className="mt-3 border border-cyanline/30 bg-cyanline/10 p-3 text-sm font-bold text-ink">
@@ -58,7 +75,7 @@ export function ReviewQueue({ segments }: { segments: Segment[] }) {
         ) : null}
       </div>
       <div className="grid gap-5 p-5">
-        {segments.length === 0 ? (
+        {visibleSegments.length === 0 ? (
           <div className="border border-dashed border-ink/20 bg-paper/60 p-5">
             <h3 className="text-lg font-black text-ink">
               No items are waiting for approval right now
@@ -70,7 +87,7 @@ export function ReviewQueue({ segments }: { segments: Segment[] }) {
             </p>
           </div>
         ) : null}
-        {segments.map((segment) => (
+        {visibleSegments.map((segment) => (
           <article key={segment.id} className="border border-ink/10 p-4">
             <div className="flex flex-wrap items-center gap-2">
               <span className="bg-broadcast px-3 py-1 text-xs font-black uppercase text-white">

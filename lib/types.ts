@@ -49,6 +49,8 @@ export type Segment = {
   riskFlags: string[];
   confidenceScore: number;
   createdAt: string;
+  approvedAt?: string;
+  updatedAt?: string;
 };
 
 export type StreamState = {

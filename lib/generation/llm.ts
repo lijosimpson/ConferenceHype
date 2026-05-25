@@ -36,7 +36,8 @@ export async function generateSegmentFromSources({
   language = "English",
   hypeLevel = "standard",
   contentType,
-  editorialInstruction
+  editorialInstruction,
+  status
 }: {
   sources: IngestedItem[];
   personaId?: string;
@@ -44,10 +45,13 @@ export async function generateSegmentFromSources({
   hypeLevel?: HypeLevel;
   contentType?: Segment["contentType"];
   editorialInstruction?: string;
+  status?: Segment["status"];
 }): Promise<Segment> {
   const persona = getPersona(personaId);
   const social = sources.some((source) => source.sourceType.includes("social"));
   const resolvedContentType = contentType ?? (social ? "social_signal" : "media_roundup");
+  const citationSourceType =
+    social && status === "approved" ? "verified_social" : social ? "general_social" : "media";
 
   if (!env.LLM_API_KEY) {
     throw new Error(
@@ -95,14 +99,14 @@ export async function generateSegmentFromSources({
     personaName: persona.name,
     hypeLevel,
     language,
-    status: "pending_review",
+    status: status ?? "pending_review",
     citations: normalizeGeneratedCitations(
       parsed.citations,
-      social ? "general_social" : "media"
+      citationSourceType
     ),
     socialBuzzItems: normalizeGeneratedCitations(
       parsed.social_buzz_items,
-      "general_social"
+      citationSourceType
     ),
     riskFlags: parsed.risk_flags ?? [],
     confidenceScore: social ? 76 : 88,

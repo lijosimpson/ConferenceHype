@@ -89,8 +89,8 @@ PERFORMANCE_LINES = [
     {"speed": 0.95, "pause": 0.30, "text": "Verify rooms before walking."},
     {"speed": 0.98, "pause": 0.18, "text": "Rooms move. Lines form. The app wins."},
     {"speed": 1.02, "pause": 0.24, "text": "That is the path through the noise."},
-    {"speed": 1.13, "pause": 0.09, "text": "Coffee line."},
-    {"speed": 1.14, "pause": 0.09, "text": "Snack win."},
+    {"speed": 1.13, "pause": 0.09, "text": "Source line."},
+    {"speed": 1.14, "pause": 0.09, "text": "Source win."},
     {"speed": 1.12, "pause": 0.09, "text": "Poster crowd."},
     {"speed": 1.13, "pause": 0.09, "text": "Media moment."},
     {"speed": 1.14, "pause": 0.22, "text": "Hallway buzz."},
@@ -197,8 +197,8 @@ VOICE_PERFORMANCES = {
     "am_adam": [
         {"speed": 0.98, "pause": 0.18, "text": "Thanks, Cole. Adam on social, which means the internet has entered the booth."},
         {"speed": 1.06, "pause": 0.18, "text": "Ask-oh 2026 Day 1 is moving, and the feed is already doing feed things."},
-        {"speed": 1.10, "pause": 0.14, "text": "Coffee line."},
-        {"speed": 1.13, "pause": 0.12, "text": "Snack win."},
+        {"speed": 1.10, "pause": 0.14, "text": "Source line."},
+        {"speed": 1.13, "pause": 0.12, "text": "Source win."},
         {"speed": 1.10, "pause": 0.12, "text": "Poster crowd."},
         {"speed": 1.15, "pause": 0.16, "text": "Somebody is definitely posting a hallway selfie like it is breaking news."},
         {"speed": 1.04, "pause": 0.20, "text": "Tag hashtag Ask-oh Hype, or tag Conference Hype, when something actually deserves the desk."},
@@ -206,8 +206,8 @@ VOICE_PERFORMANCES = {
         {"speed": 0.98, "pause": 0.20, "text": "If it is just a blurry badge photo, congratulations, you have invented evidence-free cardio."},
         {"speed": 1.12, "pause": 0.14, "text": "Media moment."},
         {"speed": 1.12, "pause": 0.14, "text": "Hallway buzz."},
-        {"speed": 1.06, "pause": 0.18, "text": "Snack reports are welcome. Step counts are welcome. Snack manifestos are concerning."},
-        {"speed": 0.94, "pause": 0.22, "text": "Social posts are buzz until an operator reviews them. We attribute, we verify, then we air."},
+        {"speed": 1.06, "pause": 0.18, "text": "Source links are welcome. Official schedule items are welcome. Vague chatter stays outside the rundown."},
+        {"speed": 0.94, "pause": 0.22, "text": "Verified sources, official schedule, monitored voices, operator statements. That is what gets airtime."},
         {"speed": 1.06, "pause": 0.18, "text": "TumorCrusher keeps it moving: Fenrir owns the schedule, Marisol brings the Latina DJ fire, Rebecca reports the heat, Aussie Onc brings the global hype, and Adam handles the feed."},
         {"speed": 1.13, "pause": 0.0, "text": "Ask-oh Hype is live. Post better. We are listening."},
     ],
@@ -275,6 +275,16 @@ def crossfade_join(parts: list[np.ndarray], fade_seconds: float) -> np.ndarray:
     return output
 
 
+def gap_join(parts: list[np.ndarray], gap_seconds: float) -> np.ndarray:
+    if not parts:
+        return np.zeros(0, dtype=np.float32)
+    gap = np.zeros(int(SAMPLE_RATE * gap_seconds), dtype=np.float32)
+    output = parts[0]
+    for part in parts[1:]:
+        output = np.concatenate([output, gap, part])
+    return output
+
+
 def synthesize_lines(pipeline: KPipeline, voice: str, lines: list[dict[str, object]]) -> np.ndarray:
     chunks: list[np.ndarray] = []
 
@@ -319,6 +329,45 @@ def synthesize_stinger(output: Path, voice: str, text: str | None = None) -> Non
     sf.write(output, audio, SAMPLE_RATE)
 
 
+def parse_script_file(script_file: Path) -> list[tuple[str, list[dict[str, object]]]]:
+    blocks: list[tuple[str, list[dict[str, object]]]] = []
+    current_voice = "am_adam"
+    current_lines: list[dict[str, object]] = []
+
+    for raw_line in script_file.read_text(encoding="utf8").splitlines():
+        line = raw_line.strip()
+        if not line:
+            continue
+        if line.startswith("[") and "]" in line:
+            if current_lines:
+                blocks.append((current_voice, current_lines))
+            current_voice = line[1 : line.index("]")]
+            if current_voice not in VOICE_MIX:
+                supported = ", ".join(VOICE_MIX.keys())
+                raise ValueError(f"Unsupported script voice {current_voice}. Use one of: {supported}")
+            current_lines = []
+            line = line[line.index("]") + 1 :].strip()
+            if not line:
+                continue
+        current_lines.append({"speed": 0.98, "pause": 0.42, "text": line})
+
+    if current_lines:
+        blocks.append((current_voice, current_lines))
+    return blocks
+
+
+def synthesize_script_file(output: Path, script_file: Path, speaker_gap_seconds: float) -> None:
+    warnings.filterwarnings("ignore", category=UserWarning)
+    pipeline = KPipeline(lang_code="a", repo_id="hexgrad/Kokoro-82M")
+    parts = [
+        apply_voice_mix(synthesize_lines(pipeline, voice, lines), voice)
+        for voice, lines in parse_script_file(script_file)
+    ]
+    audio = normalize(gap_join(parts, speaker_gap_seconds))
+    output.parent.mkdir(parents=True, exist_ok=True)
+    sf.write(output, audio, SAMPLE_RATE)
+
+
 def synthesize_lineup(output: Path, recordings_dir: Path, voices: tuple[str, ...]) -> None:
     warnings.filterwarnings("ignore", category=UserWarning)
     pipeline = KPipeline(lang_code="a", repo_id="hexgrad/Kokoro-82M")
@@ -331,7 +380,7 @@ def synthesize_lineup(output: Path, recordings_dir: Path, voices: tuple[str, ...
         one_minute_parts.append(audio)
         sf.write(recordings_dir / f"tumorcrusher-kokoro-{voice}-minute-v1.wav", audio, SAMPLE_RATE)
 
-    combined = normalize(crossfade_join(one_minute_parts, fade_seconds=1.25))
+    combined = normalize(gap_join(one_minute_parts, gap_seconds=1.5))
     output.parent.mkdir(parents=True, exist_ok=True)
     sf.write(output, combined, SAMPLE_RATE)
 
@@ -347,7 +396,7 @@ def synthesize_cycle(output: Path, voices: tuple[str, ...], target_seconds: floa
         audio = pad_or_trim(apply_voice_mix(synthesize_lines(pipeline, voice, lines), voice), seconds_per_voice)
         parts.append(audio)
 
-    combined = normalize(crossfade_join(parts, fade_seconds=0.85))
+    combined = normalize(gap_join(parts, gap_seconds=1.5))
     output.parent.mkdir(parents=True, exist_ok=True)
     sf.write(output, pad_or_trim(combined, target_seconds), SAMPLE_RATE)
 
@@ -355,14 +404,20 @@ def synthesize_cycle(output: Path, voices: tuple[str, ...], target_seconds: floa
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", required=True)
-    parser.add_argument("--mode", choices=["single", "lineup", "trio", "cycle", "stinger"], default="single")
+    parser.add_argument("--mode", choices=["single", "lineup", "trio", "cycle", "stinger", "script"], default="single")
     parser.add_argument("--voice", default=os.environ.get("KOKORO_DJ_VOICE", "am_puck"))
     parser.add_argument("--voices", default=",".join(DEFAULT_VOICES))
     parser.add_argument("--recordings-dir")
     parser.add_argument("--target-seconds", type=float, default=180.0)
     parser.add_argument("--text")
+    parser.add_argument("--script-file")
+    parser.add_argument("--speaker-gap-seconds", type=float, default=1.5)
     args = parser.parse_args()
-    if args.mode == "stinger":
+    if args.mode == "script":
+        if not args.script_file:
+            raise ValueError("--script-file is required in script mode")
+        synthesize_script_file(Path(args.output), Path(args.script_file), args.speaker_gap_seconds)
+    elif args.mode == "stinger":
         if args.voice not in VOICE_MIX:
             supported = ", ".join(VOICE_MIX.keys())
             raise ValueError(f"Stinger mode requires supported voice: {supported}")

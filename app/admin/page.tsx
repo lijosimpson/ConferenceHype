@@ -1,5 +1,8 @@
 import { AdminShell } from "@/components/AdminShell";
+import { AdminTabs } from "@/components/AdminTabs";
+import { AiredHistory } from "@/components/AiredHistory";
 import { AnalyticsPanel } from "@/components/AnalyticsPanel";
+import { BroadcastRundown } from "@/components/BroadcastRundown";
 import { EmergencyOverride } from "@/components/EmergencyOverride";
 import { FocusSocialPost } from "@/components/FocusSocialPost";
 import { InstagramPushPanel } from "@/components/InstagramPushPanel";
@@ -18,28 +21,43 @@ export default async function AdminPage() {
     getAdminSnapshot(),
     getCachedRecordings()
   ]);
+  const baseTime = new Date().toISOString();
 
   return (
     <AdminShell>
-      <div className="grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
-        <ReviewQueue segments={snapshot.pendingSegments} />
-        <div className="grid gap-6">
-          <RecordingLibrary recordings={cachedRecordings} />
-          <OncologyReporterGrid />
-          <FocusSocialPost />
-          <InstagramPushPanel />
-          <XVoiceCallouts customVoices={snapshot.xFollowVoices} />
-          <SocialVoiceCompetition
-            leaders={snapshot.socialVoiceLeaderboard}
-            cadence={snapshot.nextSocialVoiceCompetition}
-            dueNow={snapshot.socialVoiceCompetitionDueNow}
-          />
-          <EmergencyOverride streamState={snapshot.streamState} />
-          <LanguageControls />
-          <SourceManager sources={snapshot.sources} />
-          <AnalyticsPanel analytics={snapshot.analytics} />
-        </div>
-      </div>
+      <AdminTabs
+        broadcast={
+          <div className="grid gap-6 xl:grid-cols-2">
+            <BroadcastRundown
+              segments={snapshot.nextBroadcastSegments}
+              scheduleSegments={snapshot.scheduleRundownSegments}
+              baseTime={baseTime}
+            />
+            <div className="grid gap-6">
+              <ReviewQueue segments={snapshot.pendingSegments} />
+              <FocusSocialPost />
+              <InstagramPushPanel />
+              <EmergencyOverride streamState={snapshot.streamState} />
+              <SourceManager sources={snapshot.sources} />
+              <AnalyticsPanel analytics={snapshot.analytics} />
+            </div>
+          </div>
+        }
+        history={<AiredHistory segments={snapshot.airedSegments} />}
+        voices={
+          <div className="grid gap-6 xl:grid-cols-2">
+            <RecordingLibrary recordings={cachedRecordings} />
+            <OncologyReporterGrid />
+            <XVoiceCallouts customVoices={snapshot.xFollowVoices} />
+            <SocialVoiceCompetition
+              leaders={snapshot.socialVoiceLeaderboard}
+              cadence={snapshot.nextSocialVoiceCompetition}
+              dueNow={snapshot.socialVoiceCompetitionDueNow}
+            />
+            <LanguageControls />
+          </div>
+        }
+      />
     </AdminShell>
   );
 }

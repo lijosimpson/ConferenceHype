@@ -23,7 +23,12 @@ async function focusXVoice({
     body: JSON.stringify({
       postUrl: handleToUrl(handle),
       postText: `${label} ${handle} is a watched X voice for ASCO Hype commentary ideas.`,
-      operatorNote: `${note}. Treat this as a source callout idea that requires human review before broadcast.`
+      operatorNote: `${note}. Treat this as a source-attributed X voice callout for broadcast.`,
+      itemType: "x_tweet",
+      personaId: "vesper-quill",
+      approveNow: true,
+      repeatEveryHalfHour: false,
+      repeatCount: 1
     })
   });
   const payload = await response.json();
@@ -83,7 +88,7 @@ export function XVoiceCallouts({ customVoices = [] }: { customVoices?: XVoice[] 
       try {
         const result = await focusXVoice(voice);
         setMessage(
-          `${result.segment?.title ?? voice.handle} added to review queue. Refresh admin to review.`
+          `${result.segment?.title ?? voice.handle} added to the approved rundown. Refresh admin to review.`
         );
       } catch (error) {
         setMessage(error instanceof Error ? error.message : "Could not focus this X voice.");
@@ -119,8 +124,8 @@ export function XVoiceCallouts({ customVoices = [] }: { customVoices?: XVoice[] 
         <h2 className="text-xl font-black text-ink">X voices to call out</h2>
       </div>
       <p className="mt-2 text-sm leading-6 text-ink/65">
-        Watch these voices for commentary ideas. A focus action creates a
-        pending review item before anything airs.
+        Watch these voices for commentary ideas. A focus action adds a
+        source-attributed X voice callout to the approved rundown.
       </p>
       {message ? (
         <div className="mt-3 border border-cyanline/30 bg-cyanline/10 p-3 text-sm font-bold text-ink">

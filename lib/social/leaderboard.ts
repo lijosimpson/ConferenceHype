@@ -1,6 +1,5 @@
 import { monitoredXVoices, type XVoice } from "@/lib/sources/registry";
 import type { IngestedItem, Segment, SocialVoiceLeader } from "@/lib/types";
-import { defaultDisclaimer } from "@/lib/generation/disclaimers";
 
 const fallbackScores = [92, 86, 81, 75, 69, 64, 58, 53];
 
@@ -100,31 +99,31 @@ export function buildSocialVoiceCompetitionSegment(
     )
     .join("\n");
   const routing =
-    "Tag #ASCOHype and #ASCO26 on X or Instagram to nominate the next voice, snack tip, W-poster hit, or media moment.";
+    "Tag #ASCOHype and #ASCO26 on X or Instagram to nominate the next monitored voice, official schedule item, article, or media moment.";
 
   return {
     id: `social-voice-competition-${now.toISOString()}`,
     title: "Three-hour social voice leaderboard",
     summary:
       "Competition-style leaderboard for watched X voices and audience social signals.",
-    script: `${defaultDisclaimer}\n\nSocial voice scoreboard check. Every three hours, ASCO Hype is ranking the voices lighting up the conference conversation. This is a hype board, not a verification board: social posts are buzz until an operator reviews the source.\n\n${board || "The board is warming up. The desk needs more tagged social signals before crowning a leader."}\n\n${routing} Operators will review the best signals before anything airs.\n\nReminder: ${defaultDisclaimer}`,
+    script: `Social voice scoreboard check. Every three hours, ASCO Hype is ranking the voices lighting up the conference conversation. Winning voices are added to the X callout list for source-attributed broadcast commentary.\n\n${board || "The board is warming up. The desk needs more tagged social signals before crowning a leader."}\n\n${routing}`,
     contentType: "social_signal",
     personaId: "vesper-quill",
     personaName: "Vesper Quill",
     hypeLevel: "high_energy",
     language: "English",
-    status: "pending_review",
+    status: "approved",
     citations: topThree.map((leader) => ({
       label: `${leader.label} ${leader.handle}`,
       url: `https://x.com/${leader.handle.replace(/^@/, "")}`,
-      sourceType: "general_social" as const
+      sourceType: "verified_social" as const
     })),
     socialBuzzItems: topThree.map((leader) => ({
       label: `${leader.handle} social voice leaderboard`,
       url: `https://x.com/${leader.handle.replace(/^@/, "")}`,
-      sourceType: "general_social" as const
+      sourceType: "verified_social" as const
     })),
-    riskFlags: ["social_buzz_requires_review", "leaderboard_is_hype_not_verification"],
+    riskFlags: ["verified_social_voice_leaderboard", "leaderboard_is_hype_not_clinical_verification"],
     confidenceScore: 74,
     createdAt: now.toISOString()
   };

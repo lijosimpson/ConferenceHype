@@ -66,9 +66,9 @@ export function sourceToXVoice(source: SourceConfig): XVoice | null {
 
 export const instagramPushPrompts = [
   {
-    label: "Snack and coffee watch",
+    label: "Verified source watch",
     prompt:
-      "Ask viewers to tag #ASCOHype, #ASCO26, and @ConferenceHype on Instagram with the best snacks and coffee in the Exhibitor Hall. Treat replies as audience tips until reviewed."
+      "Ask viewers to tag #ASCOHype, #ASCO26, and @ConferenceHype on Instagram only with source-attributed articles, official schedule items, media links, or monitored X voice callouts."
   },
   {
     label: "Steps and workout watch",
@@ -83,7 +83,7 @@ export const instagramPushPrompts = [
   {
     label: "Media desk callout",
     prompt:
-      "Ask viewers to tag #ASCOHype and @ConferenceHype on Instagram when media hits, hallway interviews, or broadcast moments deserve operator review."
+      "Ask viewers to tag #ASCOHype and @ConferenceHype on Instagram when media links, official sources, or monitored X voice callouts deserve operator review."
   }
 ];
 

@@ -164,10 +164,11 @@ export function getAscoBriefingSources(now = new Date()): IngestedItem[] {
   return [...sessionItems, ...abstractItems].slice(0, index.costPolicy.maxBriefingSources);
 }
 
-export function getAscoUpcomingEventSources(now = new Date()): IngestedItem[] {
+export function getAscoUpcomingEventSources(now = new Date(), lookaheadOverrideMinutes?: number): IngestedItem[] {
   const index = loadCoreIndex();
   const nowMs = now.getTime();
-  const lookaheadMinutes = index.costPolicy.scheduleSpineLookaheadMinutes ?? 20;
+  const lookaheadMinutes =
+    lookaheadOverrideMinutes ?? index.costPolicy.scheduleSpineLookaheadMinutes ?? 20;
   const lookaheadEnd = nowMs + minutes(lookaheadMinutes);
 
   const upcomingSessions = index.sessions
@@ -209,7 +210,7 @@ export function getAscoCoreStats() {
     sessions: index.sessions.length,
     abstracts: index.abstracts.length,
     scheduleSpineCadenceMinutes: index.costPolicy.scheduleSpineCadenceMinutes ?? 20,
-    scheduleSpineLookaheadMinutes: index.costPolicy.scheduleSpineLookaheadMinutes ?? 20,
+    scheduleSpineLookaheadMinutes: 10,
     lookbackMinutes: index.costPolicy.lookbackMinutes,
     lookaheadMinutes: index.costPolicy.lookaheadMinutes
   };

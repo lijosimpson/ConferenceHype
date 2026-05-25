@@ -9,7 +9,14 @@ import type { IngestedItem, SourceConfig, SourceType } from "@/lib/types";
 const bodySchema = z.object({
   postUrl: z.string().max(600).optional().or(z.literal("")),
   postText: z.string().max(1200).optional().or(z.literal("")),
-  operatorNote: z.string().max(600).optional().or(z.literal(""))
+  operatorNote: z.string().max(600).optional().or(z.literal("")),
+  itemType: z
+    .enum(["x_tweet", "url", "statement", "sponsor_message"])
+    .default("url"),
+  personaId: z.string().max(80).default("vesper-quill"),
+  approveNow: z.boolean().default(false),
+  repeatEveryHalfHour: z.boolean().default(false),
+  repeatCount: z.number().int().min(1).max(12).default(1)
 }).refine((body) => body.postUrl?.trim() || body.postText?.trim(), {
   message: "Add a URL, pasted text, or both before focusing for review."
 });
@@ -79,10 +86,16 @@ async function summarizeFocusedUrl(url: string, sourceType: SourceType) {
 async function buildFocusedSource({
   postUrl,
   postText,
-  operatorNote
+  operatorNote,
+  itemType
 }: z.infer<typeof bodySchema>): Promise<IngestedItem> {
   const normalizedUrl = normalizeFocusedUrl(postUrl);
-  const sourceType = normalizedUrl ? getFocusedSourceType(normalizedUrl) : "general_social";
+  const sourceType =
+    itemType === "statement" || itemType === "sponsor_message"
+      ? "manual"
+      : normalizedUrl
+        ? getFocusedSourceType(normalizedUrl)
+        : "general_social";
   const url = normalizedUrl || "https://x.com/hashtag/ASCOHype";
   const urlSummary = normalizedUrl ? await summarizeFocusedUrl(url, sourceType) : undefined;
   const platform = getFocusedPlatform(url);
@@ -103,9 +116,15 @@ async function buildFocusedSource({
       urlSummary?.excerpt,
       postText?.trim() ? `Operator pasted text or tip: ${postText.trim()}` : "",
       operatorNote ? `Operator focus note: ${operatorNote}` : "",
+      itemType === "sponsor_message"
+        ? "Operator marked this as a sponsor message. Read it as sponsor copy, not editorial reporting."
+        : "",
+      itemType === "statement"
+        ? "Operator marked this as a direct statement for broadcast."
+        : "",
       sourceType === "general_social"
-        ? `This is an operator-selected ${platform || "social"} item. Treat as audience buzz until reviewed.`
-        : "This is an operator-selected URL. Treat it as a source for review before broadcast."
+        ? `This is an operator-selected ${platform || "social"} item. Use only if it is a monitored X voice callout or has a verified source. Do not broadcast vague audience chatter.`
+        : "This is an operator-selected item. Keep source attribution clear before broadcast."
     ]
       .filter(Boolean)
       .join("\n"),
@@ -116,36 +135,78 @@ async function buildFocusedSource({
   };
 }
 
+function repeatCopies<T extends { title: string; summary: string; script: string }>(
+  segment: T,
+  repeatEveryHalfHour: boolean,
+  repeatCount: number
+) {
+  const total = repeatEveryHalfHour ? repeatCount : 1;
+  const now = Date.now();
+  return Array.from({ length: total }, (_, index) => {
+    const scheduledAt = new Date(now + index * 30 * 60 * 1000).toISOString();
+    const repeatLabel =
+      total > 1 ? `Repeat ${index + 1} of ${total}; scheduled ${scheduledAt}.` : "";
+    return {
+      ...segment,
+      title: total > 1 ? `${segment.title} (${index + 1}/${total})` : segment.title,
+      summary: [segment.summary, repeatLabel].filter(Boolean).join(" "),
+      script: [segment.script, repeatLabel ? `Operator repeat note: ${repeatLabel}` : ""]
+        .filter(Boolean)
+        .join("\n\n"),
+      approvedAt: scheduledAt,
+      updatedAt: scheduledAt
+    };
+  });
+}
+
 export async function POST(request: NextRequest) {
   try {
     assertAdminRequest(request);
     const body = bodySchema.parse(await request.json());
     const source = await buildFocusedSource(body);
     const social = source.sourceType.includes("social");
+    const isSponsor = body.itemType === "sponsor_message";
+    const status = body.approveNow ? "approved" : "pending_review";
     const segment = await generateSegmentFromSources({
       sources: [source],
-      personaId: "vesper-quill",
+      personaId: body.personaId,
       hypeLevel: "high_energy",
-      contentType: social ? "social_signal" : "media_roundup",
+      contentType: isSponsor ? "industry_floor" : social ? "social_signal" : "media_roundup",
+      status,
       editorialInstruction: [
-        social
+        isSponsor
+          ? "Create a concise sponsor message read. Make it clearly sponsor-labeled, energetic, and separate from editorial ASCO commentary."
+          : social
           ? "Create a short radio-DJ style social desk hit from this operator-focused X/Instagram/social item."
-          : "Create a short radio-DJ style source focus hit from this operator-focused URL.",
-        "Make it sound exciting, but clearly label operator-selected items and keep them review-gated.",
-        "Do not treat social posts, attendee tips, or scraped page summaries as verified fact unless a primary source is included.",
-        "If the post recommends snacks, coffee, a booth, a poster, or a media hit, call it an attendee tip that requires review.",
-        "Mention #ASCOHype as the routing tag for more audience tips on X and Instagram."
+          : body.itemType === "statement"
+            ? "Create a concise operator statement for broadcast. Keep the wording clear, direct, and source-labeled."
+            : "Create a short radio-DJ style source focus hit from this operator-focused URL.",
+        "Make it sound exciting, but clearly label operator-selected items and keep them source-attributed.",
+        "Do not create broadcast material from vague social chatter, snack tips, hallway energy, or audience tips unless the operator marked it as a direct statement or sponsor message.",
+        "Only create a broadcast-ready card from verified source-attributed material, an article, a monitored X voice, an operator statement, or a sponsor message.",
+        "Mention #ASCOHype only as the routing tag for source-attributed broadcast ideas.",
+        body.repeatEveryHalfHour
+          ? `The operator requested this card repeat once every half hour for ${body.repeatCount} total reads.`
+          : ""
       ].join("\n")
     });
 
-    const savedSegments = await saveGeneratedSegmentsToDb([segment]);
+    const segments = repeatCopies(
+      segment,
+      body.approveNow && body.repeatEveryHalfHour,
+      body.repeatCount
+    );
+    const savedSegments = await saveGeneratedSegmentsToDb(segments);
     const savedSegment = savedSegments?.[0] ?? segment;
 
     return NextResponse.json({
       ok: true,
       segment: savedSegment,
+      count: savedSegments?.length ?? segments.length,
       note:
-        "Focused item created as a pending review segment. Approve it before broadcast."
+        status === "approved"
+          ? "Operator item added to the approved broadcast rundown."
+          : "Focused item created as a pending review segment. Approve it before broadcast."
     });
   } catch (error) {
     return NextResponse.json({ ok: false, error: String(error) }, { status: 400 });

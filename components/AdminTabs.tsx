@@ -1,0 +1,53 @@
+"use client";
+
+import { Mic2, Radio, ScrollText } from "lucide-react";
+import { useState, type ReactNode } from "react";
+
+type TabId = "broadcast" | "history" | "voices";
+
+const tabs: Array<{ id: TabId; label: string; icon: typeof Radio }> = [
+  { id: "broadcast", label: "Broadcast", icon: Radio },
+  { id: "history", label: "Talked about", icon: ScrollText },
+  { id: "voices", label: "Voices", icon: Mic2 }
+];
+
+export function AdminTabs({
+  broadcast,
+  history,
+  voices
+}: {
+  broadcast: ReactNode;
+  history: ReactNode;
+  voices: ReactNode;
+}) {
+  const [active, setActive] = useState<TabId>("broadcast");
+
+  return (
+    <div className="grid gap-5">
+      <div className="flex flex-wrap gap-2 border-b border-ink/10">
+        {tabs.map((tab) => {
+          const Icon = tab.icon;
+          const selected = active === tab.id;
+          return (
+            <button
+              key={tab.id}
+              type="button"
+              className={`inline-flex min-h-11 items-center gap-2 border-x border-t px-4 text-sm font-black uppercase ${
+                selected
+                  ? "border-ink bg-ink text-white"
+                  : "border-ink/10 bg-white text-ink hover:border-ink/30"
+              }`}
+              onClick={() => setActive(tab.id)}
+            >
+              <Icon className="h-4 w-4" />
+              {tab.label}
+            </button>
+          );
+        })}
+      </div>
+      {active === "broadcast" ? broadcast : null}
+      {active === "history" ? history : null}
+      {active === "voices" ? voices : null}
+    </div>
+  );
+}

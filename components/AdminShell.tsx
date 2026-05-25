@@ -15,7 +15,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
                 ASCO Hype operator desk
               </h1>
               <p className="text-sm font-semibold text-ink/60">
-                Review-gated reporter coverage, source intake, and stream
+                Verified-source reporter coverage, source intake, and stream
                 control.
               </p>
             </div>

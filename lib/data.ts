@@ -1,8 +1,13 @@
 import { sourceRegistry } from "@/lib/sources/registry";
-import { buildScheduleFallbackSegment } from "@/lib/jobs/upcomingEvents";
+import {
+  buildScheduleFallbackSegment,
+  buildScheduleRundownSegments
+} from "@/lib/jobs/upcomingEvents";
 import {
   getAnalyticsFromDb,
+  getAiredSegmentsFromDb,
   getApprovedSegmentsFromDb,
+  getNextBroadcastSegmentsFromDb,
   getPendingSegmentsFromDb,
   getRecentSocialItemsFromDb,
   getSourcesFromDb,
@@ -14,6 +19,30 @@ import {
   shouldRunSocialVoiceCompetition
 } from "@/lib/social/leaderboard";
 import type { AnalyticsSnapshot, StreamState } from "@/lib/types";
+
+function isUnsafeForBroadcastRundown(scriptish: string) {
+  return /\b(early social chatter|unverified buzz|operator-selected audience tip|audience tip|snack|coffee|hallway energy|rising energy|pending review)\b/i.test(
+    scriptish
+  );
+}
+
+function hasVerifiedBroadcastSource(segment: { script: string; summary: string; citations: { sourceType: string }[]; contentType: string }) {
+  if (segment.contentType === "agenda_preview" || segment.contentType === "industry_floor") {
+    return true;
+  }
+  return segment.citations.some((citation) =>
+    ["official", "media", "verified_social", "company"].includes(citation.sourceType)
+  );
+}
+
+function filterBroadcastReadySegments<T extends { script: string; summary: string; citations: { sourceType: string }[]; contentType: string }>(
+  segments: T[]
+) {
+  return segments.filter((segment) => {
+    const text = `${segment.summary}\n${segment.script}`;
+    return !isUnsafeForBroadcastRundown(text) && hasVerifiedBroadcastSource(segment);
+  });
+}
 
 export async function getPublicSegments() {
   const dbSegments = await getApprovedSegmentsFromDb();
@@ -45,7 +74,14 @@ export async function getAdminSnapshot() {
     recentSocialItems,
     xFollowVoices
   );
-  const pendingSegments = (await getPendingSegmentsFromDb()) ?? [];
+  const pendingSegments = filterBroadcastReadySegments(
+    (await getPendingSegmentsFromDb()) ?? []
+  );
+  const nextBroadcastSegments = filterBroadcastReadySegments(
+    (await getNextBroadcastSegmentsFromDb()) ?? []
+  );
+  const scheduleRundownSegments = buildScheduleRundownSegments();
+  const airedSegments = (await getAiredSegmentsFromDb()) ?? [];
   const analytics: AnalyticsSnapshot = (await getAnalyticsFromDb()) ?? {
     views: 128,
     clipsCreated: 4,
@@ -53,6 +89,9 @@ export async function getAdminSnapshot() {
   };
   return {
     pendingSegments,
+    nextBroadcastSegments,
+    scheduleRundownSegments,
+    airedSegments,
     streamState: await getStreamState(),
     sources: (await getSourcesFromDb()) ?? sourceRegistry,
     xFollowVoices,

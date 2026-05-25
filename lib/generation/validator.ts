@@ -1,5 +1,4 @@
 import type { Segment } from "@/lib/types";
-import { defaultDisclaimer } from "./disclaimers";
 
 const bannedAdvicePatterns = [
   /\bpatients should\b/i,
@@ -14,9 +13,6 @@ const bannedAdvicePatterns = [
 
 export function validateSegmentForApproval(segment: Pick<Segment, "script" | "citations" | "contentType">) {
   const errors: string[] = [];
-  if (!segment.script.includes(defaultDisclaimer)) {
-    errors.push("Missing required ASCO Hype disclaimer.");
-  }
   if (segment.citations.length === 0) {
     errors.push("At least one citation is required before approval.");
   }
