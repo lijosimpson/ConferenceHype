@@ -10,6 +10,7 @@ export const monitoredSocialTags = {
   primaryHashtag: "#ASCOHype",
   secondaryHashtag: "#AskASCOHype",
   conferenceHashtag: "#ASCO26",
+  conferenceYearHashtag: "#ASCO2026",
   botHandle: "@ASCOHypeAI",
   conferenceHypeHandle: "@ConferenceHype",
   instagramPrimaryHashtag: "#ASCOHype",
@@ -68,7 +69,7 @@ export const instagramPushPrompts = [
   {
     label: "Verified source watch",
     prompt:
-      "Ask viewers to tag #ASCOHype, #ASCO26, and @ConferenceHype on Instagram only with source-attributed articles, official schedule items, media links, or monitored X voice callouts."
+      "Ask viewers to tag #ASCOHype, #ASCO26, #ASCO2026, and @ConferenceHype on Instagram only with source-attributed articles, official schedule items, media links, or monitored X voice callouts."
   },
   {
     label: "Steps and workout watch",
@@ -123,7 +124,7 @@ export const sourceRegistry: SourceConfig[] = [
   {
     id: "asco-hype-tags",
     name: "Audience tags, X voices, and Instagram prompts",
-    url: `${monitoredSocialTags.primaryHashtag} ${monitoredSocialTags.secondaryHashtag} ${monitoredSocialTags.conferenceHashtag} ${monitoredSocialTags.botHandle} ${monitoredSocialTags.conferenceHypeHandle} ${monitoredSocialTags.instagramPrimaryHashtag} ${monitoredSocialTags.instagramConferenceHashtag} ${monitoredSocialTags.instagramConferenceHypeHandle} ${monitoredXVoices.map((voice) => voice.handle).join(" ")}`,
+    url: `${monitoredSocialTags.primaryHashtag} ${monitoredSocialTags.secondaryHashtag} ${monitoredSocialTags.conferenceHashtag} ${monitoredSocialTags.conferenceYearHashtag} ${monitoredSocialTags.botHandle} ${monitoredSocialTags.conferenceHypeHandle} ${monitoredSocialTags.instagramPrimaryHashtag} ${monitoredSocialTags.instagramConferenceHashtag} ${monitoredSocialTags.instagramConferenceHypeHandle} ${monitoredXVoices.map((voice) => voice.handle).join(" ")}`,
     type: "general_social",
     rank: 5,
     enabled: true

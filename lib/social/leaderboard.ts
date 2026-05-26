@@ -99,7 +99,7 @@ export function buildSocialVoiceCompetitionSegment(
     )
     .join("\n");
   const routing =
-    "Tag #ASCOHype and #ASCO26 on X or Instagram to nominate the next monitored voice, official schedule item, article, or media moment.";
+    "Tag #ASCOHype, #ASCO26, and #ASCO2026 on X or Instagram to nominate the next monitored voice, official schedule item, article, or media moment.";
 
   return {
     id: `social-voice-competition-${now.toISOString()}`,

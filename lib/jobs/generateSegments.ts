@@ -14,7 +14,8 @@ import {
 } from "@/lib/social/leaderboard";
 import type { IngestedItem, Segment, SocialVoiceLeader } from "@/lib/types";
 
-const SOURCE_CARD_TARGET = 12;
+const TOP_SOCIAL_NARRATIVE_TARGET = 50;
+const SOURCE_CARD_TARGET = 72;
 
 async function generateOrScheduleFallback(
   generate: () => Promise<Segment>,
@@ -93,6 +94,23 @@ function sourceSummary(item: IngestedItem) {
   return excerpt.length > 320 ? `${excerpt.slice(0, 317)}...` : excerpt;
 }
 
+function sourcePriority(item: IngestedItem) {
+  const text = `${item.sourceName} ${item.title} ${item.url}`.toLowerCase();
+  if (text.includes("asco post") || text.includes("ascopost.com")) {
+    return 0;
+  }
+  if (item.sourceType.includes("social")) {
+    return 1;
+  }
+  if (text.includes("onclive")) {
+    return 2;
+  }
+  if (text.includes("stat news") || text.includes("statnews.com")) {
+    return 9;
+  }
+  return 4;
+}
+
 function sourceCardPersona(index: number) {
   const personas = [
     { id: "vesper-quill", name: "Vesper Quill", hype: "high_energy" as const },
@@ -118,17 +136,20 @@ function sourceCardType(item: IngestedItem) {
 function buildSourceCard(item: IngestedItem, now: Date, index: number, alternate = false): Segment {
   const persona = sourceCardPersona(index);
   const contentType = sourceCardType(item);
+  const isSocialNarrative = item.sourceType.includes("social");
   const citation = {
     label: sourceLabel(item),
     url: item.url,
-    sourceType: item.sourceType
+    sourceType: isSocialNarrative ? ("verified_social" as const) : item.sourceType
   };
   const summary = sourceSummary(item);
   const alternateLine = alternate
     ? "This is a backup angle for the same source item, ready only if the primary version is not already in the hour."
     : "";
   const script = [
-    `${persona.name} here with a source-backed ASCO update from ${item.sourceName}.`,
+    isSocialNarrative
+      ? `${persona.name} here with a source-backed X narrative from ${item.author ?? item.sourceName}.`
+      : `${persona.name} here with a source-backed ASCO update from ${item.sourceName}.`,
     `The item is titled "${item.title}".`,
     summary,
     alternateLine
@@ -145,7 +166,11 @@ function buildSourceCard(item: IngestedItem, now: Date, index: number, alternate
     personaName: persona.name,
     hypeLevel: persona.hype,
     language: "en",
-    status: !alternate && isXVoiceCallout(item) ? "approved" : "pending_review",
+    status:
+      !alternate &&
+      (isXVoiceCallout(item) || sourcePriority(item) === 0)
+        ? "approved"
+        : "pending_review",
     citations: [citation],
     socialBuzzItems: item.sourceType.includes("social") ? [citation] : [],
     riskFlags: [
@@ -155,7 +180,11 @@ function buildSourceCard(item: IngestedItem, now: Date, index: number, alternate
     ],
     confidenceScore: item.sourceType === "official" ? 94 : item.sourceType === "media" ? 88 : 82,
     createdAt: now.toISOString(),
-    approvedAt: !alternate && isXVoiceCallout(item) ? now.toISOString() : undefined
+    approvedAt:
+      !alternate &&
+      (isXVoiceCallout(item) || sourcePriority(item) === 0)
+        ? now.toISOString()
+        : undefined
   };
 }
 
@@ -168,26 +197,38 @@ function buildLatestSourceCards(items: IngestedItem[], now: Date) {
         return false;
       }
       seen.add(key);
-      return ["official", "media", "company", "verified_social"].includes(item.sourceType);
+      return ["official", "media", "company", "verified_social", "general_social"].includes(item.sourceType);
+    })
+    .sort((a, b) => {
+      const priorityDelta = sourcePriority(a) - sourcePriority(b);
+      if (priorityDelta !== 0) {
+        return priorityDelta;
+      }
+      if (a.sourceType.includes("social") && b.sourceType.includes("social")) {
+        return (b.engagementScore ?? 0) - (a.engagementScore ?? 0);
+      }
+      return (b.publishedAt ?? "").localeCompare(a.publishedAt ?? "");
     });
-  const primaryCards = eligibleItems
+  const topSocialItems = eligibleItems
+    .filter((item) => item.sourceType.includes("social"))
+    .slice(0, TOP_SOCIAL_NARRATIVE_TARGET);
+  const primaryItems = [
+    ...eligibleItems.filter((item) => sourcePriority(item) === 0),
+    ...topSocialItems,
+    ...eligibleItems.filter(
+      (item) => sourcePriority(item) !== 0 && !item.sourceType.includes("social")
+    )
+  ];
+  const primaryCards = primaryItems
     .slice(0, SOURCE_CARD_TARGET)
     .map((item, index) => buildSourceCard(item, now, index));
-  if (primaryCards.length >= SOURCE_CARD_TARGET || eligibleItems.length === 0) {
-    return primaryCards;
-  }
-  const alternateCards = eligibleItems
-    .slice(0, SOURCE_CARD_TARGET - primaryCards.length)
-    .map((item, index) =>
-      buildSourceCard(item, now, primaryCards.length + index, true)
-    );
-  return [...primaryCards, ...alternateCards].slice(0, SOURCE_CARD_TARGET);
+  return primaryCards;
 }
 
 function topTractionLeaders(leaders: SocialVoiceLeader[]) {
   return leaders
     .filter((leader) => leader.mentions > 0)
-    .slice(0, 5);
+    .slice(0, TOP_SOCIAL_NARRATIVE_TARGET);
 }
 
 async function addCompetitionLeadersToXCallouts(leaders: SocialVoiceLeader[]) {

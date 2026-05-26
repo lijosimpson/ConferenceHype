@@ -44,10 +44,15 @@ export async function runIngestionJob(): Promise<IngestedItem[]> {
   const rankedItems = batches
     .flatMap((result) => (result.status === "fulfilled" ? result.value : []))
     .filter(isRelevantItem)
-    .sort((a, b) => a.rank - b.rank);
+    .sort((a, b) => {
+      if (a.sourceType.includes("social") && b.sourceType.includes("social")) {
+        return (b.engagementScore ?? 0) - (a.engagementScore ?? 0);
+      }
+      return a.rank - b.rank;
+    });
   const dedupedItems = Array.from(
     new Map(rankedItems.map((item) => [`${item.url}|${item.title}`, item])).values()
-  ).slice(0, 40);
+  ).slice(0, 120);
   await saveIngestedItemsToDb(dedupedItems);
   return dedupedItems;
 }

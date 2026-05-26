@@ -164,7 +164,7 @@ export async function getAiredSegmentsFromDb(limit = 40) {
   return (data as SegmentRow[]).map(toSegment);
 }
 
-export async function getPendingSegmentsFromDb() {
+export async function getPendingSegmentsFromDb(limit = 120) {
   if (!hasSupabase()) {
     return null;
   }
@@ -174,7 +174,7 @@ export async function getPendingSegmentsFromDb() {
     .select("*")
     .eq("status", "pending_review")
     .order("created_at", { ascending: false })
-    .limit(50);
+    .limit(limit);
 
   if (error) {
     throw error;

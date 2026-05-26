@@ -12,23 +12,24 @@ export function buildXSearchQuery(extraVoices: XVoice[] = []) {
     monitoredSocialTags.primaryHashtag,
     monitoredSocialTags.secondaryHashtag,
     monitoredSocialTags.conferenceHashtag,
+    monitoredSocialTags.conferenceYearHashtag,
     monitoredSocialTags.botHandle,
     monitoredSocialTags.conferenceHypeHandle
   ];
-  const voices = [...monitoredXVoices, ...extraVoices];
+  const voices = [...monitoredXVoices, ...extraVoices].slice(0, 50);
   const voiceTerms = voices.map((voice) => `from:${toXUsername(voice.handle)}`);
   return `(${[...tagTerms, ...voiceTerms].join(" OR ")}) -is:retweet lang:en`;
 }
 
 export async function fetchTaggedSocialPosts(extraVoices: XVoice[] = []): Promise<IngestedItem[]> {
-  const voices = [...monitoredXVoices, ...extraVoices];
+  const voices = [...monitoredXVoices, ...extraVoices].slice(0, 50);
   if (!env.X_BEARER_TOKEN) {
     return [];
   }
 
   const query = encodeURIComponent(buildXSearchQuery(extraVoices));
   const response = await fetch(
-    `https://api.x.com/2/tweets/search/recent?query=${query}&max_results=20&tweet.fields=author_id,created_at,public_metrics&expansions=author_id&user.fields=username,name`,
+    `https://api.x.com/2/tweets/search/recent?query=${query}&max_results=100&tweet.fields=author_id,created_at,public_metrics&expansions=author_id&user.fields=username,name`,
     {
       headers: {
         Authorization: `Bearer ${env.X_BEARER_TOKEN}`
