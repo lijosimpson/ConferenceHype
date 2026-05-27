@@ -29,7 +29,10 @@ async function scheduleSegment(segmentId: string, approvedAt: string, script?: s
   });
   const payload = await response.json();
   if (!response.ok || !payload.ok) {
-    throw new Error(payload.error ?? "Could not schedule card.");
+    throw new Error(
+      payload.error ??
+        (Array.isArray(payload.errors) ? payload.errors.join(" ") : "Could not schedule card.")
+    );
   }
   return payload.segment as Segment;
 }
@@ -187,17 +190,17 @@ export function BroadcastRundown({
     setPendingId(segment.id);
     startTransition(async () => {
       try {
+        const replacedSegment = replaceTarget.segmentId
+          ? visibleSegments.find((item) => item.id === replaceTarget.segmentId)
+          : undefined;
         if (
-          replaceTarget.segmentId &&
-          replaceTarget.segmentId !== segment.id &&
-          !replaceTarget.segmentId.startsWith("virtual-")
+          replacedSegment?.status === "approved" &&
+          replacedSegment.id !== segment.id &&
+          !replacedSegment.id.startsWith("virtual-")
         ) {
-          const oldSegment = [...visibleSegments, ...visibleReviewSegments].find(
-            (item) => item.id === replaceTarget.segmentId
+          setVisibleSegments((current) =>
+            current.filter((item) => item.id !== replacedSegment.id)
           );
-          if (oldSegment) {
-            await rejectSegment(oldSegment);
-          }
         }
         const updated = await scheduleSegment(
           segment.id,
@@ -216,6 +219,17 @@ export function BroadcastRundown({
         setMessage(`${updated.title} replaced ${replaceTarget.title ?? "the selected card"} at ${timeLabel(at)}.`);
         setReplaceTarget(null);
         router.refresh();
+        if (
+          replacedSegment?.status === "approved" &&
+          replacedSegment.id !== segment.id &&
+          !replacedSegment.id.startsWith("virtual-")
+        ) {
+          rejectSegment(replacedSegment).catch(() => {
+            setMessage(
+              `${updated.title} was placed, but the replaced card could not be removed from the database.`
+            );
+          });
+        }
       } catch (error) {
         setMessage(error instanceof Error ? error.message : "Could not replace card.");
       } finally {

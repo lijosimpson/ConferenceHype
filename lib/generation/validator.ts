@@ -25,9 +25,11 @@ export function validateSegmentForApproval(segment: Pick<Segment, "title" | "sum
   }
   if (
     segment.contentType === "social_signal" &&
-    !/\b(posted|claimed|reacted|discussed|social buzz|unverified)\b/i.test(segment.script)
+    !/\b(posted|claimed|reacted|discussed|social buzz|source-backed|monitored X|X narrative|X voice|@\w{1,15})\b/i.test(
+      segment.script
+    )
   ) {
-    errors.push("Social signal scripts must be labeled as buzz or attributed posts.");
+    errors.push("Social signal scripts must be labeled as attributed posts or monitored X narratives.");
   }
   return errors;
 }
