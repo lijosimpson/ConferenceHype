@@ -148,7 +148,7 @@ async function buildCards() {
 }
 
 async function main() {
-  const ffmpeg = ffmpegPath ?? "ffmpeg";
+  const ffmpeg = process.env.FFMPEG_PATH ?? ffmpegPath ?? "ffmpeg";
   const cards = await buildCards();
   await mkdir(renderDir, { recursive: true });
   await mkdir(path.dirname(outputPath), { recursive: true });

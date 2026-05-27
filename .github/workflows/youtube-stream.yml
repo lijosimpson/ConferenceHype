@@ -37,6 +37,7 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - run: sudo apt-get update && sudo apt-get install -y ffmpeg
       - name: Render current presentation
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.stream_start_time != '' }}
         run: |
@@ -46,6 +47,7 @@ jobs:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          FFMPEG_PATH: /usr/bin/ffmpeg
           HOUR_BROADCAST_START: ${{ inputs.stream_start_time }}
           HOUR_BROADCAST_OUTPUT: public/rendered/asco-hype-hour-broadcast.mp4
       - name: Start rendered YouTube stream
