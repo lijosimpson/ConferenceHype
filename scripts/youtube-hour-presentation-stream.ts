@@ -4,7 +4,7 @@ import { loadEnvConfig } from "@next/env";
 
 loadEnvConfig(process.cwd());
 
-const ffmpeg = ffmpegPath ?? "ffmpeg";
+const ffmpeg = process.env.FFMPEG_PATH ?? ffmpegPath ?? "ffmpeg";
 const videoPath = process.env.STREAM_VIDEO_PATH;
 const slideConcatPath =
   process.env.STREAM_SLIDE_CONCAT ?? "public/rendered/hour-broadcast/slides.ffconcat";
@@ -95,9 +95,23 @@ async function main() {
     return;
   }
 
+  const startedAt = Date.now();
   const child = spawn(ffmpeg, args, { stdio: "inherit" });
   child.on("exit", (code) => {
-    process.exit(code ?? 0);
+    const elapsedSeconds = (Date.now() - startedAt) / 1000;
+    if (
+      process.env.STREAM_DRY_RUN !== "1" &&
+      process.env.STREAM_ALLOW_SHORT_EXIT !== "1" &&
+      elapsedSeconds < 15
+    ) {
+      console.error(
+        `FFmpeg exited after ${elapsedSeconds.toFixed(
+          1
+        )}s before the YouTube stream could stabilize.`
+      );
+      process.exit(1);
+    }
+    process.exit(code ?? 1);
   });
 }
 

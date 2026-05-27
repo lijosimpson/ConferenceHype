@@ -58,6 +58,7 @@ jobs:
         env:
           YOUTUBE_RTMP_URL: ${{ secrets.YOUTUBE_RTMP_URL }}
           YOUTUBE_STREAM_KEY: ${{ secrets.YOUTUBE_STREAM_KEY }}
+          FFMPEG_PATH: /usr/bin/ffmpeg
           STREAM_VIDEO_PATH: public/rendered/asco-hype-hour-broadcast.mp4
       - name: Start fallback YouTube RTMP loop
         if: ${{ github.event_name != 'workflow_dispatch' || inputs.stream_start_time == '' }}
