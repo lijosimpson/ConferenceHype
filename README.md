@@ -1,169 +1,178 @@
-# ASCO Hype
+# ASCO Hype Operating Policies
 
-ASCO Hype is an AI-powered, reporter-style oncology conference coverage channel for ASCO 2026. It is built as a media/commentary product: it tracks official sources, reputable media, company updates, exhibitor activity, and monitored social posts, then routes generated segments through human review before anything airs.
+ASCO Hype is an interactive AI conference-commentary website and broadcast system for ASCO 2026. The product must behave like a source-attributed conference follow-along desk, not like medical education, journalism, clinical interpretation, or unsourced social chatter.
 
-## What This Is
+This README is the policy source of truth for the website, admin dashboard, generation jobs, presentation sequence, voice output, YouTube stream, and source intake.
 
-- A Next.js 15 public channel and protected operator dashboard.
-- A review-gated editorial workflow for AI-generated conference commentary.
-- A monitored hashtag, bot mention, X voice loop, and Instagram push-prep loop: `#ASCOHype`, `#AskASCOHype`, `#ASCO26`, `@ASCOHypeAI`, `@ConferenceHype`, plus reviewed posts from watched X voices such as `@ASCO`, `@ASCOPost`, `@OncLive`, and `@statnews`.
-- A low-cost deployment shape: Vercel for the app, Supabase for data/auth/storage, GitHub Actions for scheduled jobs, and a small stream worker for FFmpeg/YouTube.
+## Core Identity
 
-## What This Is Not
+- ASCO Hype is interactive AI commentary only.
+- ASCO Hype is not reporting, journalism, medical education, clinical guidance, scientific validation, legal advice, or financial advice.
+- ASCO Hype is not associated with the American Society of Clinical Oncology in any way.
+- The full disclaimer belongs on the public website and terms page.
+- The full disclaimer must not be repeated in every broadcast statement.
+- The disclaimer may be mentioned briefly about once per hour when appropriate.
+- ASCO must be pronounced as "ASKO" or "Ask-oh" in voice output.
 
-ASCO Hype is not medical advice, clinical advice, scientific validation, legal advice, or financial advice. Every segment must include:
+## Broadcast Source Rules
 
-> ASCO Hype is AI-generated conference commentary for informational and entertainment purposes only. It is not medical, clinical, scientific, legal, or financial advice. Always consult qualified professionals and primary sources.
+- No broadcast statement may be based on vague, unsourced, or unverified buzz.
+- Never create fake news, fake doctors, fake experts, fake speaker names, fake quotes, fake institutions, or fake source claims.
+- Do not use placeholder doctor names such as "Dr. Patel" or "Dr. Rivera" unless that exact person is present in the provided source.
+- Do not say or imply that ASCO Hype has independently verified data.
+- Spoken scripts must not use: "air", "aired", "airing", "airtime", "verified", or "we verify".
+- Preferred phrasing is source-attributed language such as "reported", "posted", "discussed", "source-backed", "monitored X voice", or "according to the linked source".
+- Abstract/science material and exhibitor/company chatter must be separated.
+- Abstract chatter may discuss abstracts, trials, posters, biomarkers, disease tracks, presenters, and source-attributed scientific discussion.
+- Exhibitor chatter may discuss booths, sponsor/product floor activity, company showcases, and operator-approved commercial messages.
+- Market or company commentary must not contain buy, sell, hold, investment, or financial recommendations.
 
-## Local Setup
+## Source Priority
+
+Ready-card and broadcast priority must be:
+
+1. The ASCO Post when relevant items appear.
+2. The highest-traction monitored X/Twitter accounts, up to the top 50.
+3. OncLive.
+4. STAT News.
+5. Other operator-approved RSS feeds, media outlets, official pages, company updates, and source-backed URLs.
+
+Official ASCO schedule/session/location information remains the schedule spine and may be inserted at required schedule intervals.
+
+## X, Social, and Media Intake
+
+- The system must search and ingest posts mentioning `#ASCO26`, `#ASCO2026`, `#ASCOHype`, `#AskASCOHype`, `@ASCOHypeAI`, and `@ConferenceHype` when API credentials allow it.
+- The system must monitor added X users and approved media/news sources.
+- Operators must be able to add X users and news/RSS sites in the admin section.
+- Popular high-traction ASCO social accounts must be added automatically to the X voices to call out list when they clear the source and bot filters.
+- Social voice competition accounts must have a blacklist button next to each name.
+- Blacklisted social accounts must be excluded from future social voice competition and automatic source intake.
+- Monitored X voice callouts may enter the presentation sequence without manual approval when source-attributed.
+- Commentary from the social voice competition must be added to the X voices to call out list before reuse as a monitored voice callout.
+- General hashtag or audience chatter must not be broadcast unless it is source-attributed, operator-approved, or tied to a monitored X voice.
+- Instagram intake is manual/operator controlled unless a compliant provider/API is added later.
+
+## Ready Cards and Human Review
+
+- Every 15 minutes, source ingestion and generation should keep more than 10 cards available across ready cards and human review when current source material exists.
+- Brand new ready cards are the only cards outside the presentation queue.
+- Ready cards must be brand-new replacement candidates, not a second copy of already scheduled cards.
+- When a ready card is placed into the presentation sequence, it must disappear from ready cards and appear in the exact selected content slot.
+- Cards must never disappear from ready cards without being written into the selected presentation slot or failing visibly with an error.
+- Human review cards must be source-backed and broadcast-ready or clearly rejected from broadcast use.
+- Approval for broadcast must remove the card from the pending review queue.
+- Pending review being marked OK means the system may move the card forward, but it still must obey all source, fake-name, voice, and schedule policies.
+- Every card must expose prepared text and sources.
+- Every presentation card must have a Reject button.
+- Rejecting a card must remove it from the visible presentation sequence.
+
+## Presentation Sequence
+
+- The admin presentation sequence is the single place where scheduled broadcast cards live.
+- The left pane must show only the 3-hour presentation block with content slots and music slots.
+- The right pane top must show brand new ready cards and the human review queue.
+- Each 3-hour block must be completely populated.
+- No content slot should be empty; if there is no suitable source-backed card, a safe official schedule bridge or music must fill the space.
+- Time slots must be 3-hour blocks across the day: 21:00-00:00, 00:00-03:00, 03:00-06:00, 06:00-09:00, and continuing every 3 hours.
+- Planning blocks must exist for the next 2 weeks.
+- Each 3-hour block must have 3 full hours of visible cards, not 2 hours.
+- The 3-hour scrollbar must allow operators to go backward and review cards that already played.
+- Every content card is 1 minute 50 seconds.
+- Every content card is followed by a 10-second music card.
+- Every hour must contain 30 content cards and 30 music cards.
+- Every 3-hour block must contain 90 content cards and 90 music cards.
+- Music slots are not content slots and must not accept dropped ready cards.
+- Every card should have a Replace button.
+- Brand new ready cards should have a Replace with this button.
+- Replacement workflow: click Replace on a presentation queue card, then click Replace with this on a brand new ready card.
+- Swapping must place the new card into the exact selected slot and remove the old card from that slot.
+- Operators must also be able to drag cards into valid content slots.
+- Selecting a presentation time slot and clicking a human review card must move that card to approved and place it in that exact slot.
+
+## Scheduled Segments
+
+- Every 10 minutes, include a brief rundown of ongoing and upcoming sessions with locations.
+- Schedule/location rundown segments should be brief and should run for about 2 minutes with locations.
+- Location narration must tell listeners to check the ASCO app and on-site signage because rooms and locations can change.
+- Once per hour after the schedule is announced, include a 2-minute segment naming rising social media voices and who they are.
+- The social voice segment must be source-attributed and must not imply clinical validation.
+- The three-hour social voice leaderboard may broadcast automatically as information is source-backed.
+- The social voice leaderboard frequency is every 3 hours unless changed by an operator.
+- Music should play every 5 minutes where the schedule calls for a music break or when a content gap must be filled.
+- Every hour starts from scratch using the current cards as the narrative pool.
+
+## Voice and Narration Rules
+
+- Delete and do not reuse old recorded intros.
+- No canned intros or repeated host banter.
+- Every voice may read any card randomly.
+- Every card should start with: "`Voice name` here from ASCO." Then go directly into the narrative.
+- There must be a strict no-repeat policy during broadcast.
+- Speakers must not overlap.
+- Keep a clear 1-2 second gap between speakers.
+- Handoffs should be limited to one brief line from the prior speaker and a quick intro by the next speaker.
+- Narration must focus on the ASCO material, source, location, and reason it matters to conference followers.
+- Avoid repeated disclaimers in voice scripts.
+- Avoid filler such as vague floor energy unless tied to a real source, official schedule item, operator statement, sponsor message, or monitored X voice.
+
+## Admin Break-In Content
+
+- Admins must be able to add a URL, X tweet, free-text statement, emergency message, or sponsor message.
+- Sponsor messages must be clearly sponsor-labeled and separate from editorial ASCO commentary.
+- Emergency and sponsor messages may be free-texted and read by the narrator.
+- Admin-created cards may optionally repeat every 30 minutes for a defined number of repeats.
+- Admin-created cards may be read by any available voice.
+- Admin-created cards must still obey banned phrase, fake-name, and source-label policies.
+
+## Aired History and Accountability
+
+- The admin history tab must show everything that was talked about.
+- Each talked-about item must include a timestamp.
+- The talked-about section must include an area listing each X account or person mentioned on ConferenceHype and the time they were mentioned.
+- Operators must be able to inspect what played in the past even after the current block advances.
+
+## YouTube and Website Stream Rules
+
+- Starting a stream from admin must trigger the render and YouTube RTMP workflow.
+- When the stream starts, it must appear on YouTube and on `conferencehype.com`.
+- The public website must use the current channel/live embed or another current live URL, not a stale finished video ID.
+- If YouTube Studio is receiving RTMP but the public video is private, unavailable, or mapped to an old event, the system must report that as a YouTube event-state blocker.
+- Stream keyframes must be sent every 4 seconds or less.
+- Preferred keyframe interval is 2 seconds.
+- The encoder must fail visibly if FFmpeg exits immediately instead of falsely reporting success.
+- The stream must be recorded when YouTube recording is enabled for the live event.
+- If the YouTube link or embed cannot be confirmed, stop or avoid starting public stream operation until the link and embed are confirmed.
+
+## Music and Media Rules
+
+- Use licensed, purchased, or otherwise cleared music for broadcast transitions.
+- Do not rely on synthetic beep-style filler as the main music identity.
+- Music must have reserved 10-second cards in the presentation sequence.
+- Music gaps must not cause speaker overlap.
+- Screen visuals must be present in rendered video, not audio-only unless explicitly running audio saver mode.
+- Video rendering must include visible card/topic visuals and not a blank screen.
+
+## Admin Layout Rules
+
+- Voice-related cards and settings belong in a separate Voices tab.
+- The broadcast admin view must prioritize the presentation sequence and ready/review cards.
+- The left half/pane is for the 3-hour presentation sequence.
+- The right top pane is for brand new ready cards and human review.
+- Source management must allow adding X users and news sites.
+- Social voice competition must show ranked voices, what they are known for, and blacklist controls.
+
+## Generation and Cost Rules
+
+- Deterministic pipelines should be the broadcast core whenever possible.
+- The official ASCO schedule/index should provide the no-token schedule spine.
+- LLM generation must be used only when it adds useful narration and must still obey source restrictions.
+- The system must prefer source-backed card generation over repeated host chatter.
+- If there are no valid sources, create a safe schedule bridge or music slot rather than invented content.
+
+## Local Commands
 
 ```powershell
 npm install
-npm run dev
-```
-
-Open:
-
-- Public channel: `http://localhost:3000`
-- Operator dashboard: `http://localhost:3000/admin`
-
-The app runs in mock mode without credentials. Add `.env.local` values when you are ready to connect real services.
-
-## Production Setup
-
-Use [LAUNCH_CHECKLIST.md](./LAUNCH_CHECKLIST.md) as the step-by-step operator checklist.
-Use [LOW_BANDWIDTH.md](./LOW_BANDWIDTH.md) for the conference-bandwidth operating rule.
-
-### 1. GitHub
-
-Create a GitHub repo and push this project.
-
-Add repository secrets:
-
-- `NEXT_PUBLIC_SUPABASE_URL`
-- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-- `SUPABASE_SERVICE_ROLE_KEY`
-- `LLM_API_KEY`
-- `LLM_BASE_URL`
-- `LLM_MODEL`
-- `X_BEARER_TOKEN`
-- `ELEVENLABS_API_KEY`
-- `YOUTUBE_RTMP_URL`
-- `YOUTUBE_STREAM_KEY`
-
-GitHub Actions:
-
-- `Ingest sources`: runs every 30 minutes.
-- `Generate ASCO upcoming-events spine`: runs every 20 minutes and creates the main no-token schedule segment from the preprocessed ASCO schedule and abstract index.
-- `Generate ASCO 75-minute recap briefing`: runs every 75 minutes and creates the short "what happened / what is next" agenda segment from the preprocessed ASCO schedule and abstract index.
-- `Generate review segments`: runs hourly for media, social, exhibitor, and background programming.
-- `Render media`: manual until media storage and worker deployment are finalized.
-
-## ASCO 2026 Batch Backbone
-
-The recurring schedule desk is intentionally no-token for the main broadcast spine. The local ASCO schedule workbook and abstracts CSV are preprocessed into `data/asco2026/core-index.json`. The upcoming-events job creates a prepared segment every 20 minutes without an LLM call:
-
-- next 20 minutes: sessions attendees may want to catch next
-- a small number of matching abstract records for context
-- deterministic copy that is safe to run as the main daily broadcast spine
-
-The 75-minute recap job is a separate, broader desk segment:
-
-- last 75 minutes: sessions that just wrapped
-- next 60 minutes: larger forward look
-- can use the configured LLM for a more natural recap script
-
-Run locally:
-
-```powershell
-npm run job:upcoming
-npm run job:briefing
-```
-
-For a local smoke test outside the live ASCO dates:
-
-```powershell
-$env:ASCO_UPCOMING_NOW="2026-05-29T12:55:00-05:00"; npm run job:upcoming
-$env:ASCO_BRIEFING_NOW="2026-05-29T14:30:00-05:00"; npm run job:briefing
-```
-
-The raw source files should stay local/operator-controlled. Do not paste whole workbooks, full abstract exports, or full article bodies into prompts.
-
-Programming rule:
-
-- The 20-minute upcoming-events spine is the core broadcast every day.
-- Social posts, `#ASCOHype`, X, Instagram-style posts, OncLive, STAT News, The ASCO Post, and exhibitor/company updates interrupt that spine only as reviewed media/social segments.
-- Instagram is treated as an operator/manual social watchlist and caption/reel prep path by default unless a compliant provider/API is added later.
-- Every 3 hours, the generation job can create a review-gated "social voice competition" segment that ranks leading watched X/social voices like a scoreboard. This is hype/topic discovery only, not source verification.
-
-### 2. Supabase
-
-1. Create a Supabase project.
-2. Run `supabase/schema.sql`.
-3. Run `supabase/seed.sql`.
-4. Enable email auth for admin users.
-5. Create private storage buckets for rendered segments and clips.
-6. Copy URL, anon key, and service role key into GitHub and Vercel secrets.
-
-### 3. Vercel
-
-1. Import the GitHub repo.
-2. Add the values from `.env.example`.
-3. Deploy from `main`.
-4. Set `NEXT_PUBLIC_AUDIO_STREAM_URL` for the lowest-bandwidth public player.
-5. Set `NEXT_PUBLIC_HLS_URL` when the low-bitrate fallback playlist is available.
-6. Set `NEXT_PUBLIC_YOUTUBE_VIDEO_ID` when the YouTube stream is created.
-
-### 4. YouTube
-
-1. Verify the YouTube channel.
-2. Enable live streaming at least 24 hours before launch.
-3. Create a scheduled ASCO Hype live event.
-4. Store the RTMP URL and stream key as secrets.
-5. Rehearse with an unlisted stream before the public launch.
-
-### 5. ElevenLabs or TTS Provider
-
-1. Use a plan/license that allows your intended publishing and commercial use.
-2. Pick one voice per persona.
-3. Add voice IDs to the `VOICE_*` environment variables.
-
-## Source Policy
-
-Priority order:
-
-1. Official ASCO agenda and abstracts.
-2. Reputable oncology and medical media.
-3. Company and exhibitor statements.
-4. Verified or high-credibility social accounts.
-5. General social posts, hashtags, and bot mentions.
-
-Social posts are always labeled as social buzz unless confirmed by stronger sources.
-
-## Hashtag and Bot Mention Flow
-
-Ask users to post with:
-
-- `#ASCOHype`
-- `#AskASCOHype`
-- `#ASCO26`
-- `@ASCOHypeAI`
-- `@ConferenceHype`
-
-Listeners can tag `@ConferenceHype` with steps, walks, runs, gym sessions, and other workouts during the meeting day. These posts are reviewed as audience shoutout candidates for the end-of-day broadcast, not as medical or fitness advice.
-- watched X voices: `@ASCO`, `@ASCOPost`, `@OncLive`, `@statnews`
-
-The X ingestion job searches those terms, creates `social_signal` source items, and sends generated commentary to the human review queue. Operators must approve or edit scripts before airing.
-
-Operators can add more X accounts from the admin **X voices to call out** panel. Added follows are stored as enabled social sources and included in the X recent-search query when Supabase and `X_BEARER_TOKEN` are configured.
-
-Instagram posts, reels, and caption ideas can be pasted into the admin Instagram panel. They are treated as manual social signals, generate review-gated commentary, and can use the caption starter for outward posts asking viewers to tag `#ASCOHype`, `#ASCO26`, and `@ConferenceHype`.
-
-The admin **Social voice competition** panel shows the current scoreboard and whether the 3-hour competition segment is due in the current generation block.
-
-## Useful Commands
-
-```powershell
 npm run dev
 npm run build
 npm run typecheck
@@ -172,34 +181,14 @@ npm run job:generate
 npm run job:briefing
 npm run job:upcoming
 npm run job:render
-```
-
-Streaming worker:
-
-```powershell
 npm run job:stream
 ```
 
-That command expects `ffmpeg`, `STREAM_INPUT_PATH`, `YOUTUBE_RTMP_URL`, and `YOUTUBE_STREAM_KEY`.
+## Deployment Notes
 
-## Launch Checklist
-
-- Confirm Supabase schema and admin login.
-- Confirm RSS ingestion works.
-- Confirm X hashtag ingestion works.
-- Confirm Instagram manual intake and caption prep works.
-- Confirm generated scripts include citations and disclaimer.
-- Confirm social posts are labeled as buzz.
-- Confirm market segments contain no buy/sell/hold recommendations.
-- Confirm approval is required before public queue visibility.
-- Add licensed music to `public/music/light-jazz-techno.mp3`.
-- Render one full segment with voice, music bed, captions, and disclaimer.
-- Generate one 30-60 second clip from an approved segment.
-- Run a 2-hour unlisted YouTube rehearsal.
-- Test emergency override.
-- Test fallback HLS playlist.
-- Confirm final public stream embed in Vercel.
-
-## Current MVP Notes
-
-The code intentionally supports mock mode so the app is runnable before credentials are configured. The next production hardening step is replacing the mock data reads/writes in `lib/data.ts` and admin API routes with Supabase table operations.
+- Public site: `https://conferencehype.com`
+- Admin dashboard: `/admin`
+- Vercel hosts the app.
+- Supabase stores segments, sources, approvals, social voices, blacklist data, and schedule state.
+- GitHub Actions runs ingest, generation, render, and YouTube streaming jobs.
+- YouTube Studio must expose the active RTMP event as public or unlisted for the website embed to work.
