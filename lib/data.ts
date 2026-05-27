@@ -100,7 +100,7 @@ export async function getAdminSnapshot(baseTime = new Date()) {
     (await getNextBroadcastSegmentsFromDb()) ?? []
   );
   const scheduleRundownSegments = buildScheduleRundownSegments(baseTime);
-  const airedSegments = (await getAiredSegmentsFromDb()) ?? [];
+  const airedSegments = (await getAiredSegmentsFromDb(180)) ?? [];
   const analytics: AnalyticsSnapshot = (await getAnalyticsFromDb()) ?? {
     views: 128,
     clipsCreated: 4,

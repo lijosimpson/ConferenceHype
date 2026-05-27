@@ -11,6 +11,7 @@ import { OncologyReporterGrid } from "@/components/OncologyReporterGrid";
 import { RecordingLibrary } from "@/components/RecordingLibrary";
 import { SocialVoiceCompetition } from "@/components/SocialVoiceCompetition";
 import { SourceManager } from "@/components/SourceManager";
+import { StartStreamButton } from "@/components/StartStreamButton";
 import { XVoiceCallouts } from "@/components/XVoiceCallouts";
 import { getAdminSnapshot } from "@/lib/data";
 import { getCachedRecordings } from "@/lib/media/recordings";
@@ -87,9 +88,13 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
     leaders: snapshot.socialVoiceLeaderboard,
     baseTime: baseDate
   });
+  const isPastPreview = baseDate.getTime() < Date.now() - 3 * 60 * 60 * 1000;
+  const presentationSegments = isPastPreview
+    ? snapshot.airedSegments
+    : snapshot.nextBroadcastSegments;
   const firstPlanningStart = todayAtPlanningEastern();
-  const twoWeekStarts = Array.from({ length: 14 * 8 }, (_, index) => {
-    const planningStart = addHours(firstPlanningStart, index * 3);
+  const twoWeekStarts = Array.from({ length: 28 * 8 + 1 }, (_, index) => {
+    const planningStart = addHours(firstPlanningStart, (index - 14 * 8) * 3);
     return {
       href: `/admin?start=${encodeURIComponent(planningStart.toISOString())}`,
       label: planningSlotLabel(planningStart)
@@ -130,6 +135,7 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
         >
           Live now view
         </a>
+        <StartStreamButton />
         <div className="basis-full">
           <div className="mb-2 text-xs font-black uppercase text-ink/50">
             Three-hour planning slots
@@ -151,7 +157,7 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
         broadcast={
           <div className="grid gap-6">
             <BroadcastRundown
-              segments={snapshot.nextBroadcastSegments}
+              segments={presentationSegments}
               reviewSegments={snapshot.pendingSegments}
               scheduleSegments={snapshot.scheduleRundownSegments}
               socialVoiceSegments={hourlySocialVoiceSegments}

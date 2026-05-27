@@ -18,6 +18,10 @@ on:
         description: "Video file to loop into YouTube"
         required: true
         default: "public/rendered/fallback-loop.mp4"
+      stream_start_time:
+        description: "ISO start time for rendering the correct rundown cards"
+        required: false
+        default: ""
   schedule:
     # 8:00 AM EDT on May 24. Remove after the 2026 test run if not needed again.
     - cron: "0 12 24 5 *"
@@ -33,7 +37,28 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - name: Start YouTube RTMP loop
+      - name: Render current presentation
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.stream_start_time != '' }}
+        run: |
+          export HOUR_BROADCAST_SECONDS=$(( ${{ inputs.duration_minutes }} * 60 ))
+          npx tsx scripts/render-hour-broadcast.ts
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          HOUR_BROADCAST_START: ${{ inputs.stream_start_time }}
+          HOUR_BROADCAST_OUTPUT: public/rendered/asco-hype-hour-broadcast.mp4
+      - name: Start rendered YouTube stream
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.stream_start_time != '' }}
+        run: |
+          export STREAM_DURATION_SECONDS=$(( ${{ inputs.duration_minutes }} * 60 ))
+          npx tsx scripts/youtube-hour-presentation-stream.ts
+        env:
+          YOUTUBE_RTMP_URL: ${{ secrets.YOUTUBE_RTMP_URL }}
+          YOUTUBE_STREAM_KEY: ${{ secrets.YOUTUBE_STREAM_KEY }}
+          STREAM_VIDEO_PATH: public/rendered/asco-hype-hour-broadcast.mp4
+      - name: Start fallback YouTube RTMP loop
+        if: ${{ github.event_name != 'workflow_dispatch' || inputs.stream_start_time == '' }}
         run: npm run job:stream
         env:
           YOUTUBE_RTMP_URL: ${{ secrets.YOUTUBE_RTMP_URL }}
