@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { AdminShell } from "@/components/AdminShell";
 import { AdminTabs } from "@/components/AdminTabs";
 import { AiredHistory } from "@/components/AiredHistory";
@@ -136,18 +137,18 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
           </div>
           <div className="text-lg font-black text-ink">{previewLabel}</div>
         </div>
-        <a
+        <Link
           className="inline-flex min-h-10 items-center justify-center border border-ink bg-white px-4 text-xs font-black uppercase text-ink"
           href={planningPreviewHref}
         >
           Today 21:00 plan
-        </a>
-        <a
+        </Link>
+        <Link
           className="inline-flex min-h-10 items-center justify-center bg-ink px-4 text-xs font-black uppercase text-white"
           href={liveHref}
         >
           Live now view
-        </a>
+        </Link>
         <StartStreamButton />
         <div className="basis-full">
           <div className="mb-2 text-xs font-black uppercase text-ink/50">
@@ -155,13 +156,13 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
           </div>
           <div className="flex gap-2 overflow-x-auto pb-1">
             {planningSlots.map((item) => (
-              <a
+              <Link
                 key={item.href}
                 className="shrink-0 border border-ink/10 bg-paper px-3 py-2 text-xs font-black uppercase text-ink/70 hover:border-broadcast"
                 href={item.href}
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
           </div>
         </div>
@@ -170,6 +171,7 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
         broadcast={
           <div className="grid gap-6">
             <BroadcastRundown
+              key={baseTime}
               segments={presentationSegments}
               reviewSegments={snapshot.pendingSegments}
               scheduleSegments={snapshot.scheduleRundownSegments}
