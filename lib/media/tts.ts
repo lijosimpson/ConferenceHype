@@ -40,6 +40,7 @@ export function applySpokenPronunciations(script: string) {
     .replace(/\bASKO\b/g, "Ask-oh")
     // Rule 1: strip URLs — TTS would read out raw links character-by-character
     .replace(/https?:\/\/[^\s)\]}>]+/g, "")
+    .replace(/\bwww\.\S+/g, "")
     // Rule 3: strip internal process labels that sneak into scripts
     .replace(/\boperator[- ](?:added|selected)\b[^.!?\n]*/gi, "")
     .replace(/\bmonitored\s+X\s+(?:voice|narrative|voices)\b/gi, "")
@@ -51,7 +52,19 @@ export function applySpokenPronunciations(script: string) {
     // Rule 6: @ and # in social posts — drop @ entirely, keep hashtag word
     .replace(/@\w{1,15}/g, "")
     .replace(/#(\w+)/g, "$1")
-    // Clean up any double spaces left behind
+    // Punctuation: replace colons (not in time like 9:30) with a pause comma
+    .replace(/(?<!\d):(?!\d{2})/g, ",")
+    // Em dashes and en dashes → natural pause
+    .replace(/\s*[—–]\s*/g, ", ")
+    // Bullet points → sentence break
+    .replace(/[•·]\s*/g, ". ")
+    // Remove brackets and parentheses (often contain meta info like citations)
+    .replace(/\[[^\]]{1,80}\]/g, "")
+    .replace(/\([^)]{1,80}\)/g, "")
+    // Percent sign → "percent"
+    .replace(/(\d)\s*%/g, "$1 percent")
+    // Clean up stray commas and double spaces left behind
+    .replace(/,\s*,/g, ",")
     .replace(/\s{2,}/g, " ")
     .trim();
 }

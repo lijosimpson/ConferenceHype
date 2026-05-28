@@ -11,9 +11,9 @@ export type BroadcastSlot = {
   replaceable?: boolean;
 };
 
-const CONTENT_SECONDS = 20;   // was 110 — match real TTS length, no more silence gaps
-const MUSIC_SECONDS = 20;     // was 10 — matches 20-second gap-clip library
-const CONTENT_SLOTS_PER_HOUR = 90; // was 30 — 90 × 40 s = 3 600 s = 1 h exactly
+const CONTENT_SECONDS = 40;   // 40-second content window — ~90 words at 135 wpm, no more silence gaps
+const MUSIC_SECONDS = 20;     // matches 20-second gap-clip library
+const CONTENT_SLOTS_PER_HOUR = 60; // 60 × (40 + 20) s = 3 600 s = 1 h exactly
 
 export function addMinutes(date: Date, minutes: number) {
   return new Date(date.getTime() + minutes * 60 * 1000);
@@ -55,9 +55,9 @@ function cleanSocialScript(value: string): string {
     .trim();
 }
 
-// Limit script to roughly 20 seconds of spoken content (~45 words at 135 wpm).
+// Limit script to roughly 40 seconds of spoken content (~90 words at 135 wpm).
 // Breaks on the last sentence boundary if possible.
-function trimToSpokenLength(text: string, maxWords = 45): string {
+function trimToSpokenLength(text: string, maxWords = 90): string {
   const words = text.trim().split(/\s+/).filter(Boolean);
   if (words.length <= maxWords) return text.trim();
   const limited = words.slice(0, maxWords).join(" ");
@@ -92,6 +92,22 @@ function cleanForbiddenBroadcastPhrases(value: string) {
     .replace(/\bunverified\s+buzz\b/gi, "early buzz")
     // Rule 4: ≈ → "approximately"
     .replace(/≈/g, "approximately")
+    // Strip bare URLs (http/https and www.)
+    .replace(/https?:\/\/[^\s)\]}>]+/g, "")
+    .replace(/\bwww\.\S+/g, "")
+    // Punctuation: colon (not in times like 9:30) → pause comma
+    .replace(/(?<!\d):(?!\d{2})/g, ",")
+    // Em/en dashes → natural pause
+    .replace(/\s*[—–]\s*/g, ", ")
+    // Bullet points → sentence break
+    .replace(/[•·]\s*/g, ". ")
+    // Remove brackets/parens (citations, meta info)
+    .replace(/\[[^\]]{1,80}\]/g, "")
+    .replace(/\([^)]{1,80}\)/g, "")
+    // Percent sign → "percent"
+    .replace(/(\d)\s*%/g, "$1 percent")
+    // Clean up stray commas and spaces
+    .replace(/,\s*,/g, ",")
     .replace(/\s+/g, " ")
     .trim();
 }
@@ -105,8 +121,8 @@ function withAssignedVoice(segment: Segment, slotIndex: number): Segment {
     narrative = `ConferenceHype calls out: ${cleanSocialScript(narrative)}`;
   }
 
-  // Rule 2: fit inside a 20-second spoken slot (~45 words at 135 wpm)
-  narrative = trimToSpokenLength(narrative, 45);
+  // Rule 2: fit inside a 40-second spoken slot (~90 words at 135 wpm)
+  narrative = trimToSpokenLength(narrative, 90);
 
   const summary = cleanForbiddenBroadcastPhrases(segment.summary);
   return {
@@ -248,7 +264,7 @@ export function buildBroadcastSlots({
         kind: "music",
         durationMinutes: MUSIC_SECONDS / 60,
         durationSeconds: MUSIC_SECONDS,
-        label: "10-second music card",
+        label: "20-second music card",
         replaceable: false
       });
     }

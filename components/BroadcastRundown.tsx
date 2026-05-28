@@ -468,7 +468,7 @@ export function BroadcastRundown({
                       {timeLabel(slot.at.toISOString())}
                     </span>
                     <span className="border border-ink/10 bg-white px-2 py-1 text-[11px] font-black uppercase text-ink/50">
-                      {slot.durationSeconds === 20 ? "0:20" : slot.durationSeconds === 10 ? "0:10" : `${String(Math.floor(slot.durationSeconds / 60)).padStart(1, "0")}:${String(slot.durationSeconds % 60).padStart(2, "0")}`}
+                      {slot.durationSeconds === 40 ? "0:40" : slot.durationSeconds === 20 ? "0:20" : slot.durationSeconds === 10 ? "0:10" : `${String(Math.floor(slot.durationSeconds / 60)).padStart(1, "0")}:${String(slot.durationSeconds % 60).padStart(2, "0")}`}
                     </span>
                     {slot.kind !== "music" ? (
                       <button
