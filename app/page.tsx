@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { CountdownTimer } from "@/components/CountdownTimer";
 import { PublicPlayer } from "@/components/PublicPlayer";
 import { getPublicSegments, getStreamState } from "@/lib/data";
 import { monitoredSocialTags } from "@/lib/sources/registry";
@@ -34,22 +33,16 @@ export default async function Home() {
               <strong>{monitoredSocialTags.conferenceHashtag}</strong>, or tag{" "}
               <strong>{monitoredSocialTags.botHandle}</strong>.
             </p>
-            <div className="mt-5">
-              <CountdownTimer
-                startAt="2026-05-24T12:00:00Z"
-                label="One-hour ASCO Hype live stream"
-              />
-            </div>
             <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:max-w-2xl">
               <div className="border-l-4 border-broadcast bg-white/85 p-4 shadow-panel">
-                <div className="text-xl font-black md:text-2xl">May 25</div>
+                <div className="text-xl font-black md:text-2xl">Live now</div>
                 <div className="text-sm font-semibold text-ink/65">
-                  Favourite this link now. Listen and contribute to the ASCO
-                  experience.
+                  Broadcasting daily 7 AM–10 PM ET. Listen and contribute to
+                  the ASCO experience.
                 </div>
               </div>
               <div className="border-l-4 border-cyanline bg-white/85 p-4 shadow-panel">
-                <div className="text-xl font-black md:text-2xl">May 29-Jun 2</div>
+                <div className="text-xl font-black md:text-2xl">May 29–Jun 2</div>
                 <div className="text-sm font-semibold text-ink/65">
                   ASCO 2026 annual meeting
                 </div>
