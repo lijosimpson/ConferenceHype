@@ -54,8 +54,20 @@ async function main() {
     console.log("STREAM_DRY_RUN=1, not starting FFmpeg.");
     return;
   }
-  const child = spawn(ffmpeg, args, { stdio: "inherit" });
-  child.on("exit", (code) => process.exit(code ?? 1));
+  const child = spawn(ffmpeg, args, { stdio: ["inherit", "inherit", "pipe"] });
+  const stderrChunks: Buffer[] = [];
+  child.stderr?.on("data", (chunk: Buffer) => {
+    stderrChunks.push(chunk);
+    process.stderr.write(chunk);
+  });
+  child.on("exit", (code) => {
+    if (code !== 0) {
+      const stderr = Buffer.concat(stderrChunks).toString("utf8");
+      const errorLine = stderr.split("\n").find((l) => /error|failed|refused|forbidden|denied|not found/i.test(l));
+      if (errorLine) console.error("ffmpeg error:", errorLine.trim());
+    }
+    process.exit(code ?? 1);
+  });
 }
 
 main().catch((error) => {
